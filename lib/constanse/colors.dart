@@ -5,5 +5,6 @@ class Colors{
   static var mainTextColor = Color(0xff23203F);
   static var subTextColor = Color(0xff716F87);
   static var hintColor = Color(0xff9391A4);
+  static var borderColor = Color(0xffD0D0D0);
 
 }
