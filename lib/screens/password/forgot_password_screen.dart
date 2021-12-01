@@ -78,15 +78,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           SizedBox(
             height: 32.h,
           ),
-          // Text(
-          //   // AppLocalizations.of(context)!.mobile,
-          //   'Mobile',
-          //   style: TextStyle(
-          //       fontFamily: 'Nunito',
-          //       fontSize: 20.sp,
-          //       color: const Color(0xff23203F),
-          //       fontWeight: FontWeight.w600),
-          // ),
           SizedBox(
             height: 10.h,
           ),
@@ -100,7 +91,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             height: 200.h,
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/reset_password_screen');
+            },
             style: ElevatedButton.styleFrom(
               primary: const Color(0xff6A90F2),
               shape: RoundedRectangleBorder(

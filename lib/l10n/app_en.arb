@@ -21,5 +21,12 @@
 "gender": "Gender",
 "male": "Male",
 "female": "Female",
-"already": "Already have an account? "
+"already": "Already have an account? ",
+"weSent": "We have sent Code to your Mobile",
+"sendCode": "Send Code",
+"resetPassword": "Reset Password",
+"enterPassword": "Enter New Password",
+"subTitlePassword": "Enter New Password and received code",
+"confirmPassword": "Password Confirmation",
+"reset": "Reset"
 }

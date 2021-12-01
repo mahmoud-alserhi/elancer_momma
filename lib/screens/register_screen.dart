@@ -12,7 +12,6 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-
   late TextEditingController _nameTextEditingController;
   late TextEditingController _mobileTextEditingController;
   late TextEditingController _passwordTextEditingController;
@@ -138,10 +137,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 });
               },
               icon: Icon(
-                _isPasswordShow
-                    ? Icons.visibility_off
-                    : Icons.visibility,
-                color: _isPasswordShow ? const Color(0xff9391A4) : const Color(0xff6A90F2),
+                _isPasswordShow ? Icons.visibility_off : Icons.visibility,
+                color: _isPasswordShow
+                    ? const Color(0xff9391A4)
+                    : const Color(0xff6A90F2),
                 // color: const Color(0xff6A90F2),
               ),
             ),
@@ -149,33 +148,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
           SizedBox(
             height: 20.h,
           ),
-          DropdownButton(
-
-            isExpanded: true,
-            hint: Text(
-                'Select City',
-              style: TextStyle(
-                fontFamily: 'Nunito',
-                fontSize: 18.sp,
-                color: const Color(0xff9391A4),
-                fontWeight: FontWeight.w600,
-              ),
+          InputDecorator(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15)),
+              contentPadding: const EdgeInsets.all(10),
             ),
-            onTap: () {},
-            onChanged: (int? value) {
-              if(value != null){
-                setState(() {
-                  _selectedAddress = value;
-                });
-              }
-            },
-            value: _selectedAddress,
-            items: _addresses.map((e) {
-              return DropdownMenuItem(
-                child: Text(e.name),
-                value: e.id,
-              );
-            }).toList(),
+            child: DropdownButton(
+              borderRadius: BorderRadius.circular(15),
+              elevation: 8,
+              underline: const SizedBox.shrink(),
+              isExpanded: true,
+              hint: Text(
+                'Select City',
+                style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 18.sp,
+                  color: const Color(0xff9391A4),
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              onTap: () {},
+              onChanged: (int? value) {
+                if (value != null) {
+                  setState(() {
+                    _selectedAddress = value;
+                  });
+                }
+              },
+              value: _selectedAddress,
+              items: _addresses.map((e) {
+                return DropdownMenuItem(
+                  child: Text(e.name),
+                  value: e.id,
+                );
+              }).toList(),
+            ),
           ),
           SizedBox(
             height: 20.h,
@@ -195,13 +203,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
             children: [
               Expanded(
                 child: RadioListTile<String>(
-                    title: Text(
-                        'Male',
+                    title: Text('Male',
                         style: TextStyle(
-                        fontFamily: 'Nunito',
-                        fontSize: 20.sp,
-                        color: const Color(0xff23203F),
-                        fontWeight: FontWeight.w600)),
+                            fontFamily: 'Nunito',
+                            fontSize: 20.sp,
+                            color: const Color(0xff23203F),
+                            fontWeight: FontWeight.w600)),
                     contentPadding: EdgeInsets.zero,
                     value: 'M',
                     groupValue: _gender,
@@ -215,13 +222,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               Expanded(
                 child: RadioListTile<String>(
-                    title: Text(
-                        'Female',
+                    title: Text('Female',
                         style: TextStyle(
-                        fontFamily: 'Nunito',
-                        fontSize: 20.sp,
-                        color: const Color(0xff23203F),
-                        fontWeight: FontWeight.w600)),
+                            fontFamily: 'Nunito',
+                            fontSize: 20.sp,
+                            color: const Color(0xff23203F),
+                            fontWeight: FontWeight.w600)),
                     contentPadding: EdgeInsets.zero,
                     value: 'F',
                     groupValue: _gender,
@@ -267,7 +273,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   color: const Color(0xff23203F),
                   fontFamily: 'Nunito',
                   fontSize: 18.sp,
-                  fontWeight: FontWeight.w400,),
+                  fontWeight: FontWeight.w400,
+                ),
                 children: [
                   TextSpan(
                     recognizer: _tapGestureRecognizer,
