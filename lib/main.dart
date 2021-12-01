@@ -1,3 +1,4 @@
+import 'package:elancer_momma/screens/forgot_password_screen.dart';
 import 'package:elancer_momma/screens/launch_screen.dart';
 import 'package:elancer_momma/screens/login_screen.dart';
 import 'package:elancer_momma/screens/out_boarding_screen.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
           '/out_boarding_screen' : (context) => const OutBoardingScreen(),
           '/login_screen' : (context) => const LoginScreen(),
           '/register_screen' : (context) => const RegisterScreen(),
+          '/forget_password_screen' : (context) => const ForgotPassword(),
         },
       ),
     );
