@@ -12,6 +12,14 @@
 "loginTo": "تسجيل الدخول لمواصلة حسابك",
 "mobile": "رقم الجوال",
 "password": "كلمة المرور",
-"createAccount": "ليس لديك حساب؟  ",
-"forgetPassword": "هل نسيت كلمة السر؟"
+"haveCreateAccount": "ليس لديك حساب؟  ",
+"forgetPassword": "هل نسيت كلمة السر؟",
+"register": "التسجيل",
+"createAccount": "إنشاء حساب",
+"name": "الإسم",
+"selectCity": "إختار المدينة",
+"gender": "الجنس",
+"male": "ذكر",
+"female": "أنثى",
+"already": "هل لديك حساب؟ "
 }

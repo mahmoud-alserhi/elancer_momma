@@ -35,7 +35,7 @@ class _AppTextFiledState extends State<AppTextFiled> {
         hintStyle: TextStyle(
             fontFamily: 'Nunito',
             fontSize: 22.sp,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
             color: const Color(0xff9391A4)),
         hintMaxLines: 1,
         suffixIcon: widget.suffixIcon,

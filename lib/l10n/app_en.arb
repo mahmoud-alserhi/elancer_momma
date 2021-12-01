@@ -12,6 +12,14 @@
 "loginTo": "Login to continue your account",
 "mobile": "Mobile",
 "password": "Password",
-"createAccount": "Don`t have an account? ",
-"forgetPassword": "Forget Password?"
+"haveCreateAccount": "Don`t have an account? ",
+"forgetPassword": "Forget Password?",
+"register": "Register",
+"createAccount": "Create Account",
+"name": "Name",
+"selectCity": "Select City",
+"gender": "Gender",
+"male": "Male",
+"female": "Female",
+"already": "Already have an account? "
 }

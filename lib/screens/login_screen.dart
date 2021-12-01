@@ -86,10 +86,10 @@ class _LoginScreenState extends State<LoginScreen> {
             textInputType: TextInputType.phone,
           ),
           SizedBox(
-            height: 31.h,
+            height: 20.h,
           ),
           AppTextFiled(
-            textEditingController: _mobileTextEditingController,
+            textEditingController: _passwordTextEditingController,
             hintText: 'Password',
             textInputType: TextInputType.text,
             obscureText: _isPasswordShow,
@@ -101,9 +101,9 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               icon: Icon(
                   _isPasswordShow
-                      ? Icons.visibility
-                      : Icons.visibility_off,
-                color: const Color(0xff6A90F2),
+                      ? Icons.visibility_off
+                      : Icons.visibility,
+                color: _isPasswordShow ? const Color(0xff9391A4) : const Color(0xff6A90F2),
               ),
             ),
           ),
@@ -129,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           const SizedBox(
-            height: 25,
+            height: 20,
           ),
           RichText(
             textAlign: TextAlign.center,
