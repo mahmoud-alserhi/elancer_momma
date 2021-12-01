@@ -245,7 +245,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             height: 30.h,
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/activate_screen');
+            },
             style: ElevatedButton.styleFrom(
               primary: const Color(0xff6A90F2),
               shape: RoundedRectangleBorder(

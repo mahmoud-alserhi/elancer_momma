@@ -28,5 +28,9 @@
 "enterPassword": "Enter New Password",
 "subTitlePassword": "Enter New Password and received code",
 "confirmPassword": "Password Confirmation",
-"reset": "Reset"
+"reset": "Reset",
+"verification": "Verification",
+"verifyAccount": "Verify Your Account",
+"subVerifyAccount": "We are sending OTP to validate your mobile number. Hang on!",
+"submit": "Submit"
 }

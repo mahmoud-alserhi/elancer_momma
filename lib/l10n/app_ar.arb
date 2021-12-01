@@ -28,5 +28,9 @@
 "enterPassword": "أدخل كلمة مرور جديدة",
 "subTitlePassword": "أدخل كلمة المرور الجديدة والرمز المستلم",
 "confirmPassword": "تأكيد كلمة المرور",
-"reset": "إعادة تعيين"
+"reset": "إعادة تعيين",
+"verification": "تحقق",
+"verifyAccount": "تحقق من حسابك",
+"subVerifyAccount": "نحن نرسل OTP للتحقق من صحة رقم هاتفك المحمول. تحقق!",
+"submit": "إرسال"
 }

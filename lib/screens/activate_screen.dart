@@ -6,8 +6,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ResetPasswordScreen extends StatefulWidget {
-  const ResetPasswordScreen({
+class ActivateScreen extends StatefulWidget {
+  const ActivateScreen({
     Key? key,
     // required this.mobile,
   }) : super(key: key);
@@ -15,14 +15,11 @@ class ResetPasswordScreen extends StatefulWidget {
   // final String mobile;
 
   @override
-  _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
+  _ActivateScreenState createState() => _ActivateScreenState();
 }
 
-class _ResetPasswordScreenState extends State<ResetPasswordScreen>
+class _ActivateScreenState extends State<ActivateScreen>
     with Helpers {
-
-  late TextEditingController _newPasswordTextEditingController;
-  late TextEditingController _newPasswordConfirmationTextEditingController;
 
   late TextEditingController _firstCodeTextController;
   late TextEditingController _secondCodeTextController;
@@ -47,9 +44,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
     // TODO: implement initState
     super.initState();
 
-    _newPasswordTextEditingController = TextEditingController();
-    _newPasswordConfirmationTextEditingController = TextEditingController();
-
     _firstCodeTextController = TextEditingController();
     _secondCodeTextController = TextEditingController();
     _thirdCodeTextController = TextEditingController();
@@ -66,8 +60,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
   @override
   void dispose() {
     // TODO: implement dispose
-    _newPasswordTextEditingController.dispose();
-    _newPasswordConfirmationTextEditingController.dispose();
 
     _firstCodeTextController.dispose();
     _secondCodeTextController.dispose();
@@ -95,7 +87,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
         ),
         title: Text(
           // AppLocalizations.of(context)!.resetPassword,
-            'Reset Password',
+            'Verification',
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontFamily: 'Nunito',
               fontSize: 25.sp,
@@ -110,18 +103,23 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
         children: [
           SizedBox(
-            height: 50.h,
+            height: 147.h,
           ),
           Text(
-            'Enter New Password',
+            'Verify Your Account',
+            textAlign: TextAlign.center,
             style: TextStyle(
                 color: const Color(0xff23203F),
                 fontFamily: 'Nunito',
                 fontWeight: FontWeight.bold,
                 fontSize: 30.sp,),
           ),
+          SizedBox(
+            height: 20.h,
+          ),
           Text(
-            'Enter New Password and received code',
+            'We are sending OTP to validate your mobile number. Hang on!',
+            textAlign: TextAlign.center,
             style: TextStyle(
                 color: const Color(0xff716F87),
                 fontFamily: 'Nunito',
@@ -135,7 +133,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
             children: [
               Expanded(
                 child: CodeTextField(
-                  // color: _isSelectedCode1,
                   textEditingController: _firstCodeTextController,
                   focusNode: _firstFocusNode,
                   onChanged: (value) {
@@ -144,15 +141,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
 
                     }
                   },
-                    // onTap: (){
-                    // setState(() {
-                    //   _isSelectedCode1 = false;
-                    //   _isSelectedCode2 = true;
-                    //   _isSelectedCode3 = true;
-                    //   _isSelectedCode4 = true;
-                    //
-                    // });
-                    // },
                 ),
               ),
               SizedBox(
@@ -160,7 +148,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
               ),
               Expanded(
                 child: CodeTextField(
-                  // color: _isSelectedCode2,
                   textEditingController: _secondCodeTextController,
                   focusNode: _secondFocusNode,
                   onChanged: (value) {
@@ -168,14 +155,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
                         ? _thirdFocusNode.requestFocus()
                         : _firstFocusNode.requestFocus();
                   },
-                  // onTap: (){
-                  //   setState(() {
-                  //     _isSelectedCode1 = true;
-                  //     _isSelectedCode2 = false;
-                  //     _isSelectedCode3 = true;
-                  //     _isSelectedCode4 = true;
-                  //   });
-                  // },
                 ),
               ),
               SizedBox(
@@ -183,7 +162,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
               ),
               Expanded(
                 child: CodeTextField(
-                  // color: _isSelectedCode3,
                   textEditingController: _thirdCodeTextController,
                   focusNode: _thirdFocusNode,
                   onChanged: (value) {
@@ -191,14 +169,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
                         ? _fourthFocusNode.requestFocus()
                         : _secondFocusNode.requestFocus();
                   },
-                  // onTap: (){
-                  //   setState(() {
-                  //     _isSelectedCode1 = true;
-                  //     _isSelectedCode2 = true;
-                  //     _isSelectedCode3 = false;
-                  //     _isSelectedCode4 = true;
-                  //   });
-                  // },
                 ),
               ),
               SizedBox(
@@ -206,7 +176,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
               ),
               Expanded(
                 child: CodeTextField(
-                  // color: _isSelectedCode4,
                   textEditingController: _fourthCodeTextController,
                   focusNode: _fourthFocusNode,
                   onChanged: (value) {
@@ -214,38 +183,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
                       _thirdFocusNode.requestFocus();
                     }
                   },
-                  // onTap: (){
-                  //   setState(() {
-                  //     _isSelectedCode1 = true;
-                  //     _isSelectedCode2 = true;
-                  //     _isSelectedCode3 = true;
-                  //     _isSelectedCode4 = false;
-                  //   });
-                  // },
                 ),
               ),
             ],
           ),
+
           SizedBox(
-            height: 20.h,
-          ),
-          AppTextFiled(
-            hintText: 'Password',
-            textEditingController: _newPasswordTextEditingController,
-            textInputType: TextInputType.text,
-            obscureText: true,
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-          AppTextFiled(
-            hintText: 'Password Confirmation',
-            textEditingController: _newPasswordConfirmationTextEditingController,
-            textInputType: TextInputType.text,
-            obscureText: true,
-          ),
-          SizedBox(
-            height: 40.h,
+            height: 70.h,
           ),
           ElevatedButton(
             onPressed: () {
@@ -259,7 +203,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
               minimumSize: Size(0.w, 56.h),
             ),
             child: Text(
-              'Reset',
+              'Submit',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: 'Nunito',
