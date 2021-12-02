@@ -100,6 +100,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
               fontFamily: 'Nunito',
               fontSize: 25.sp,
               color: const Color(0xff23203F),
+              fontWeight: FontWeight.bold,
             )),
         centerTitle: true,
         backgroundColor: Colors.transparent,

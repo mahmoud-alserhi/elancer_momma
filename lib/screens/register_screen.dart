@@ -75,6 +75,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               fontFamily: 'Nunito',
               fontSize: 25.sp,
               color: const Color(0xff23203F),
+              fontWeight: FontWeight.bold,
             )),
         centerTitle: true,
         backgroundColor: Colors.transparent,
