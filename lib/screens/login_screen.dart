@@ -111,7 +111,9 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 30.h,
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/home_screen');
+            },
             style: ElevatedButton.styleFrom(
               primary: const Color(0xff6A90F2),
               shape: RoundedRectangleBorder(
