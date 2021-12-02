@@ -32,5 +32,15 @@
 "verification": "Verification",
 "verifyAccount": "Verify Your Account",
 "subVerifyAccount": "We are sending OTP to validate your mobile number. Hang on!",
-"submit": "Submit"
+"submit": "Submit",
+"home": "Home",
+"categorise": "Categorise",
+"latestProducts": "Latest Products",
+"productsYou": "Products You may like",
+"viewAll": "View All",
+"myProfile": "My Profile",
+"changePassword": "Change Password",
+"faqs": "FAQs",
+"about": "About",
+"logout": "Logout"
 }

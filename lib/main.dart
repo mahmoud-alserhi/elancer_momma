@@ -1,11 +1,11 @@
-import 'package:elancer_momma/screens/activate_screen.dart';
+import 'package:elancer_momma/screens/auth/activate_screen.dart';
+import 'package:elancer_momma/screens/auth/password/forgot_password_screen.dart';
+import 'package:elancer_momma/screens/auth/password/reset_password_screen.dart';
 import 'package:elancer_momma/screens/home_screen.dart';
-import 'package:elancer_momma/screens/password/forgot_password_screen.dart';
 import 'package:elancer_momma/screens/launch_screen.dart';
-import 'package:elancer_momma/screens/login_screen.dart';
+import 'package:elancer_momma/screens/auth/login_screen.dart';
 import 'package:elancer_momma/screens/out_boarding_screen.dart';
-import 'package:elancer_momma/screens/register_screen.dart';
-import 'package:elancer_momma/screens/password/reset_password_screen.dart';
+import 'package:elancer_momma/screens/auth/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

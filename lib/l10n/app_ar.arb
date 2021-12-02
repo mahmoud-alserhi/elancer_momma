@@ -32,5 +32,15 @@
 "verification": "تحقق",
 "verifyAccount": "تحقق من حسابك",
 "subVerifyAccount": "نحن نرسل OTP للتحقق من صحة رقم هاتفك المحمول. تحقق!",
-"submit": "إرسال"
+"submit": "إرسال",
+"home": "الرئيسية",
+"categorise": "الفئات",
+"latestProducts": "أحدث المنتجات",
+"productsYou": "المنتجات التي قد تعجبك",
+"viewAll": "مشاهدة الكل",
+"myProfile": "الملف الشخصي",
+"changePassword": "تغيير كلمة المرور",
+"faqs": "الأسئلة الشائعة",
+"about": "حول",
+"logout": "تسجيل خروج"
 }

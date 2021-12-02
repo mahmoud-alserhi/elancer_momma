@@ -11,15 +11,17 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
-        // automaticallyImplyLeading: false,
+        automaticallyImplyLeading: false,
         leading: IconButton(
-          onPressed: () => Scaffold.of(context).openDrawer(),
+          onPressed: () => _scaffoldKey.currentState!.openDrawer(),
+          // onPressed: () => Scaffold.of(context).openDrawer(),
           icon: const Icon(
             Icons.menu_rounded,
             color: Color(0xff23203f),
@@ -204,13 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: const Color(0xff23203F),
                   fontWeight: FontWeight.bold,
                 ),
-              ),
-              subtitle: const Text(
-                'Waiting Logout app',
-                style: TextStyle(
-                fontFamily: 'Nunito',
               ),),
-            ),
           ],
         ),
       ),

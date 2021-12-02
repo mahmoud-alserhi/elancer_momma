@@ -85,7 +85,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           AppTextFiled(
             textEditingController: _mobileTextEditingController,
             // hintText: AppLocalizations.of(context)!.mobile,
-            hintText: 'Mobil',
+            hintText: 'Mobile',
             textInputType: TextInputType.phone,
           ),
           SizedBox(
