@@ -1,3 +1,4 @@
+import 'package:elancer_momma/prefs/shared_pref_controller.dart';
 import 'package:elancer_momma/screens/auth/activate_screen.dart';
 import 'package:elancer_momma/screens/auth/password/forgot_password_screen.dart';
 import 'package:elancer_momma/screens/auth/password/reset_password_screen.dart';
@@ -10,7 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefController().initPref();
   runApp(const MyApp());
 }
 
@@ -39,8 +42,8 @@ class MyApp extends StatelessWidget {
           '/login_screen' : (context) => const LoginScreen(),
           '/register_screen' : (context) => const RegisterScreen(),
           '/forget_password_screen' : (context) => const ForgotPassword(),
-          '/reset_password_screen' : (context) => const ResetPasswordScreen(),
-          '/activate_screen' : (context) => const ActivateScreen(),
+          // '/reset_password_screen' : (context) => const ResetPasswordScreen(),
+          // '/activate_screen' : (context) => const ActivateScreen(),
           '/home_screen' : (context) => const HomeScreen(),
         },
       ),

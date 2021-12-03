@@ -1,3 +1,4 @@
+import 'package:elancer_momma/prefs/shared_pref_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,8 +15,8 @@ class _LaunchScreenState extends State<LaunchScreen> {
     // TODO: shared pref
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      // String route = SharedPrefController().loggedIn ? '/main_screen' : '/out_boarding_screen';
-      Navigator.pushReplacementNamed(context, '/out_boarding_screen');
+      String route = SharedPrefController().loggedIn ? '/home_screen' : '/out_boarding_screen';
+      Navigator.pushReplacementNamed(context, route);
     });
   }
 

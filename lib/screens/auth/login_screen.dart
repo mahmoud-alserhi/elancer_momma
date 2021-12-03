@@ -1,3 +1,5 @@
+import 'package:elancer_momma/api/controllers/auth_api_controller.dart';
+import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/widgets/app_text_filed.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +12,7 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen> with Helpers{
 
   late TextEditingController _mobileTextEditingController;
   late TextEditingController _passwordTextEditingController;
@@ -111,9 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 30.h,
           ),
           ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/home_screen');
-            },
+            onPressed: () async => await performLogin(),
             style: ElevatedButton.styleFrom(
               primary: const Color(0xff6A90F2),
               shape: RoundedRectangleBorder(
@@ -147,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     recognizer: _tapGestureRecognizer,
                     text: 'Sing Up!',
                     style: TextStyle(
-                      color: Color(0xff6A90F2),
+                      color: const Color(0xff6A90F2),
                       fontFamily: 'Nunito',
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
@@ -171,4 +171,33 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
+  Future<void> performLogin() async {
+    if (checkData()) {
+      await login();
+    }
+  }
+
+  bool checkData() {
+    if (_mobileTextEditingController.text.isNotEmpty &&
+        _passwordTextEditingController.text.isNotEmpty) {
+      return true;
+    }
+    showSnackBar(
+      context: context,
+      message: 'Enter required data!',
+      error: true,
+    );
+    return false;
+  }
+
+  Future<void> login() async {
+    bool status = await AuthApiController().login(
+        context,
+        mobile: _mobileTextEditingController.text,
+        password: _passwordTextEditingController.text,
+    );
+    if (status) Navigator.pushReplacementNamed(context, '/home_screen');
+  }
+
 }

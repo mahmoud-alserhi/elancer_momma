@@ -1,3 +1,6 @@
+import 'package:elancer_momma/api/controllers/auth_api_controller.dart';
+import 'package:elancer_momma/helpers/helpers.dart';
+import 'package:elancer_momma/screens/auth/password/reset_password_screen.dart';
 import 'package:elancer_momma/widgets/app_text_filed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +14,7 @@ class ForgotPassword extends StatefulWidget {
   State<ForgotPassword> createState() => _ForgotPasswordState();
 }
 
-class _ForgotPasswordState extends State<ForgotPassword> {
+class _ForgotPasswordState extends State<ForgotPassword> with Helpers{
   late TextEditingController _mobileTextEditingController;
 
 
@@ -92,9 +95,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             height: 200.h,
           ),
           ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/reset_password_screen');
-            },
+            onPressed: () async => await performForgetPassword(),
             style: ElevatedButton.styleFrom(
               primary: const Color(0xff6A90F2),
               shape: RoundedRectangleBorder(
@@ -120,5 +121,38 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 
+  Future<void> performForgetPassword() async {
+    if (checkData()) {
+      await forgetPassword();
+    }
+  }
+
+  bool checkData() {
+    if (_mobileTextEditingController.text.isNotEmpty) {
+      return true;
+    }
+    showSnackBar(
+      context: context,
+      message: 'Enter required data!',
+      error: true,
+    );
+    return false;
+  }
+
+  Future<void> forgetPassword() async {
+    bool status = await AuthApiController().forgetPassword(
+        context,
+        mobile: _mobileTextEditingController.text,
+    );
+    if (status) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              ResetPasswordScreen(mobile: _mobileTextEditingController.text),
+        ),
+      );
+    }
+  }
   
 }

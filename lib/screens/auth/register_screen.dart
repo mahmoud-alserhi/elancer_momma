@@ -1,4 +1,8 @@
-import 'package:elancer_momma/models/cities.dart';
+import 'package:elancer_momma/api/controllers/auth_api_controller.dart';
+import 'package:elancer_momma/helpers/helpers.dart';
+import 'package:elancer_momma/models/city.dart';
+import 'package:elancer_momma/models/user.dart';
+import 'package:elancer_momma/screens/auth/activate_screen.dart';
 import 'package:elancer_momma/widgets/app_text_filed.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +15,7 @@ class RegisterScreen extends StatefulWidget {
   _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends State<RegisterScreen>  with Helpers{
   late TextEditingController _nameTextEditingController;
   late TextEditingController _mobileTextEditingController;
   late TextEditingController _passwordTextEditingController;
@@ -19,12 +23,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late bool _isPasswordShow;
   String _gender = 'M';
   int? _selectedAddress;
-  final List<Cities> _addresses = <Cities>[
-    const Cities(id: 1, name: 'Gaza'),
-    const Cities(id: 2, name: 'Rafah'),
-    const Cities(id: 3, name: 'Khanyounis'),
-    const Cities(id: 4, name: 'Al-Borayj'),
-    const Cities(id: 5, name: 'Al-Nasser'),
+  final List<City> _addresses = <City>[
+    // const City(id: 1, name: 'Gaza'),
+    // const City(id: 2, name: 'Rafah'),
+    // const City(id: 3, name: 'Khanyounis'),
+    // const City(id: 4, name: 'Al-Borayj'),
+    // const City(id: 5, name: 'Al-Nasser'),
   ];
 
   late TapGestureRecognizer _tapGestureRecognizer;
@@ -155,36 +159,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 borderRadius: BorderRadius.circular(15)),
               contentPadding: const EdgeInsets.all(10),
             ),
-            child: DropdownButton(
-              borderRadius: BorderRadius.circular(15),
-              elevation: 8,
-              underline: const SizedBox.shrink(),
-              isExpanded: true,
-              hint: Text(
-                'Select City',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 18.sp,
-                  color: const Color(0xff9391A4),
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              onTap: () {},
-              onChanged: (int? value) {
-                if (value != null) {
-                  setState(() {
-                    _selectedAddress = value;
-                  });
-                }
-              },
-              value: _selectedAddress,
-              items: _addresses.map((e) {
-                return DropdownMenuItem(
-                  child: Text(e.name),
-                  value: e.id,
-                );
-              }).toList(),
-            ),
+            // child: DropdownButton(
+            //   borderRadius: BorderRadius.circular(15),
+            //   elevation: 8,
+            //   underline: const SizedBox.shrink(),
+            //   isExpanded: true,
+            //   hint: Text(
+            //     'Select City',
+            //     style: TextStyle(
+            //       fontFamily: 'Nunito',
+            //       fontSize: 18.sp,
+            //       color: const Color(0xff9391A4),
+            //       fontWeight: FontWeight.w600,
+            //     ),
+            //   ),
+            //   onTap: () {},
+            //   onChanged: (int? value) {
+            //     if (value != null) {
+            //       setState(() {
+            //         _selectedAddress = value;
+            //       });
+            //     }
+            //   },
+            //   value: _selectedAddress,
+            //   items: _addresses.map((e) {
+            //     return DropdownMenuItem(
+            //       child: Text(e.name),
+            //       value: e.id,
+            //     );
+            //   }).toList(),
+            // ),
           ),
           SizedBox(
             height: 20.h,
@@ -246,9 +250,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             height: 30.h,
           ),
           ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/activate_screen');
-            },
+            onPressed: () async => await performRegister(),
             style: ElevatedButton.styleFrom(
               primary: const Color(0xff6A90F2),
               shape: RoundedRectangleBorder(
@@ -283,7 +285,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     recognizer: _tapGestureRecognizer,
                     text: 'Sing In!',
                     style: TextStyle(
-                      color: Color(0xff6A90F2),
+                      color: const Color(0xff6A90F2),
                       fontFamily: 'Nunito',
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
@@ -295,4 +297,47 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
+
+  Future<void> performRegister() async {
+    if (checkData()) {
+      await register();
+    }
+  }
+
+  bool checkData() {
+    if (_nameTextEditingController.text.isNotEmpty &&
+        _mobileTextEditingController.text.isNotEmpty &&
+        _passwordTextEditingController.text.isNotEmpty) {
+      return true;
+    }
+    showSnackBar(
+      context: context,
+      message: 'Enter required data!',
+      error: true,
+    );
+    return false;
+  }
+
+  Future<void> register() async {
+    bool status = await AuthApiController().register(context, user: user);
+    // if(status) Navigator.pushNamed(context, '/activate_screen');
+    if(status) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(
+        builder: (context) =>
+            ActivateScreen(mobile: _mobileTextEditingController.text),
+      ),
+      );
+    }
+  }
+
+  User get user{
+    User user = User();
+    user.name = _nameTextEditingController.text;
+    user.mobile = _mobileTextEditingController.text;
+    user.password = _passwordTextEditingController.text;
+    user.gender = _gender;
+    return user;
+  }
+
 }

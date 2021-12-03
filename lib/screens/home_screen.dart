@@ -1,4 +1,5 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:elancer_momma/api/controllers/auth_api_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,7 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
         automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () => _scaffoldKey.currentState!.openDrawer(),
-          // onPressed: () => Scaffold.of(context).openDrawer(),
           icon: const Icon(
             Icons.menu_rounded,
             color: Color(0xff23203f),
@@ -190,12 +190,9 @@ class _HomeScreenState extends State<HomeScreen> {
               endIndent: 25,
             ),
             ListTile(
-              onTap: (){
+              onTap: () async{
                 Navigator.pop(context);
-                Future.delayed(const Duration(seconds: 1),(){
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, '/login_screen', (route) => true);
-                });
+                await logOut(context);
               },
               leading: const Icon(Icons.logout,color: Color(0xff23203F),size: 25,),
               title: Text(
@@ -233,7 +230,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         Image.network(
                           "http://www.hoko.pk/wp-content/uploads/2017/10/FHB-101-1.jpg",
-                          // "https://images.unsplash.com/photo-1595445364671-15205e6c380c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=764&q=80",
                           fit: BoxFit.fitHeight,
                           height: 200,
                           width: 300,
@@ -559,5 +555,15 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> logOut(BuildContext context) async {
+    bool loggedOut = await AuthApiController().logout();
+    if(loggedOut){
+      Future.delayed(const Duration(seconds: 1),(){
+        Navigator.pushReplacementNamed(
+            context, '/login_screen',);
+      });
+    }
   }
 }

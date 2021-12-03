@@ -1,3 +1,4 @@
+import 'package:elancer_momma/api/controllers/auth_api_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/widgets/app_text_filed.dart';
 import 'package:elancer_momma/widgets/code_text_filed.dart';
@@ -9,10 +10,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ActivateScreen extends StatefulWidget {
   const ActivateScreen({
     Key? key,
-    // required this.mobile,
+    required this.mobile,
   }) : super(key: key);
 
-  // final String mobile;
+  final String mobile;
 
   @override
   _ActivateScreenState createState() => _ActivateScreenState();
@@ -193,10 +194,7 @@ class _ActivateScreenState extends State<ActivateScreen>
             height: 70.h,
           ),
           ElevatedButton(
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, '/login_screen');
-            },
-            // onPressed: () async => await performResetPassword(),
+            onPressed: () async => await performActivatePhone(),
             style: ElevatedButton.styleFrom(
               primary: const Color(0xff6A90F2),
               shape: RoundedRectangleBorder(
@@ -218,70 +216,55 @@ class _ActivateScreenState extends State<ActivateScreen>
     );
   }
 
-  // Future<void> performResetPassword() async {
-  //   if (checkData()) {
-  //     await resetPassword();
-  //   }
-  // }
-  //
-  // bool checkData() {
-  //   if (checkCode() && checkPassword()) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
-  //
-  // bool checkPassword() {
-  //   if (_newPasswordTextEditingController.text.isNotEmpty &&
-  //       _newPasswordConfirmationTextEditingController.text.isNotEmpty) {
-  //     if (_newPasswordTextEditingController.text ==
-  //         _newPasswordConfirmationTextEditingController.text) {
-  //       return true;
-  //     }
-  //     showSnackBar(
-  //       context: context,
-  //       message: 'Password confirmation error!',
-  //       error: true,
-  //     );
-  //     return false;
-  //   }
-  //   showSnackBar(
-  //     context: context,
-  //     message: 'Enter New Password!',
-  //     error: true,
-  //   );
-  //   return false;
-  // }
-  //
-  // bool checkCode() {
-  //   if (_firstCodeTextController.text.isNotEmpty &&
-  //       _secondCodeTextController.text.isNotEmpty &&
-  //       _thirdCodeTextController.text.isNotEmpty &&
-  //       _fourthCodeTextController.text.isNotEmpty) {
-  //     getVerificationCode();
-  //     return true;
-  //   }
-  //   showSnackBar(
-  //     context: context,
-  //     message: 'Enter Verification Code!',
-  //     error: true,
-  //   );
-  //   return false;
-  // }
-  //
-  // String getVerificationCode() {
-  //   return _code = _firstCodeTextController.text +
-  //       _secondCodeTextController.text +
-  //       _thirdCodeTextController.text +
-  //       _fourthCodeTextController.text;
-  // }
-  //
-  // Future<void> resetPassword() async {
-  //   bool status = await AuthApiController().resetPassword(context,
-  //       email: widget.email,
-  //       code: _code!,
-  //       password: _newPasswordTextEditingController.text
-  //   );
-  //   if (status) Navigator.pop(context);
-  // }
+  Future<void> performActivatePhone() async {
+    if (checkData()) {
+      await activatePhone();
+    }
+  }
+
+  bool checkData() {
+    if (checkCode()) {
+      return true;
+    }
+    return false;
+  }
+
+
+  bool checkCode() {
+    if (_firstCodeTextController.text.isNotEmpty &&
+        _secondCodeTextController.text.isNotEmpty &&
+        _thirdCodeTextController.text.isNotEmpty &&
+        _fourthCodeTextController.text.isNotEmpty) {
+      getVerificationCode();
+      return true;
+    }
+    showSnackBar(
+      context: context,
+      message: 'Enter Verification Code!',
+      error: true,
+    );
+    return false;
+  }
+
+  String getVerificationCode() {
+    return _code = _firstCodeTextController.text +
+        _secondCodeTextController.text +
+        _thirdCodeTextController.text +
+        _fourthCodeTextController.text;
+  }
+
+  Future<void> activatePhone() async {
+    bool status = await AuthApiController().activatePhone(
+        context,
+        mobile: widget.mobile,
+        code: _code!,
+    );
+    if (status) {
+      Future.delayed(const Duration(seconds: 1),(){
+        Navigator.pushReplacementNamed(context, '/home_screen');
+      });
+    }
+    // if (status) Navigator.pushReplacementNamed(context, '/home_screen');
+  }
+
 }
