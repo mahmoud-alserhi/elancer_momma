@@ -18,7 +18,7 @@ class AuthApiController with Helpers{
       'gender':user.gender,
       'STORE_API_KEY':ApiSettings.storeApiKey,
       // 'city_id':'1',
-      'city_id':user.cityId,
+      'city_id':user.cityId.toString(),
     });
 
     if (response.statusCode == 201) {

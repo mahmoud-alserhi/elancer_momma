@@ -16,8 +16,7 @@ class RegisterScreen extends StatefulWidget {
   _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen>  with Helpers{
-
+class _RegisterScreenState extends State<RegisterScreen> with Helpers {
   late TextEditingController _nameTextEditingController;
   late TextEditingController _mobileTextEditingController;
   late TextEditingController _passwordTextEditingController;
@@ -25,7 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen>  with Helpers{
   late bool _isPasswordShow;
   String _gender = 'M';
 
-  String? _selectedAddress;
+  int? _selectedAddress;
   final List<City> _addresses = <City>[
     // const City(id: 1, name: 'Gaza'),
     // const City(id: 2, name: 'Rafah'),
@@ -36,9 +35,6 @@ class _RegisterScreenState extends State<RegisterScreen>  with Helpers{
 
   List<City> _city = <City>[];
   late Future<List<City>> _future;
-
-  List<String>items=[];
-  int indexcity=1;
 
   late TapGestureRecognizer _tapGestureRecognizer;
 
@@ -166,48 +162,15 @@ class _RegisterScreenState extends State<RegisterScreen>  with Helpers{
           ),
           InputDecorator(
             decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15)),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
               contentPadding: const EdgeInsets.all(10),
             ),
             child: FutureBuilder<List<City>>(
               future: _future,
               builder: (context, snapshot) {
-                if(snapshot.hasData && snapshot.data!.isNotEmpty){
-                  _city =snapshot.data ?? [];
-                  for(int i=0;i<_city.length;i++){
-                    items.add(_city[i].nameEn);
-                    print(items.length);
-                  }
-                  // return DropdownButton(
-                  //   value: _selectedAddress,
-                  //   icon: Icon(Icons.keyboard_arrow_down),
-                  //   underline: SizedBox(),
-                  //   items:items.map((String items) {
-                  //     return DropdownMenuItem(
-                  //         value: items,
-                  //         child: Text(items)
-                  //     );
-                  //   }
-                  //   ).toList(),
-                  //   onChanged: (value) {
-                  //     setState(() {
-                  //       _selectedAddress = value.toString();
-                  //       for(int i=0;i<items.length;i++)
-                  //       {
-                  //         if(_selectedAddress==items[i])
-                  //         {
-                  //           int j =i+1;
-                  //           setState(() {
-                  //             indexcity=j;
-                  //             print("city selected "+indexcity.toString());
-                  //           });
-                  //         }
-                  //       }
-                  //     });
-                  //   },
-                  // );
-
+                if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                  _city = snapshot.data ?? [];
                   return DropdownButton(
                     borderRadius: BorderRadius.circular(15),
                     elevation: 8,
@@ -223,18 +186,12 @@ class _RegisterScreenState extends State<RegisterScreen>  with Helpers{
                       ),
                     ),
                     onTap: () {},
-                    onChanged: (value) {
-                      print("response.statusCode");
-                      setState(() {
-                        _selectedAddress = value.toString();
-                        for(int i=0;i<items.length;i++)
-                        {
-                          if(_selectedAddress==items[i]) {
-                            int j =i+1;
-                            indexcity=j;
-                          }
-                        }
-                      });
+                    onChanged: (int? value) {
+                      if (value != null) {
+                        setState(() {
+                          _selectedAddress = value;
+                        });
+                      }
                     },
                     value: _selectedAddress,
                     items: _city.map((e) {
@@ -244,16 +201,16 @@ class _RegisterScreenState extends State<RegisterScreen>  with Helpers{
                       );
                     }).toList(),
                   );
-                }else{
+                } else {
                   return Center(
                     child: Text(
-                      'No City',
+                      'No Data',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontFamily: 'Nunito',
-                          fontSize: 22.sp,
-                          fontWeight: FontWeight.w600,
-                          color: const Color(0xff23203F),
+                        fontFamily: 'Nunito',
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.w600,
+                        color: const Color(0xff23203F),
                       ),
                     ),
                   );
@@ -408,7 +365,8 @@ class _RegisterScreenState extends State<RegisterScreen>  with Helpers{
   bool checkData() {
     if (_nameTextEditingController.text.isNotEmpty &&
         _mobileTextEditingController.text.isNotEmpty &&
-        _passwordTextEditingController.text.isNotEmpty) {
+        _passwordTextEditingController.text.isNotEmpty &&
+        _selectedAddress != null) {
       return true;
     }
     showSnackBar(
@@ -422,24 +380,24 @@ class _RegisterScreenState extends State<RegisterScreen>  with Helpers{
   Future<void> register() async {
     bool status = await AuthApiController().register(context, user: user);
     // if(status) Navigator.pushNamed(context, '/activate_screen');
-    if(status) {
+    if (status) {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(
-        builder: (context) =>
-            ActivateScreen(mobile: _mobileTextEditingController.text),
-      ),
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              ActivateScreen(mobile: _mobileTextEditingController.text),
+        ),
       );
     }
   }
 
-  User get user{
+  User get user {
     User user = User();
     user.name = _nameTextEditingController.text;
     user.mobile = _mobileTextEditingController.text;
     user.password = _passwordTextEditingController.text;
-    user.cityId = indexcity;
     user.gender = _gender;
+    user.cityId = _selectedAddress!;
     return user;
   }
-
 }
