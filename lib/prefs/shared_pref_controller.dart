@@ -22,7 +22,7 @@ class SharedPrefController{
     await _sharedPreferences.setBool(prefKeys.loggIn.toString(), true);
     await _sharedPreferences.setString(prefKeys.name.toString(), user.name);
     await _sharedPreferences.setString(prefKeys.mobile.toString(), user.mobile);
-    // await _sharedPreferences.setInt(prefKeys.cityId.toString(), user.cityId);
+    await _sharedPreferences.setInt(prefKeys.cityId.toString(), user.cityId);
     await _sharedPreferences.setString(prefKeys.gender.toString(), user.gender);
     await _sharedPreferences.setString(prefKeys.token.toString(), 'Bearer' + user.token);
   }

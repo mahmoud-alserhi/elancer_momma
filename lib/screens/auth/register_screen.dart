@@ -1,4 +1,5 @@
 import 'package:elancer_momma/api/controllers/auth_api_controller.dart';
+import 'package:elancer_momma/api/controllers/city_api_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/models/city.dart';
 import 'package:elancer_momma/models/user.dart';
@@ -16,13 +17,15 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen>  with Helpers{
+
   late TextEditingController _nameTextEditingController;
   late TextEditingController _mobileTextEditingController;
   late TextEditingController _passwordTextEditingController;
 
   late bool _isPasswordShow;
   String _gender = 'M';
-  int? _selectedAddress;
+
+  String? _selectedAddress;
   final List<City> _addresses = <City>[
     // const City(id: 1, name: 'Gaza'),
     // const City(id: 2, name: 'Rafah'),
@@ -30,6 +33,12 @@ class _RegisterScreenState extends State<RegisterScreen>  with Helpers{
     // const City(id: 4, name: 'Al-Borayj'),
     // const City(id: 5, name: 'Al-Nasser'),
   ];
+
+  List<City> _city = <City>[];
+  late Future<List<City>> _future;
+
+  List<String>items=[];
+  int indexcity=1;
 
   late TapGestureRecognizer _tapGestureRecognizer;
 
@@ -49,6 +58,8 @@ class _RegisterScreenState extends State<RegisterScreen>  with Helpers{
 
     _tapGestureRecognizer = TapGestureRecognizer()
       ..onTap = navigateToRegisterScreen;
+
+    _future = CityApiController().getCity();
   }
 
   @override
@@ -159,36 +170,126 @@ class _RegisterScreenState extends State<RegisterScreen>  with Helpers{
                 borderRadius: BorderRadius.circular(15)),
               contentPadding: const EdgeInsets.all(10),
             ),
-            // child: DropdownButton(
-            //   borderRadius: BorderRadius.circular(15),
-            //   elevation: 8,
-            //   underline: const SizedBox.shrink(),
-            //   isExpanded: true,
-            //   hint: Text(
-            //     'Select City',
-            //     style: TextStyle(
-            //       fontFamily: 'Nunito',
-            //       fontSize: 18.sp,
-            //       color: const Color(0xff9391A4),
-            //       fontWeight: FontWeight.w600,
-            //     ),
-            //   ),
-            //   onTap: () {},
-            //   onChanged: (int? value) {
-            //     if (value != null) {
-            //       setState(() {
-            //         _selectedAddress = value;
-            //       });
-            //     }
-            //   },
-            //   value: _selectedAddress,
-            //   items: _addresses.map((e) {
-            //     return DropdownMenuItem(
-            //       child: Text(e.name),
-            //       value: e.id,
-            //     );
-            //   }).toList(),
-            // ),
+            child: FutureBuilder<List<City>>(
+              future: _future,
+              builder: (context, snapshot) {
+                if(snapshot.hasData && snapshot.data!.isNotEmpty){
+                  _city =snapshot.data ?? [];
+                  for(int i=0;i<_city.length;i++){
+                    items.add(_city[i].nameEn);
+                    print(items.length);
+                  }
+                  // return DropdownButton(
+                  //   value: _selectedAddress,
+                  //   icon: Icon(Icons.keyboard_arrow_down),
+                  //   underline: SizedBox(),
+                  //   items:items.map((String items) {
+                  //     return DropdownMenuItem(
+                  //         value: items,
+                  //         child: Text(items)
+                  //     );
+                  //   }
+                  //   ).toList(),
+                  //   onChanged: (value) {
+                  //     setState(() {
+                  //       _selectedAddress = value.toString();
+                  //       for(int i=0;i<items.length;i++)
+                  //       {
+                  //         if(_selectedAddress==items[i])
+                  //         {
+                  //           int j =i+1;
+                  //           setState(() {
+                  //             indexcity=j;
+                  //             print("city selected "+indexcity.toString());
+                  //           });
+                  //         }
+                  //       }
+                  //     });
+                  //   },
+                  // );
+
+                  return DropdownButton(
+                    borderRadius: BorderRadius.circular(15),
+                    elevation: 8,
+                    underline: const SizedBox.shrink(),
+                    isExpanded: true,
+                    hint: Text(
+                      'Select City',
+                      style: TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 18.sp,
+                        color: const Color(0xff9391A4),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    onTap: () {},
+                    onChanged: (value) {
+                      print("response.statusCode");
+                      setState(() {
+                        _selectedAddress = value.toString();
+                        for(int i=0;i<items.length;i++)
+                        {
+                          if(_selectedAddress==items[i]) {
+                            int j =i+1;
+                            indexcity=j;
+                          }
+                        }
+                      });
+                    },
+                    value: _selectedAddress,
+                    items: _city.map((e) {
+                      return DropdownMenuItem(
+                        child: Text(e.nameEn),
+                        value: e.id,
+                      );
+                    }).toList(),
+                  );
+                }else{
+                  return Center(
+                    child: Text(
+                      'No City',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 22.sp,
+                          fontWeight: FontWeight.w600,
+                          color: const Color(0xff23203F),
+                      ),
+                    ),
+                  );
+                }
+              },
+              // child: DropdownButton(
+              //   borderRadius: BorderRadius.circular(15),
+              //   elevation: 8,
+              //   underline: const SizedBox.shrink(),
+              //   isExpanded: true,
+              //   hint: Text(
+              //     'Select City',
+              //     style: TextStyle(
+              //       fontFamily: 'Nunito',
+              //       fontSize: 18.sp,
+              //       color: const Color(0xff9391A4),
+              //       fontWeight: FontWeight.w600,
+              //     ),
+              //   ),
+              //   onTap: () {},
+              //   onChanged: (int? value) {
+              //     if (value != null) {
+              //       setState(() {
+              //         _selectedAddress = value;
+              //       });
+              //     }
+              //   },
+              //   value: _selectedAddress,
+              //   items: _addresses.map((e) {
+              //     return DropdownMenuItem(
+              //       child: Text(e.name),
+              //       value: e.id,
+              //     );
+              //   }).toList(),
+              // ),
+            ),
           ),
           SizedBox(
             height: 20.h,
@@ -336,6 +437,7 @@ class _RegisterScreenState extends State<RegisterScreen>  with Helpers{
     user.name = _nameTextEditingController.text;
     user.mobile = _mobileTextEditingController.text;
     user.password = _passwordTextEditingController.text;
+    user.cityId = indexcity;
     user.gender = _gender;
     return user;
   }

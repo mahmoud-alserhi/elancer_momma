@@ -15,4 +15,6 @@ class ApiSettings{
   static const forgetPassword = _apiUrl + "auth/forget-password";
   static const resetPassword = _apiUrl + "auth/reset-password";
 
+  static const city = _apiUrl + "cities";
+
 }
