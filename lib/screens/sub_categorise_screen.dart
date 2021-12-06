@@ -207,22 +207,27 @@ class _SubCategoriseScreenState extends State<SubCategoriseScreen> with Logout{
           ],
         ),
       ),
-      body: GridView.builder(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-        itemCount: 10,
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1,
-            mainAxisSpacing: 20,
-            crossAxisSpacing: 20,
-            childAspectRatio: 240 / 141),
-        itemBuilder: (context, index) {
-          return const CardCategorise(
-            image: 'assets/images/Clip.png',
-            title: 'Lorem Ipsum is',
-          );
+      body: GestureDetector(
+        onTap: (){
+          Navigator.pushNamed(context, '/details_product_screen');
         },
+        child: GridView.builder(
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+          itemCount: 10,
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 20,
+              childAspectRatio: 240 / 141),
+          itemBuilder: (context, index) {
+            return const CardCategorise(
+              image: 'assets/images/Clip.png',
+              title: 'Lorem Ipsum is',
+            );
+          },
+        ),
       ),
     );
   }

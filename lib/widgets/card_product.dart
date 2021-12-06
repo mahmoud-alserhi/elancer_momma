@@ -97,7 +97,7 @@ class CardProduct extends StatelessWidget {
                         maxLines: 1,
                         style: TextStyle(
                           fontFamily: 'Nunito',
-                          fontSize: 15.sp,
+                          fontSize: 16.sp,
                           color: const Color(0xff716F87),
                           fontWeight: FontWeight.w600,
                         ),

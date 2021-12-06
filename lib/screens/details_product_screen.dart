@@ -117,7 +117,7 @@ class _DetailsProductScreenState extends State<DetailsProductScreen> {
                       style: TextStyle(
                         fontFamily: 'Nunito',
                         fontSize: 22.sp,
-                        color: const Color(0xff716F87),
+                        color: const Color(0xff23203F),
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -132,7 +132,7 @@ class _DetailsProductScreenState extends State<DetailsProductScreen> {
                       style: TextStyle(
                         fontFamily: 'Nunito',
                         fontSize: 20.sp,
-                        color: const Color(0xff716F87),
+                        color: const Color(0xff6A90F2),
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -156,6 +156,7 @@ class _DetailsProductScreenState extends State<DetailsProductScreen> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       'Item Description:',
@@ -163,7 +164,7 @@ class _DetailsProductScreenState extends State<DetailsProductScreen> {
                       style: TextStyle(
                         fontFamily: 'Nunito',
                         fontSize: 20.sp,
-                        color: const Color(0xff716F87),
+                        color: const Color(0xff23203F),
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -176,9 +177,6 @@ class _DetailsProductScreenState extends State<DetailsProductScreen> {
                       ),
                     ),
                   ],
-                ),
-                SizedBox(
-                  height: 10.h,
                 ),
                 Text(
                   'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry`s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
