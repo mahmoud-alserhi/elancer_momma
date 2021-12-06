@@ -1,5 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
-import 'package:elancer_momma/api/controllers/auth_api_controller.dart';
+import 'package:elancer_momma/helpers/logout.dart';
+import 'package:elancer_momma/widgets/card_categorise.dart';
+import 'package:elancer_momma/widgets/card_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,7 +12,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with Logout{
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -44,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {},
             icon: const Icon(
               Icons.favorite,
-              color: Color(0xff23203f),
+              color: Color(0xffFF0000),
             ),
           ),
           IconButton(
@@ -218,9 +220,14 @@ class _HomeScreenState extends State<HomeScreen> {
               minWidth: double.infinity,
             ),
             child: Swiper(
-              // onTap: (value){},
+              onTap: (value){
+                Navigator.pushNamed(context, '/details_product_screen');
+              },
               duration: 500,
               autoplay: true,
+              itemCount: 10,
+              viewportFraction: 0.7,
+              scale: 0.9,
               itemBuilder: (BuildContext context, int index) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -234,31 +241,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 200,
                           width: 300,
                         ),
-                        // Container(
-                        //   decoration: const BoxDecoration(
-                        //     color: Color.fromARGB(180, 255, 255, 255),
-                        //     borderRadius: BorderRadius.only(bottomRight: Radius.circular(15),bottomLeft: Radius.circular(15)),
-                        //   ),
-                        //   height: 70.h,
-                        //   width: double.infinity,
-                        //   child: const Padding(
-                        //     padding: EdgeInsets.all(10),
-                        //     child: Text(
-                        //         "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-                        //         // textAlign: TextAlign.right,
-                        //         maxLines: 2,
-                        //         style: TextStyle(
-                        //             fontSize: 15, fontWeight: FontWeight.bold)),
-                        //   ),
-                        // ),
                       ],
                     ),
                   ],
                 );
               },
-              itemCount: 10,
-              viewportFraction: 0.7,
-              scale: 0.9,
             ),
           ),
           SizedBox(
@@ -279,7 +266,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/categorise_screen');
+                  },
                   child: Text(
                     'View All',
                     style: TextStyle(
@@ -296,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ConstrainedBox(
             constraints: BoxConstraints(
               minHeight: 10.h,
-              maxHeight: 252.h,
+              maxHeight: 200.h,
               minWidth: double.infinity,
             ),
             child: GridView.builder(
@@ -307,52 +296,15 @@ class _HomeScreenState extends State<HomeScreen> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 1,
                   mainAxisSpacing: 20,
-                  childAspectRatio: 212 / 141),
+                  childAspectRatio: 141 / 210),
               itemBuilder: (context, index) {
-                return Card(
-                  elevation: 8,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        'assets/images/Clip.png',
-                        fit: BoxFit.fitHeight,
-                        height: 190,
-                      ),
-                      SizedBox(
-                        height: 45.h,
-                        width: double.infinity,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.w),
-                          child: Column(
-                            children: [
-                              Text(
-                                  "Lorem Ipsum is",
-                                  // textAlign: TextAlign.right,
-                                  maxLines: 1,
-                                style: TextStyle(
-                                  fontFamily: 'Nunito',
-                                  fontSize: 15.sp,
-                                  color: const Color(0xff23203F),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                "\$10.00",
-                                // textAlign: TextAlign.right,
-                                maxLines: 1,
-                                style: TextStyle(
-                                  fontFamily: 'Nunito',
-                                  fontSize: 15.sp,
-                                  color: const Color(0xff716F87),
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                return GestureDetector(
+                  onTap: (){
+                    Navigator.pushNamed(context, '/sub_categorise_screen');
+                  },
+                  child: const CardCategorise(
+                      image: 'assets/images/Clip.png',
+                      title: 'Lorem Ipsum is',
                   ),
                 );
               },
@@ -376,7 +328,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/latest_products_screen');
+                  },
                   child: Text(
                     'View All',
                     style: TextStyle(
@@ -393,66 +347,31 @@ class _HomeScreenState extends State<HomeScreen> {
           ConstrainedBox(
             constraints: BoxConstraints(
               minHeight: 10.h,
-              maxHeight: 252.h,
+              maxHeight: 200.h,
               minWidth: double.infinity,
             ),
-            child: GridView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 20.h),
-              itemCount: 10,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1,
-                  mainAxisSpacing: 19,
-                  childAspectRatio: 212 / 141),
-              itemBuilder: (context, index) {
-                return Card(
-                  elevation: 8,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        'assets/images/Clip.png',
-                        fit: BoxFit.fitHeight,
-                        height: 190,
-                      ),
-                      SizedBox(
-                        height: 45.h,
-                        width: double.infinity,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.w),
-                          child: Column(
-                            children: [
-                              Text(
-                                "Lorem Ipsum is",
-                                // textAlign: TextAlign.right,
-                                maxLines: 1,
-                                style: TextStyle(
-                                  fontFamily: 'Nunito',
-                                  fontSize: 15.sp,
-                                  color: const Color(0xff23203F),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                "\$10.00",
-                                // textAlign: TextAlign.right,
-                                maxLines: 1,
-                                style: TextStyle(
-                                  fontFamily: 'Nunito',
-                                  fontSize: 15.sp,
-                                  color: const Color(0xff716F87),
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
+            child: GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(context, '/details_product_screen');
               },
+              child: GridView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 20.h),
+                itemCount: 10,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1,
+                    mainAxisSpacing: 19,
+                    childAspectRatio: 141 / 210),
+                itemBuilder: (context, index) {
+                  return const CardProduct(
+                      image: 'assets/images/Clip.png',
+                      title: 'Lorem Ipsum is',
+                      subTitle: 'subTitle',
+                      price: '\$10.00',
+                  );
+                },
+              ),
             ),
           ),
           SizedBox(
@@ -473,7 +392,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/products_screen');
+                  },
                   child: Text(
                     'View All',
                     style: TextStyle(
@@ -490,66 +411,31 @@ class _HomeScreenState extends State<HomeScreen> {
           ConstrainedBox(
             constraints: BoxConstraints(
               minHeight: 10.h,
-              maxHeight: 252.h,
+              maxHeight: 200.h,
               minWidth: double.infinity,
             ),
-            child: GridView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 20.h),
-              itemCount: 10,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1,
-                  mainAxisSpacing: 19,
-                  childAspectRatio: 212 / 141),
-              itemBuilder: (context, index) {
-                return Card(
-                  elevation: 8,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        'assets/images/Clip.png',
-                        fit: BoxFit.fitHeight,
-                        height: 190,
-                      ),
-                      SizedBox(
-                        height: 45.h,
-                        width: double.infinity,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.w),
-                          child: Column(
-                            children: [
-                              Text(
-                                "Lorem Ipsum is",
-                                // textAlign: TextAlign.right,
-                                maxLines: 1,
-                                style: TextStyle(
-                                  fontFamily: 'Nunito',
-                                  fontSize: 15.sp,
-                                  color: const Color(0xff23203F),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                "\$10.00",
-                                // textAlign: TextAlign.right,
-                                maxLines: 1,
-                                style: TextStyle(
-                                  fontFamily: 'Nunito',
-                                  fontSize: 15.sp,
-                                  color: const Color(0xff716F87),
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
+            child: GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(context, '/details_product_screen');
               },
+              child: GridView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 20.h),
+                itemCount: 10,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1,
+                    mainAxisSpacing: 19,
+                    childAspectRatio: 141 / 210),
+                itemBuilder: (context, index) {
+                  return const CardProduct(
+                    image: 'assets/images/Clip.png',
+                    title: 'Lorem Ipsum is',
+                    subTitle: 'subTitle',
+                    price: '\$10.00',
+                  );
+                },
+              ),
             ),
           ),
         ],
@@ -557,13 +443,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Future<void> logOut(BuildContext context) async {
-    bool loggedOut = await AuthApiController().logout();
-    if(loggedOut){
-      Future.delayed(const Duration(seconds: 1),(){
-        Navigator.pushReplacementNamed(
-            context, '/login_screen',);
-      });
-    }
-  }
+
 }
+

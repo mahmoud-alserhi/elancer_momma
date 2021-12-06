@@ -25,13 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
   String _gender = 'M';
 
   int? _selectedAddress;
-  final List<City> _addresses = <City>[
-    // const City(id: 1, name: 'Gaza'),
-    // const City(id: 2, name: 'Rafah'),
-    // const City(id: 3, name: 'Khanyounis'),
-    // const City(id: 4, name: 'Al-Borayj'),
-    // const City(id: 5, name: 'Al-Nasser'),
-  ];
+
 
   List<City> _city = <City>[];
   late Future<List<City>> _future;
@@ -216,36 +210,6 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
                   );
                 }
               },
-              // child: DropdownButton(
-              //   borderRadius: BorderRadius.circular(15),
-              //   elevation: 8,
-              //   underline: const SizedBox.shrink(),
-              //   isExpanded: true,
-              //   hint: Text(
-              //     'Select City',
-              //     style: TextStyle(
-              //       fontFamily: 'Nunito',
-              //       fontSize: 18.sp,
-              //       color: const Color(0xff9391A4),
-              //       fontWeight: FontWeight.w600,
-              //     ),
-              //   ),
-              //   onTap: () {},
-              //   onChanged: (int? value) {
-              //     if (value != null) {
-              //       setState(() {
-              //         _selectedAddress = value;
-              //       });
-              //     }
-              //   },
-              //   value: _selectedAddress,
-              //   items: _addresses.map((e) {
-              //     return DropdownMenuItem(
-              //       child: Text(e.name),
-              //       value: e.id,
-              //     );
-              //   }).toList(),
-              // ),
             ),
           ),
           SizedBox(

@@ -6,5 +6,7 @@ class Colors{
   static var subTextColor = const Color(0xff716F87);
   static var hintColor = const Color(0xff9391A4);
   static var borderColor = const Color(0xffD0D0D0);
+  static var favouriteColor = const Color(0xffFF0000);
+  static var categoryColor = const Color(0xffF0F1F6);
 
 }
