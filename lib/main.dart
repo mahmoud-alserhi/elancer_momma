@@ -1,9 +1,12 @@
 import 'package:elancer_momma/prefs/shared_pref_controller.dart';
 import 'package:elancer_momma/screens/auth/activate_screen.dart';
+import 'package:elancer_momma/screens/auth/password/change_password_screen.dart';
 import 'package:elancer_momma/screens/auth/password/forgot_password_screen.dart';
 import 'package:elancer_momma/screens/auth/password/reset_password_screen.dart';
 import 'package:elancer_momma/screens/categorise_screen.dart';
 import 'package:elancer_momma/screens/details_product_screen.dart';
+import 'package:elancer_momma/screens/faqs_screen.dart';
+import 'package:elancer_momma/screens/favorite_screen.dart';
 import 'package:elancer_momma/screens/home_screen.dart';
 import 'package:elancer_momma/screens/latest_products_screen.dart';
 import 'package:elancer_momma/screens/launch_screen.dart';
@@ -48,6 +51,7 @@ class MyApp extends StatelessWidget {
           '/register_screen' : (context) => const RegisterScreen(),
           '/forget_password_screen' : (context) => const ForgotPassword(),
           // '/reset_password_screen' : (context) => const ResetPasswordScreen(),
+          '/change_password_screen' : (context) => const ChangePasswordScreen(),
           // '/activate_screen' : (context) => const ActivateScreen(),
           '/home_screen' : (context) => const HomeScreen(),
           '/categorise_screen' : (context) => const CategoriseScreen(),
@@ -55,6 +59,8 @@ class MyApp extends StatelessWidget {
           '/latest_products_screen' : (context) => const LatestProductsScreen(),
           '/products_screen' : (context) => const ProductsScreen(),
           '/details_product_screen' : (context) => const DetailsProductScreen(),
+          '/favorite_screen' : (context) => const FavoriteScreen(),
+          '/faqs_screen' : (context) => const FAQseScreen(),
         },
       ),
     );

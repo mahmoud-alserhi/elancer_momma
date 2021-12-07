@@ -41,7 +41,9 @@ class _SubCategoriseScreenState extends State<SubCategoriseScreen> with Logout{
         elevation: 0,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/favorite_screen');
+            },
             icon: const Icon(
               Icons.favorite,
               color: Color(0xffFF0000),

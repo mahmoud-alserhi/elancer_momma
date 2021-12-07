@@ -9,12 +9,14 @@ class CardProduct extends StatelessWidget {
     required this.title,
     required this.subTitle,
     required this.price,
+    this.isFavorite = false,
   }) : super(key: key);
 
   final String image;
   final String title;
   final String subTitle;
   final String price;
+  final bool isFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +36,9 @@ class CardProduct extends StatelessWidget {
               ),
               child: IconButton(
                 onPressed: () {},
-                icon: const Icon(
-                  Icons.favorite_border_outlined,
-                  color: Color(0xffFF0000),
+                icon: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
+                  color: const Color(0xffFF0000),
                   size: 30,
                 ),
               ),

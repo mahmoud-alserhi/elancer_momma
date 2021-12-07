@@ -179,12 +179,25 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    onTap: () {},
+                    // onTap: () {},
                     onChanged: (int? value) {
                       if (value != null) {
                         setState(() {
                           _selectedAddress = value;
                         });
+                      }else{
+                        Center(
+                          child: Text(
+                            'No Data',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'Nunito',
+                              fontSize: 22.sp,
+                              fontWeight: FontWeight.w600,
+                              color: const Color(0xff23203F),
+                            ),
+                          ),
+                        );
                       }
                     },
                     value: _selectedAddress,
@@ -196,18 +209,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
                     }).toList(),
                   );
                 } else {
-                  return Center(
-                    child: Text(
-                      'No Data',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Nunito',
-                        fontSize: 22.sp,
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xff23203F),
-                      ),
-                    ),
-                  );
+                  return const Center(child: CircularProgressIndicator(),);
                 }
               },
             ),

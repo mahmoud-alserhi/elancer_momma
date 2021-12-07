@@ -217,16 +217,9 @@ class _ActivateScreenState extends State<ActivateScreen>
   }
 
   Future<void> performActivatePhone() async {
-    if (checkData()) {
+    if (checkCode()) {
       await activatePhone();
     }
-  }
-
-  bool checkData() {
-    if (checkCode()) {
-      return true;
-    }
-    return false;
   }
 
 
