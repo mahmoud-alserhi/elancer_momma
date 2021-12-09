@@ -1,8 +1,8 @@
 import 'package:elancer_momma/api/controllers/auth_api_controller.dart';
 import 'package:elancer_momma/api/controllers/city_api_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
-import 'package:elancer_momma/models/city.dart';
-import 'package:elancer_momma/models/user.dart';
+import 'package:elancer_momma/models/api/city.dart';
+import 'package:elancer_momma/models/api/user.dart';
 import 'package:elancer_momma/screens/auth/activate_screen.dart';
 import 'package:elancer_momma/widgets/app_text_filed.dart';
 import 'package:flutter/gestures.dart';
@@ -203,7 +203,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
                     value: _selectedAddress,
                     items: _city.map((e) {
                       return DropdownMenuItem(
-                        child: Text(e.nameEn),
+                        child: Text(e.cityName),
                         value: e.id,
                       );
                     }).toList(),

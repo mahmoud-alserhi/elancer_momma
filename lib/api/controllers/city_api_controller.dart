@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:elancer_momma/models/city.dart';
+import 'package:elancer_momma/models/api/city.dart';
 import 'package:http/http.dart' as http;
 import 'package:elancer_momma/api/api_settings.dart';
 

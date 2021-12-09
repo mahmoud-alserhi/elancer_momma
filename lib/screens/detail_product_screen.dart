@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DetailsProductScreen extends StatefulWidget {
-  const DetailsProductScreen({Key? key}) : super(key: key);
+class DetailProductScreen extends StatefulWidget {
+  const DetailProductScreen({Key? key}) : super(key: key);
 
   @override
-  _DetailsProductScreenState createState() => _DetailsProductScreenState();
+  _DetailProductScreenState createState() => _DetailProductScreenState();
 }
 
-class _DetailsProductScreenState extends State<DetailsProductScreen> {
+class _DetailProductScreenState extends State<DetailProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

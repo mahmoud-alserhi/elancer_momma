@@ -3,14 +3,14 @@ import 'package:elancer_momma/widgets/card_categorise.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CategoriseScreen extends StatefulWidget {
-  const CategoriseScreen({Key? key}) : super(key: key);
+class CategoryScreen extends StatefulWidget {
+  const CategoryScreen({Key? key}) : super(key: key);
 
   @override
-  _CategoriseScreenState createState() => _CategoriseScreenState();
+  _CategoryScreenState createState() => _CategoryScreenState();
 }
 
-class _CategoriseScreenState extends State<CategoriseScreen> with Logout{
+class _CategoryScreenState extends State<CategoryScreen> with Logout{
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 

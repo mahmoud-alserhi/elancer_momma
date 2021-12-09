@@ -15,6 +15,8 @@ mixin Helpers{
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10)
           ),
+          //This is New Property to dismiss snackBar
+          dismissDirection: DismissDirection.horizontal,
         )
     );
   }

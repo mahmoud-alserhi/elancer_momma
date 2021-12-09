@@ -1,3 +1,4 @@
+import 'package:elancer_momma/prefs/shared_pref_controller.dart';
 
 class City {
   late int id;
@@ -12,4 +13,6 @@ class City {
     nameAr = json['name_ar'];
   }
 
+  String get cityName =>
+      SharedPrefController().checkLanguage == 'en' ? nameEn : nameAr;
 }

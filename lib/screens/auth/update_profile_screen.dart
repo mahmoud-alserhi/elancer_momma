@@ -1,23 +1,22 @@
 import 'package:elancer_momma/api/controllers/auth_api_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
-import 'package:elancer_momma/models/city.dart';
+import 'package:elancer_momma/models/api/city.dart';
 import 'package:elancer_momma/widgets/app_text_filed.dart';
-import 'package:elancer_momma/widgets/code_text_filed.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({
+class UpdateProfileScreen extends StatefulWidget {
+  const UpdateProfileScreen({
     Key? key,
   }) : super(key: key);
 
 
   @override
-  _EditProfileScreenState createState() => _EditProfileScreenState();
+  _UpdateProfileScreenState createState() => _UpdateProfileScreenState();
 }
 
-class _EditProfileScreenState extends State<EditProfileScreen>
+class _UpdateProfileScreenState extends State<UpdateProfileScreen>
     with Helpers {
 
   late TextEditingController _nameTextEditingController;

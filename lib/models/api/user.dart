@@ -1,4 +1,6 @@
 
+import 'package:elancer_momma/models/api/city.dart';
+
 class User {
   late int id;
   late String name;
@@ -13,7 +15,7 @@ class User {
   late String token;
   late String tokenType;
   late String refreshToken;
-  // late City city;
+  late City city;
   late String password;
 
   User();
@@ -32,7 +34,7 @@ class User {
     token = json['token'];
     tokenType = json['token_type'];
     refreshToken = json['refresh_token'];
-    // city = json['city'] != null ? City.fromJson(json['city']) : null;
+    city = City.fromJson(json['city']);
   }
 
 }

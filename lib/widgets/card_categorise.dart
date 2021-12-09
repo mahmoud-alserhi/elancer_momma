@@ -14,18 +14,23 @@ class CardCategorise extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
+
         color: const Color(0xffF0F1F6),
         borderRadius: BorderRadius.circular(25),
       ),
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          Image.asset(
-            image,
-            // 'assets/images/Clip.png',
-            fit: BoxFit.fitHeight,
-            height: 200,
+          Container(
+            height: 200.h,
+            width: double.infinity,
+            child: Image.network(
+              image,
+              // 'assets/images/Clip.png',
+              fit: BoxFit.fill,
+            ),
           ),
           Container(
             decoration: const BoxDecoration(
