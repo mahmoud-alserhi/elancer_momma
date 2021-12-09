@@ -219,7 +219,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Logout{
               title: 'Lorem Ipsum is',
               subTitle: 'subTitle',
               price: '\$10.00',
-              isFavorite: true,
+              // isFavorite: true,
             );
           },
         ),

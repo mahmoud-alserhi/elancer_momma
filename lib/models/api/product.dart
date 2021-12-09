@@ -8,10 +8,10 @@ class Product {
   late String infoAr;
   late int price;
   late int quantity;
-  late double overalRate;
+  late num? overalRate;
   late int subCategoryId;
   late int productRate;
-  late num offerPrice;
+  late num? offerPrice;
   late bool isFavorite;
   late String imageUrl;
 
@@ -35,7 +35,7 @@ class Product {
   String get productName =>
       SharedPrefController().checkLanguage == 'en' ? nameEn : nameAr;
 
-  String get infoName =>
+  String get infoProduct =>
       SharedPrefController().checkLanguage == 'en' ? infoEn : infoAr;
 
 }

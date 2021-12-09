@@ -16,14 +16,13 @@ class CardCategorise extends StatelessWidget {
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-
         color: const Color(0xffF0F1F6),
         borderRadius: BorderRadius.circular(25),
       ),
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          Container(
+          SizedBox(
             height: 200.h,
             width: double.infinity,
             child: Image.network(
@@ -37,10 +36,10 @@ class CardCategorise extends StatelessWidget {
               color: Color(0xffe6e4fa),
               borderRadius: BorderRadius.only(bottomRight: Radius.circular(15),bottomLeft: Radius.circular(15)),
             ),
-            height: 40.h,
+            height: 45.h,
             width: double.infinity,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
               child: Text(
                 title,
                 // "Lorem Ipsum is simply dummy text of the printing and typesetting industry",

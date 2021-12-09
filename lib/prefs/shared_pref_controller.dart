@@ -35,8 +35,8 @@ class SharedPrefController{
 
   Future<void> setLanguage ({required String lang}) async{
     await _sharedPreferences.setString(prefKeys.lang.toString(), lang);
-  }                                                                                    //'en
-  String get checkLanguage => _sharedPreferences.getString(prefKeys.lang.toString()) ?? 'ar';
+  }                                                                                    //'ar
+  String get checkLanguage => _sharedPreferences.getString(prefKeys.lang.toString()) ?? 'en';
 
   Future<bool> clear() async{
     return await _sharedPreferences.clear();

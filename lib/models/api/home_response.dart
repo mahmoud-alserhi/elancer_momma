@@ -22,7 +22,7 @@ class HomeResponse {
       json['categories'].forEach((jsonObject) {
         categories.add(Category.fromJson(jsonObject));
       });
-      print(categories.length.toString()+"aaaaa");
+      // print(categories.length.toString()+"aaaaa");
     }
     if (json['latest_products'] != null) {
       latestProducts = <Product>[];
