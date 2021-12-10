@@ -1,4 +1,4 @@
-import 'package:elancer_momma/helpers/logout.dart';
+import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/widgets/card_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +10,7 @@ class ProductsScreen extends StatefulWidget {
   _ProductsScreenState createState() => _ProductsScreenState();
 }
 
-class _ProductsScreenState extends State<ProductsScreen> with Logout{
+class _ProductsScreenState extends State<ProductsScreen> with Helpers{
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 

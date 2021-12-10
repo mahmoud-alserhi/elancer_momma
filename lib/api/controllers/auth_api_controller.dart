@@ -20,15 +20,20 @@ class AuthApiController with Helpers {
       'STORE_API_KEY': ApiSettings.storeApiKey,
       // 'city_id':'1',
       'city_id': user.cityId.toString(),
-    });
+    },
+      headers: headers
+    );
 
     if (response.statusCode == 201) {
       showSnackBar(
         context: context,
-        message: jsonDecode(response.body)['message'] +
-            jsonDecode(response.body)['code'],
+        message: jsonDecode(response.body)['message'],
       );
-      print(jsonDecode(response.body)['code']);
+      showSnackBarCode(
+          context: context,
+          message: "Your verification Code: ${jsonDecode(response.body)["code"]}",
+      );
+      // print(jsonDecode(response.body)['code']);
       return true;
     } else if (response.statusCode == 400) {
       showSnackBar(
@@ -48,11 +53,11 @@ class AuthApiController with Helpers {
         'mobile': mobile,
         'code': code,
       },
-      headers: {'lang': 'en'},
+      headers: headers
     );
     if (response.statusCode == 200) {
-      print(response.statusCode);
-      print(jsonDecode(response.body)['code']);
+      // print(response.statusCode);
+      // print(jsonDecode(response.body)['code']);
       showSnackBar(
         context: context,
         message: jsonDecode(response.body)['message'],
@@ -81,7 +86,7 @@ class AuthApiController with Helpers {
         'mobile': mobile,
         'password': password,
       },
-      headers: {'lang': 'ar'},
+      headers: headers
     );
     if (response.statusCode == 200) {
       var jsonObject = jsonDecode(response.body);
@@ -103,11 +108,14 @@ class AuthApiController with Helpers {
 
   Future<bool> logout() async {
     var url = Uri.parse(ApiSettings.logout);
-    var response = await http.get(url, headers: {
-      'lang': 'en',
-      HttpHeaders.authorizationHeader: SharedPrefController().token,
-      HttpHeaders.acceptHeader: 'application/json',
-    });
+    var response = await http.get(url,
+        headers: headers
+    //     {
+    //   'lang': 'en',
+    //   HttpHeaders.authorizationHeader: SharedPrefController().token,
+    //   HttpHeaders.acceptHeader: 'application/json',
+    // }
+    );
     print(response.statusCode);
     if (response.statusCode == 200 || response.statusCode == 401) {
       SharedPrefController().clear();
@@ -124,9 +132,10 @@ class AuthApiController with Helpers {
       body: {
         'mobile': mobile,
       },
-      headers: {
-        'lang': 'en',
-      },
+      headers: headers
+      // {
+      //   'lang': 'en',
+      // },
     );
     if (response.statusCode == 200) {
       print(response.statusCode);
@@ -157,10 +166,12 @@ class AuthApiController with Helpers {
       'code': code,
       'password': password,
       'password_confirmation': password,
-    }, headers: {
-      'lang': 'ar',
-      HttpHeaders.acceptHeader: 'application/json',
-    });
+    }, headers: headers
+    // {
+    //   'lang': 'ar',
+    //   HttpHeaders.acceptHeader: 'application/json',
+    // }
+    );
 
     if (response.statusCode == 200) {
       showSnackBar(

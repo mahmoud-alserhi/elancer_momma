@@ -1,4 +1,4 @@
-import 'package:elancer_momma/helpers/logout.dart';
+import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/widgets/card_categorise.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +10,7 @@ class CategoryScreen extends StatefulWidget {
   _CategoryScreenState createState() => _CategoryScreenState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> with Logout{
+class _CategoryScreenState extends State<CategoryScreen> with Helpers{
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 

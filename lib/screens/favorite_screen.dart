@@ -1,4 +1,4 @@
-import 'package:elancer_momma/helpers/logout.dart';
+import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/widgets/card_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +10,7 @@ class FavoriteScreen extends StatefulWidget {
   _FavoriteScreenState createState() => _FavoriteScreenState();
 }
 
-class _FavoriteScreenState extends State<FavoriteScreen> with Logout{
+class _FavoriteScreenState extends State<FavoriteScreen> with Helpers{
 
   @override
   Widget build(BuildContext context) {

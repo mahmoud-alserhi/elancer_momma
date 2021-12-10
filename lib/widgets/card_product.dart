@@ -105,7 +105,7 @@ class CardProduct extends StatelessWidget {
                     children: [
                       SizedBox(
                         height: 25.h,
-                        width: 225.w,
+                        width: 163.w,
                         child: Text(
                           '$subTitle...',
                           // "subTitle",

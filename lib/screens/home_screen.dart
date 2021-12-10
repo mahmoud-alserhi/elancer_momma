@@ -1,6 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:elancer_momma/get/home_getx_controller.dart';
-import 'package:elancer_momma/helpers/logout.dart';
+import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/widgets/card_categorise.dart';
 import 'package:elancer_momma/widgets/card_product.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with Logout {
+class _HomeScreenState extends State<HomeScreen> with Helpers {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   HomeGetxController _homeGetxController = Get.put(HomeGetxController());
 

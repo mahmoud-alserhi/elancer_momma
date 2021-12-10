@@ -3,6 +3,7 @@ import 'package:elancer_momma/models/api/home_response.dart';
 import 'package:elancer_momma/models/api/user.dart';
 
 class BaseApiObjectResponse<T> extends BaseApiResponse {
+
   late T object;
   late T data;
 
