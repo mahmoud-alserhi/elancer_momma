@@ -1,4 +1,5 @@
 import 'package:elancer_momma/api/controllers/auth_api_controller.dart';
+import 'package:elancer_momma/api/controllers/city_api_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/models/api/city.dart';
 import 'package:elancer_momma/widgets/app_text_filed.dart';
@@ -24,14 +25,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
   String _gender = 'M';
 
   List<City> _city = <City>[];
-  // late Future<List<City>> _future;
+  late Future<List<City>> _future;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _nameTextEditingController = TextEditingController();
-    // _future = CityApiController().getCity();
+    _future = CityApiController().getCity();
   }
 
   @override
@@ -55,7 +56,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
         ),
         title: Text(
           // AppLocalizations.of(context)!.resetPassword,
-            'Edit Profile',
+            'Update Profile',
             style: TextStyle(
               fontFamily: 'Nunito',
               fontSize: 25.sp,
@@ -102,10 +103,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
             height: 20.h,
           ),
           AppTextFiled(
-            hintText: 'Current Password',
+            hintText: 'Name',
             textEditingController: _nameTextEditingController,
             textInputType: TextInputType.text,
-            obscureText: true,
           ),
           SizedBox(
             height: 20.h,
@@ -116,35 +116,45 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
               OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
               contentPadding: const EdgeInsets.all(10),
             ),
-            child: DropdownButton(
-              borderRadius: BorderRadius.circular(15),
-              elevation: 8,
-              underline: const SizedBox.shrink(),
-              isExpanded: true,
-              hint: Text(
-                'Select City',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 18.sp,
-                  color: const Color(0xff9391A4),
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              onTap: () {},
-              onChanged: (int? value) {
-                if (value != null) {
-                  setState(() {
-                    _selectedCity = value;
-                  });
+            child: FutureBuilder<List<City>>(
+              future: _future,
+              builder: (context, snapshot) {
+                if(snapshot.hasData && snapshot.data!.isNotEmpty){
+                  _city = snapshot.data ?? [];
+                  return DropdownButton(
+                    borderRadius: BorderRadius.circular(15),
+                    elevation: 8,
+                    underline: const SizedBox.shrink(),
+                    isExpanded: true,
+                    hint: Text(
+                      'Select City',
+                      style: TextStyle(
+                        fontFamily: 'Nunito',
+                        fontSize: 18.sp,
+                        color: const Color(0xff9391A4),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    onTap: () {},
+                    onChanged: (int? value) {
+                      if (value != null) {
+                        setState(() {
+                          _selectedCity = value;
+                        });
+                      }
+                    },
+                    value: _selectedCity,
+                    items: _city.map((e) {
+                      return DropdownMenuItem(
+                        child: Text(e.nameEn),
+                        value: e.id,
+                      );
+                    }).toList(),
+                  );
+                }else {
+                  return const Center(child: CircularProgressIndicator(),);
                 }
               },
-              value: _selectedCity,
-              items: _city.map((e) {
-                return DropdownMenuItem(
-                  child: Text(e.nameEn),
-                  value: e.id,
-                );
-              }).toList(),
             ),
           ),
           SizedBox(
@@ -250,13 +260,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
 
 
   Future<void> updateInformation() async {
-    // bool status = await AuthApiController().resetPassword(
-    //     context,
-    //     mobile: widget.mobile,
-    //     code: _code!,
-    //     password: _newPasswordTextEditingController.text,
-    // );
-    // if (status) Navigator.pop(context);
+    bool status = await AuthApiController().updateProfile(
+        context,
+        name: _nameTextEditingController.text,
+        city_id: _selectedCity!,
+        gender: _gender
+    );
+    if (status) Navigator.pop(context);
   }
 
   // User get user {

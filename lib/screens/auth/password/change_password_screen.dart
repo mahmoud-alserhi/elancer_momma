@@ -22,7 +22,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
   late TextEditingController _currentPasswordTextEditingController;
   late TextEditingController _newPasswordTextEditingController;
   late TextEditingController _newPasswordConfirmationTextEditingController;
-
+  late bool _isPasswordShow1;
+  late bool _isPasswordShow2;
 
   @override
   void initState() {
@@ -32,6 +33,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
     _currentPasswordTextEditingController = TextEditingController();
     _newPasswordTextEditingController = TextEditingController();
     _newPasswordConfirmationTextEditingController = TextEditingController();
+    _isPasswordShow1 = true;
+    _isPasswordShow2 = true;
 
   }
 
@@ -117,7 +120,20 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
             hintText: 'New Password',
             textEditingController: _newPasswordTextEditingController,
             textInputType: TextInputType.text,
-            obscureText: true,
+            obscureText: _isPasswordShow1,
+            suffixIcon: IconButton(
+              onPressed: () {
+                setState(() {
+                  _isPasswordShow1 = !_isPasswordShow1;
+                });
+              },
+              icon: Icon(
+                _isPasswordShow1
+                    ? Icons.visibility_off
+                    : Icons.visibility,
+                color: _isPasswordShow1 ? const Color(0xff9391A4) : const Color(0xff6A90F2),
+              ),
+            ),
           ),
           SizedBox(
             height: 20.h,
@@ -126,7 +142,20 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
             hintText: 'Password Confirmation',
             textEditingController: _newPasswordConfirmationTextEditingController,
             textInputType: TextInputType.text,
-            obscureText: true,
+            obscureText: _isPasswordShow2,
+            suffixIcon: IconButton(
+              onPressed: () {
+                setState(() {
+                  _isPasswordShow2 = !_isPasswordShow2;
+                });
+              },
+              icon: Icon(
+                _isPasswordShow2
+                    ? Icons.visibility_off
+                    : Icons.visibility,
+                color: _isPasswordShow2 ? const Color(0xff9391A4) : const Color(0xff6A90F2),
+              ),
+            ),
           ),
           SizedBox(
             height: 40.h,
@@ -191,13 +220,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
   }
 
   Future<void> changePassword() async {
-    // bool status = await AuthApiController().resetPassword(
-    //     context,
-    //     mobile: widget.mobile,
-    //     code: _code!,
-    //     password: _newPasswordTextEditingController.text,
-    // );
-    // if (status) Navigator.pop(context);
+    bool status = await AuthApiController().changePassword(
+        context,
+        currentPassword: _currentPasswordTextEditingController.text,
+        password: _newPasswordTextEditingController.text
+    );
+    if (status) Navigator.pop(context);
   }
 
 }

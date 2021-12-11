@@ -114,12 +114,12 @@ class _SubCategoriseScreenState extends State<SubCategoriseScreen> with Helpers{
               onTap: () {
                 Navigator.pop(context);
                 Future.delayed(const Duration(microseconds: 800),(){
-                  Navigator.pushNamed(context, '/home_screen');
+                  Navigator.pushNamed(context, '/update_profile_screen');
                 });
               },
               leading: const Icon(Icons.person_outline,color: Color(0xff23203F),size: 25,),
               title: Text(
-                'My Profile',
+                'Update Profile',
                 style: TextStyle(
                   fontFamily: 'Nunito',
                   fontSize: 19.sp,
@@ -133,7 +133,7 @@ class _SubCategoriseScreenState extends State<SubCategoriseScreen> with Helpers{
               onTap: () {
                 Navigator.pop(context);
                 Future.delayed(const Duration(microseconds: 800),(){
-                  Navigator.pushNamed(context, '/home_screen');
+                  Navigator.pushNamed(context, '/change_password_screen');
                 });
               },
               leading: const Icon(Icons.change_circle_outlined,color: Color(0xff23203F),size: 25,),
@@ -152,7 +152,7 @@ class _SubCategoriseScreenState extends State<SubCategoriseScreen> with Helpers{
               onTap: () {
                 Navigator.pop(context);
                 Future.delayed(const Duration(microseconds: 800),(){
-                  Navigator.pushNamed(context, '/home_screen');
+                  Navigator.pushNamed(context, '/faqs_screen');
                 });
               },
               leading: const Icon(Icons.announcement_outlined,color: Color(0xff23203F),size: 25,),

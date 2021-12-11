@@ -3,6 +3,7 @@ import 'package:elancer_momma/screens/auth/activate_screen.dart';
 import 'package:elancer_momma/screens/auth/password/change_password_screen.dart';
 import 'package:elancer_momma/screens/auth/password/forgot_password_screen.dart';
 import 'package:elancer_momma/screens/auth/password/reset_password_screen.dart';
+import 'package:elancer_momma/screens/auth/update_profile_screen.dart';
 import 'package:elancer_momma/screens/category_screen.dart';
 import 'package:elancer_momma/screens/detail_product_screen.dart';
 import 'package:elancer_momma/screens/faqs_screen.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
           '/forget_password_screen' : (context) => const ForgotPassword(),
           // '/reset_password_screen' : (context) => const ResetPasswordScreen(),
           '/change_password_screen' : (context) => const ChangePasswordScreen(),
+          '/update_profile_screen' : (context) => const UpdateProfileScreen(),
           // '/activate_screen' : (context) => const ActivateScreen(),
           '/home_screen' : (context) => const HomeScreen(),
           '/categorise_screen' : (context) => const CategoryScreen(),

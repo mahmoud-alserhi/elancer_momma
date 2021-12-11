@@ -1,7 +1,10 @@
+import 'package:elancer_momma/get/category_getx_controller.dart';
+import 'package:elancer_momma/get/home_getx_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/widgets/card_categorise.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -133,7 +136,7 @@ class _CategoryScreenState extends State<CategoryScreen> with Helpers{
               onTap: () {
                 Navigator.pop(context);
                 Future.delayed(const Duration(microseconds: 800),(){
-                  Navigator.pushNamed(context, '/home_screen');
+                  Navigator.pushNamed(context, '/change_password_screen');
                 });
               },
               leading: const Icon(Icons.change_circle_outlined,color: Color(0xff23203F),size: 25,),
@@ -152,7 +155,7 @@ class _CategoryScreenState extends State<CategoryScreen> with Helpers{
               onTap: () {
                 Navigator.pop(context);
                 Future.delayed(const Duration(microseconds: 800),(){
-                  Navigator.pushNamed(context, '/home_screen');
+                  Navigator.pushNamed(context, '/faqs_screen');
                 });
               },
               leading: const Icon(Icons.announcement_outlined,color: Color(0xff23203F),size: 25,),
@@ -209,26 +212,50 @@ class _CategoryScreenState extends State<CategoryScreen> with Helpers{
           ],
         ),
       ),
-      body: GridView.builder(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-        itemCount: 10,
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 20,
-            crossAxisSpacing: 20,
-            childAspectRatio: 171 / 210),
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: (){
-              Navigator.pushNamed(context, '/sub_categorise_screen');
-            },
-            child: const CardCategorise(
-              image: 'assets/images/Clip.png',
-              title: 'Lorem Ipsum is',
-            ),
-          );
+      body: GetBuilder<HomeGetxController>(
+        builder: (controller) {
+          if(controller.loading){
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }else if(controller.homeResponse != null){
+            return GridView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+              itemCount: controller.homeResponse!.categories.length,
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 20.w,
+                  crossAxisSpacing: 20.h,
+                  childAspectRatio: 171.w / 210.h),
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: (){
+                    Navigator.pushNamed(context, '/sub_categorise_screen');
+                  },
+                  child: CardCategorise(
+                    image: controller.homeResponse!.categories[index].imageUrl,
+                    title: controller.homeResponse!.categories[index].categoryName,
+                  ),
+                );
+              },
+            );
+          }else {
+            return Center(
+              child: Text(
+                'No Data',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 22.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.red,
+                  // color: const Color(0xff23203F),
+                ),
+              ),
+            );
+          }
         },
       ),
     );

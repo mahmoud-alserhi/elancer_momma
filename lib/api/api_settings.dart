@@ -14,8 +14,11 @@ class ApiSettings{
 
   static const String forgetPassword = _apiUrl + "auth/forget-password";
   static const String resetPassword = _apiUrl + "auth/reset-password";
+  static const String updateProfile = _apiUrl + "auth/update-profile";
+  static const String changePassword = _apiUrl + "auth/change-password";
 
   static const String home = _apiUrl + "home";
+  static const String category = _apiUrl + "categories";
 
   static const String city = _apiUrl + "cities";
 

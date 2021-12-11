@@ -192,4 +192,74 @@ class AuthApiController with Helpers {
     }
     return false;
   }
+
+  Future<bool> updateProfile(BuildContext context,
+      {required String name,
+        required int city_id,
+        required String gender}) async {
+    var url = Uri.parse(ApiSettings.updateProfile);
+    var response = await http.post(url, body: {
+      'name': name,
+      'city_id': city_id.toString(),
+      'gender': gender
+    }, headers: headers
+    );
+
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+      showSnackBar(
+        context: context,
+        message: jsonDecode(response.body)['message'],
+      );
+      return true;
+    } else if (response.statusCode == 400) {
+      print(response.statusCode);
+      showSnackBar(
+          context: context,
+          message: jsonDecode(response.body)['message'],
+          error: true);
+    } else if (response.statusCode == 500) {
+      print(response.statusCode);
+      showSnackBar(
+          context: context,
+          message: 'Something went wrong, please try again!',
+          error: true);
+    }
+    return false;
+  }
+
+  Future<bool> changePassword(BuildContext context,
+      {required String currentPassword,
+        required String password}) async {
+    var url = Uri.parse(ApiSettings.changePassword);
+    var response = await http.post(url, body: {
+      'current_password': currentPassword,
+      'new_password': password,
+      'new_password_confirmation': password,
+    }, headers: headers
+    );
+
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+      showSnackBar(
+        context: context,
+        message: jsonDecode(response.body)['message'],
+      );
+      return true;
+    } else if (response.statusCode == 400) {
+      print(response.statusCode);
+      showSnackBar(
+          context: context,
+          message: jsonDecode(response.body)['message'],
+          error: true);
+    } else if (response.statusCode == 500) {
+      print(response.statusCode);
+      showSnackBar(
+          context: context,
+          message: 'Something went wrong, please try again!',
+          error: true);
+    }
+    return false;
+  }
+
 }

@@ -14,6 +14,8 @@ class Product {
   late num? offerPrice;
   late bool isFavorite;
   late String imageUrl;
+  // late List<Images> images;
+  // late SubCategory subCategory;
 
 
   Product.fromJson(Map<String, dynamic> json) {
@@ -30,6 +32,16 @@ class Product {
     offerPrice = json['offer_price'];
     isFavorite = json['is_favorite'];
     imageUrl = json['image_url'];
+    // if (json['images'] != null) {
+    //   images = List<Images>[];
+    //   json['images'].forEach((v) {
+    //     images.add(Images.fromJson(v));
+    //   });
+    // }
+    // subCategory = json['sub_category'] != null
+    //     ? SubCategory.fromJson(json['sub_category'])
+    //     : null;
+
   }
 
   String get productName =>

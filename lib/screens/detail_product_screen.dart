@@ -33,20 +33,21 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
             fontSize: 25.sp,
             color: const Color(0xff23203F),
             fontWeight: FontWeight.bold,
-          ),),
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/favorite_screen');
-            },
-            icon: const Icon(
-              Icons.favorite,
-              color: Color(0xffFF0000),
-            ),
-          ),
+          // IconButton(
+          //   onPressed: () {
+          //     Navigator.pushNamed(context, '/favorite_screen');
+          //   },
+          //   icon: const Icon(
+          //     Icons.favorite,
+          //     color: Color(0xffFF0000),
+          //   ),
+          // ),
           IconButton(
             onPressed: () {},
             icon: const Icon(
@@ -60,39 +61,54 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(vertical: 20.w),
         children: [
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: 10.h,
-              maxHeight: 200.h,
-              minWidth: double.infinity,
-            ),
-            child: Swiper(
-              // onTap: (value){},
-              duration: 500,
-              autoplay: true,
-              itemCount: 10,
-              viewportFraction: 0.7,
-              scale: 0.9,
-              itemBuilder: (BuildContext context, int index) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Stack(
-                      alignment: AlignmentDirectional.bottomCenter,
-                      children: [
-                        Image.network(
-                          "http://www.hoko.pk/wp-content/uploads/2017/10/FHB-101-1.jpg",
-                          fit: BoxFit.fitHeight,
-                          height: 200,
-                          width: 300,
-                        ),
-                      ],
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
+          // ConstrainedBox(
+          //   constraints: BoxConstraints(
+          //     minHeight: 10.h,
+          //     maxHeight: 200.h,
+          //     minWidth: double.infinity,
+          //   ),
+          //   child: controller.homeResponse!.slider.isNotEmpty
+          //       ? Swiper(
+          //           // onTap: (value) {
+          //           //   Navigator.pushNamed(context, '/details_product_screen');
+          //           // },
+          //           duration: 500,
+          //           autoplay: true,
+          //           itemCount: controller.homeResponse!.slider.length,
+          //           viewportFraction: 0.7,
+          //           scale: 0.8,
+          //           itemBuilder: (BuildContext context, int index) {
+          //             return Column(
+          //               mainAxisAlignment: MainAxisAlignment.start,
+          //               children: [
+          //                 Stack(
+          //                   alignment: AlignmentDirectional.bottomEnd,
+          //                   children: [
+          //                     Container(
+          //                       clipBehavior: Clip.antiAlias,
+          //                       decoration: BoxDecoration(
+          //                         borderRadius: BorderRadius.circular(25),
+          //                       ),
+          //                       child: SizedBox(
+          //                         height: 200.h,
+          //                         width: double.infinity,
+          //                         child: Image.network(
+          //                           controller
+          //                               .homeResponse!.slider[index].imageUrl,
+          //                           fit: BoxFit.fill,
+          //                         ),
+          //                       ),
+          //                     ),
+          //                   ],
+          //                 ),
+          //               ],
+          //             );
+          //           },
+          //         )
+          //       : const Center(
+          //           child: Text("no Data"),
+          //         ),
+          // ),
           SizedBox(
             height: 20.h,
           ),
