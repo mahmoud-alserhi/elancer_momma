@@ -21,6 +21,7 @@ class ApiSettings{
   static const String category = _apiUrl + "categories";
   static const String subCategory = _apiUrl + "categories/";
   static const String productRead = _apiUrl + "sub-categories/";
+  static const String productDetail = _apiUrl + "products/";
 
   static const String city = _apiUrl + "cities";
 

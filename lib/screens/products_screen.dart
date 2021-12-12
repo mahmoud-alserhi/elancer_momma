@@ -244,13 +244,13 @@ class _ProductsScreenState extends State<ProductsScreen> with Helpers{
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: (){
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) =>
-                    //         DetailProductScreen(product: _productRead[index].productName),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            DetailProductScreen(productRead: _productRead[index]),
+                      ),
+                    );
                   },
                   child: CardProduct(
                       image: _productRead[index].imageUrl,

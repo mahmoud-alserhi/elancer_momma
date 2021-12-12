@@ -1,5 +1,6 @@
 import 'package:elancer_momma/models/api/base_api_response.dart';
 import 'package:elancer_momma/models/api/home/home_response.dart';
+import 'package:elancer_momma/models/api/products/product_detail.dart';
 import 'package:elancer_momma/models/api/user.dart';
 
 class BaseApiObjectResponse<T> extends BaseApiResponse {
@@ -16,6 +17,10 @@ class BaseApiObjectResponse<T> extends BaseApiResponse {
         data = HomeResponse.fromJson(json['data']) as T;
       }
     }
-    if (json.containsKey('object')) {}
+    if (json.containsKey('object')) {
+      if(T == ProductDetails){
+        object = ProductDetails.fromJson(json['object']) as T;
+      }
+    }
   }
 }
