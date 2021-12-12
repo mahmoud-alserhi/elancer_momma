@@ -2,23 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CardProduct extends StatelessWidget {
+class CardProduct extends StatefulWidget {
   const CardProduct({
     Key? key,
     required this.image,
     required this.title,
     required this.subTitle,
     required this.price,
-    this.overalRate = '',
-    // this.isFavorite = false,
+    this.overalRate = 0,
+    this.isFavorite = false,
   }) : super(key: key);
 
   final String image;
   final String title;
   final String subTitle;
   final String price;
-  final String overalRate;
-  // final bool isFavorite;
+  final num overalRate;
+  final bool isFavorite;
+
+  // late bool _isFavorite = false;
+
+  @override
+  State<CardProduct> createState() => _CardProductState();
+}
+
+class _CardProductState extends State<CardProduct> {
+
+  late bool _isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,29 +41,38 @@ class CardProduct extends StatelessWidget {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          // Align(
-          //   alignment: Alignment.topRight,
-          //   child: Padding(
-          //     padding: EdgeInsets.symmetric(
-          //       horizontal: 5.w,
-          //     ),
-          //     child: IconButton(
-          //       onPressed: () {},
-          //       icon: Icon(
-          //         isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
-          //         color: const Color(0xffFF0000),
-          //         size: 30,
-          //       ),
-          //     ),
-          //   ),
-          // ),
           SizedBox(
             height: 200.h,
             width: double.infinity,
             child: Image.network(
-              image,
+              widget.image,
               // 'assets/images/Clip.png',
               fit: BoxFit.fill,
+            ),
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 5.w,
+              ),
+              child: IconButton(
+                onPressed: () {
+                  setState(() {
+                    _isFavorite
+                    // widget.isFavorite
+                        ? _isFavorite = false
+                        : _isFavorite = true;
+                  });
+                },
+                icon: Icon(
+                  Icons.favorite,
+                  // isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
+                  color: _isFavorite ? const Color(0xffFF0000) : const Color(0xffB0B0B0),
+                  // color: const Color(0xffFF0000),
+                  size: 30,
+                ),
+              ),
             ),
           ),
           Container(
@@ -76,7 +95,7 @@ class CardProduct extends StatelessWidget {
                         height: 21.h,
                         width: 150.w,
                         child: Text(
-                          title,
+                          widget.title,
                           // "Lorem Ipsum is",
                           maxLines: 1,
                           style: TextStyle(
@@ -88,7 +107,7 @@ class CardProduct extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Price \$$price',
+                        'Price \$${widget.price}',
                         // "\$10.00",
                         maxLines: 1,
                         style: TextStyle(
@@ -107,9 +126,10 @@ class CardProduct extends StatelessWidget {
                         height: 25.h,
                         width: 163.w,
                         child: Text(
-                          '$subTitle...',
+                          '${widget.subTitle}...',
                           // "subTitle",
                           overflow: TextOverflow.ellipsis,
+                          // overflow: TextOverflow.clip,
                           maxLines: 1,
                           style: TextStyle(
                             fontFamily: 'Nunito',
@@ -126,7 +146,7 @@ class CardProduct extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                '4.5',
+                                '${widget.overalRate}',
                                 // "overal rate",
                                 maxLines: 1,
                                 style: TextStyle(

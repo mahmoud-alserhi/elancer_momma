@@ -22,4 +22,6 @@ class ApiSettings{
 
   static const String city = _apiUrl + "cities";
 
+  static const String faqs = _apiUrl + "faqs";
+
 }

@@ -10,7 +10,20 @@ class FAQseScreen extends StatefulWidget {
   _FAQseScreenState createState() => _FAQseScreenState();
 }
 
-class _FAQseScreenState extends State<FAQseScreen> with Helpers{
+class _FAQseScreenState extends State<FAQseScreen> with Helpers {
+
+  List<Widget> _getChildren(int count, String name) => List<Widget>.generate(
+        count,
+        (i) => ListTile(title: Text(
+          name,
+          style: TextStyle(
+            fontFamily: 'Nunito',
+            fontSize: 20.sp,
+            color: const Color(0xff716F87),
+            fontWeight: FontWeight.w600,
+          ),
+        )),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +47,8 @@ class _FAQseScreenState extends State<FAQseScreen> with Helpers{
             fontSize: 25.sp,
             color: const Color(0xff23203F),
             fontWeight: FontWeight.bold,
-          ),),
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -48,158 +62,25 @@ class _FAQseScreenState extends State<FAQseScreen> with Helpers{
           ),
         ],
       ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            const UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: AlignmentDirectional.topStart,
-                    end: AlignmentDirectional.bottomEnd,
-                    colors: [
-                      Color(0xff3d3868),
-                      Color(0xff6A90F2),
-                    ]),
-              ),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/me.jpg',),
-              ),
-              currentAccountPictureSize: Size(85,88),
-              accountName: Text(
-                'Mahmoud Maher Alserhi',
-                style: TextStyle(
-                  color: Colors.white,
-                  // color: Color(0xff23203F),
-                  // fontFamily: 'Nunito',
-                ),
-              ),
-              accountEmail: Text(
-                'mahmoudalserhi@gmail.com',
-                style: TextStyle(
-                  color: Colors.white,
-                  // fontFamily: 'Nunito',
-                ),
+      body: ListView.builder(
+        padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 10.h),
+        shrinkWrap: true,
+        itemCount: 15,
+        itemBuilder: (context, index) {
+          return ExpansionTile(
+            title: Text(
+              'Question',
+              style: TextStyle(
+                fontFamily: 'Nunito',
+                fontSize: 20.sp,
+                color: const Color(0xff23203F),
+                fontWeight: FontWeight.w600,
               ),
             ),
-            ListTile(
-              onTap: () {
-                Navigator.pop(context);
-                Future.delayed(const Duration(microseconds: 800),(){
-                  Navigator.pushNamed(context, '/home_screen');
-                });
-              },
-              leading: const Icon(Icons.home_outlined,color: Color(0xff23203F),size: 25,),
-              title: Text(
-                'Home',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 19.sp,
-                  color: const Color(0xff23203F),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              trailing: const Icon(Icons.arrow_forward_ios,color: Color(0xff23203F),),
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.pop(context);
-                Future.delayed(const Duration(microseconds: 800),(){
-                  Navigator.pushNamed(context, '/update_profile_screen');
-                });
-              },
-              leading: const Icon(Icons.person_outline,color: Color(0xff23203F),size: 25,),
-              title: Text(
-                'Update Profile',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 19.sp,
-                  color: const Color(0xff23203F),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              trailing: const Icon(Icons.arrow_forward_ios,color: Color(0xff23203F),),
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.pop(context);
-                Future.delayed(const Duration(microseconds: 800),(){
-                  Navigator.pushNamed(context, '/change_password_screen');
-                });
-              },
-              leading: const Icon(Icons.change_circle_outlined,color: Color(0xff23203F),size: 25,),
-              title: Text(
-                'Change Password',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 19.sp,
-                  color: const Color(0xff23203F),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              trailing: const Icon(Icons.arrow_forward_ios,color: Color(0xff23203F),),
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.pop(context);
-                Future.delayed(const Duration(microseconds: 800),(){
-                  Navigator.pushNamed(context, '/faqs_screen');
-                });
-              },
-              leading: const Icon(Icons.announcement_outlined,color: Color(0xff23203F),size: 25,),
-              title: Text(
-                'FAQs',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 19.sp,
-                  color: const Color(0xff23203F),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              trailing: const Icon(Icons.arrow_forward_ios,color: Color(0xff23203F),),
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.pop(context);
-                Future.delayed(const Duration(microseconds: 800),(){
-                  Navigator.pushNamed(context, '/home_screen');
-                });
-              },
-              leading: const Icon(Icons.info_outline,color: Color(0xff23203F),size: 25,),
-              title: Text(
-                'About',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 19.sp,
-                  color: const Color(0xff23203F),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              trailing: const Icon(Icons.arrow_forward_ios,color: Color(0xff23203F),),
-            ),
-            const Divider(
-              color: Color(0xff6A90F2),
-              thickness: 1,
-              endIndent: 25,
-            ),
-            ListTile(
-              onTap: () async{
-                Navigator.pop(context);
-                await logOut(context);
-              },
-              leading: const Icon(Icons.logout,color: Color(0xff23203F),size: 25,),
-              title: Text(
-                'Logout',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 19.sp,
-                  color: const Color(0xff23203F),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),),
-          ],
-        ),
+            children: _getChildren(1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+          );
+        },
       ),
-      body: const Center(child: CircularProgressIndicator(),),
     );
   }
 }

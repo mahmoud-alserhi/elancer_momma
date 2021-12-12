@@ -1,10 +1,13 @@
+import 'package:elancer_momma/api/controllers/category_api_controller.dart';
 import 'package:elancer_momma/get/category_getx_controller.dart';
 import 'package:elancer_momma/get/home_getx_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
+import 'package:elancer_momma/models/api/category.dart';
 import 'package:elancer_momma/widgets/card_categorise.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -16,6 +19,16 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> with Helpers{
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  late Future<List<Category>> _future;
+  List<Category> _categories = <Category>[];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _future = CategoryApiController().showCategory();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -212,16 +225,16 @@ class _CategoryScreenState extends State<CategoryScreen> with Helpers{
           ],
         ),
       ),
-      body: GetBuilder<HomeGetxController>(
-        builder: (controller) {
-          if(controller.loading){
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }else if(controller.homeResponse != null){
+      body: FutureBuilder<List<Category>>(
+        future: _future,
+        builder: (context, snapshot) {
+          if(snapshot.connectionState == ConnectionState.waiting){
+            return const Center(child: CircularProgressIndicator());
+          }else if(snapshot.hasData && snapshot.data!.isNotEmpty){
+            _categories = snapshot.data ?? [];
             return GridView.builder(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-              itemCount: controller.homeResponse!.categories.length,
+              itemCount: _categories.length,
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -235,24 +248,28 @@ class _CategoryScreenState extends State<CategoryScreen> with Helpers{
                     Navigator.pushNamed(context, '/sub_categorise_screen');
                   },
                   child: CardCategorise(
-                    image: controller.homeResponse!.categories[index].imageUrl,
-                    title: controller.homeResponse!.categories[index].categoryName,
+                    image: _categories[index].imageUrl,
+                    title: _categories[index].categoryName,
+                    subCategory: _categories[index].subCategoriesCount!,
+                    productCount: _categories[index].productsCount!,
                   ),
                 );
               },
             );
-          }else {
+          }else{
             return Center(
-              child: Text(
-                'No Data',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 22.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.red,
-                  // color: const Color(0xff23203F),
-                ),
+              child: Column(
+                children: const [
+                  Icon(Icons.warning, size: 80),
+                  Text(
+                    'NO DATA',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  )
+                ],
               ),
             );
           }

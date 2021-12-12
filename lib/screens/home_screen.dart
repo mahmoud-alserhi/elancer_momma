@@ -9,6 +9,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
+import 'detail_product_screen.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -377,6 +379,10 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                                     .homeResponse!.categories[index].imageUrl,
                                 title: controller.homeResponse!
                                     .categories[index].categoryName,
+                                // subCategory: controller.homeResponse!
+                                //     .categories[index].subCategoriesCount!,
+                                // productCount: controller.homeResponse!
+                                //     .categories[index].productsCount!,
                               ),
                             );
                           },
@@ -427,37 +433,42 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                     minWidth: double.infinity,
                   ),
                   child: controller.homeResponse!.latestProducts.isNotEmpty
-                      ? GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, '/details_product_screen');
-                          },
-                          child: GridView.builder(
-                            padding: EdgeInsets.symmetric(horizontal: 20.h),
-                            itemCount:
-                                controller.homeResponse!.latestProducts.length,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 1,
-                                    mainAxisSpacing: 20.h,
-                                    childAspectRatio: 131.w / 210.h),
-                            itemBuilder: (context, index) {
-                              return CardProduct(
-                                image: controller.homeResponse!
-                                    .latestProducts[index].imageUrl,
-                                title: controller.homeResponse!
-                                    .latestProducts[index].productName,
-                                subTitle: controller.homeResponse!
-                                    .latestProducts[index].infoProduct,
-                                price: controller
-                                    .homeResponse!.latestProducts[index].price
-                                    .toString(),
+                      ? GridView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: 20.h),
+                        itemCount:
+                            controller.homeResponse!.latestProducts.length,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        gridDelegate:
+                            SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 1,
+                                mainAxisSpacing: 20.h,
+                                childAspectRatio: 131.w / 210.h),
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetailProductScreen(product: controller.homeResponse!.latestProducts[index]),
+                                ),
                               );
                             },
-                          ),
-                        )
+                            child: CardProduct(
+                              image: controller.homeResponse!
+                                  .latestProducts[index].imageUrl,
+                              title: controller.homeResponse!
+                                  .latestProducts[index].productName,
+                              subTitle: controller.homeResponse!
+                                  .latestProducts[index].infoProduct,
+                              price: controller
+                                  .homeResponse!.latestProducts[index].price
+                                  .toString(),
+                            ),
+                          );
+                        },
+                      )
                       : const Center(
                           child: Text("no Data"),
                         ),

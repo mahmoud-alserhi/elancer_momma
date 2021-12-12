@@ -6,10 +6,14 @@ class CardCategorise extends StatelessWidget {
     Key? key,
     required this.image,
     required this.title,
+    this.subCategory = 0,
+    this.productCount = 0,
   }) : super(key: key);
 
   final String image;
   final String title;
+  final int subCategory;
+  final int productCount;
 
   @override
   Widget build(BuildContext context) {
@@ -34,23 +38,64 @@ class CardCategorise extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               color: Color(0xffe6e4fa),
-              borderRadius: BorderRadius.only(bottomRight: Radius.circular(15),bottomLeft: Radius.circular(15)),
+              borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(15),
+                  bottomLeft: Radius.circular(15)),
             ),
-            height: 45.h,
+            height: 50.h,
             width: double.infinity,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-              child: Text(
-                title,
-                // "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-                // textAlign: TextAlign.right,
-                maxLines: 1,
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 18.sp,
-                  color: const Color(0xff23203F),
-                  fontWeight: FontWeight.bold,
-                ),
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 2.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    // "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+                    // textAlign: TextAlign.right,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontFamily: 'Nunito',
+                      fontSize: 16.sp,
+                      color: const Color(0xff23203F),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Sub Category: $subCategory',
+                        // overflow: TextOverflow.ellipsis,
+                        overflow: TextOverflow.clip,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 16.sp,
+                          color: const Color(0xff716F87),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(width: 10.w,),
+                      Expanded(
+                        child: Text(
+                          'Product: $productCount',
+                          // overflow: TextOverflow.ellipsis,
+                          // overflow: TextOverflow.clip,
+                          maxLines: 1,
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                            fontFamily: 'Nunito',
+                            fontSize: 16.sp,
+                            color: const Color(0xff716F87),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),

@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
           '/sub_categorise_screen' : (context) => const SubCategoriseScreen(),
           '/latest_products_screen' : (context) => const LatestProductsScreen(),
           '/products_screen' : (context) => const ProductsScreen(),
-          '/details_product_screen' : (context) => const DetailProductScreen(),
+          // '/details_product_screen' : (context) => const DetailProductScreen(),
           '/favorite_screen' : (context) => const FavoriteScreen(),
           '/faqs_screen' : (context) => const FAQseScreen(),
         },

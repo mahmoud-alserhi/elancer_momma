@@ -21,7 +21,7 @@ class CategoryApiController with Helpers{
           .map((jsonObject) => Category.fromJson(jsonObject))
           .toList();
     }
-    print(jsonDecode(response.body));
+    // print(jsonDecode(response.body));
     return [];
   }
 

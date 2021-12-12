@@ -1,10 +1,12 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:elancer_momma/models/api/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetailProductScreen extends StatefulWidget {
-  const DetailProductScreen({Key? key}) : super(key: key);
+  const DetailProductScreen({Key? key,required this.product}) : super(key: key);
+  final Product product;
 
   @override
   _DetailProductScreenState createState() => _DetailProductScreenState();
@@ -61,54 +63,47 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(vertical: 20.w),
         children: [
-          // ConstrainedBox(
-          //   constraints: BoxConstraints(
-          //     minHeight: 10.h,
-          //     maxHeight: 200.h,
-          //     minWidth: double.infinity,
-          //   ),
-          //   child: controller.homeResponse!.slider.isNotEmpty
-          //       ? Swiper(
-          //           // onTap: (value) {
-          //           //   Navigator.pushNamed(context, '/details_product_screen');
-          //           // },
-          //           duration: 500,
-          //           autoplay: true,
-          //           itemCount: controller.homeResponse!.slider.length,
-          //           viewportFraction: 0.7,
-          //           scale: 0.8,
-          //           itemBuilder: (BuildContext context, int index) {
-          //             return Column(
-          //               mainAxisAlignment: MainAxisAlignment.start,
-          //               children: [
-          //                 Stack(
-          //                   alignment: AlignmentDirectional.bottomEnd,
-          //                   children: [
-          //                     Container(
-          //                       clipBehavior: Clip.antiAlias,
-          //                       decoration: BoxDecoration(
-          //                         borderRadius: BorderRadius.circular(25),
-          //                       ),
-          //                       child: SizedBox(
-          //                         height: 200.h,
-          //                         width: double.infinity,
-          //                         child: Image.network(
-          //                           controller
-          //                               .homeResponse!.slider[index].imageUrl,
-          //                           fit: BoxFit.fill,
-          //                         ),
-          //                       ),
-          //                     ),
-          //                   ],
-          //                 ),
-          //               ],
-          //             );
-          //           },
-          //         )
-          //       : const Center(
-          //           child: Text("no Data"),
-          //         ),
-          // ),
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: 10.h,
+              maxHeight: 200.h,
+              minWidth: double.infinity,
+            ),
+            child: Swiper(
+                    duration: 500,
+                    autoplay: true,
+                    itemCount: widget.product.imageUrl.length,
+                    viewportFraction: 0.7,
+                    scale: 0.8,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Stack(
+                            alignment: AlignmentDirectional.bottomEnd,
+                            children: [
+                              Container(
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                                child: SizedBox(
+                                  height: 200.h,
+                                  width: double.infinity,
+                                  child: Image.network(
+                                    widget.product.imageUrl,
+                                    // widget.product.imageUrl[index],
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+          ),
           SizedBox(
             height: 20.h,
           ),
@@ -119,22 +114,27 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Lorem Ipsum is",
-                      maxLines: 1,
-                      style: TextStyle(
-                        fontFamily: 'Nunito',
-                        fontSize: 22.sp,
-                        color: const Color(0xff23203F),
-                        fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Text(
+                        widget.product.productName,
+                        // "Lorem Ipsum is",
+                        // overflow: TextOverflow.clip,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 19.sp,
+                          color: const Color(0xff23203F),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     Text(
-                      "\$10.00",
+                      "\$${widget.product.price}",
+                      // "\$10.00",
                       maxLines: 1,
                       style: TextStyle(
                         fontFamily: 'Nunito',
-                        fontSize: 22.sp,
+                        fontSize: 19.sp,
                         color: const Color(0xff23203F),
                         fontWeight: FontWeight.w600,
                       ),
@@ -145,7 +145,8 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Quantity: 5',
+                      'Quantity: ${widget.product.quantity}',
+                      // 'Quantity: 5',
                       maxLines: 1,
                       style: TextStyle(
                         fontFamily: 'Nunito',
@@ -186,18 +187,46 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.favorite_border_outlined,
-                        color: Color(0xffFF0000),
-                        size: 30,
-                      ),
+
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              // _isFavorite
+                              // // widget.isFavorite
+                              //     ? _isFavorite = false
+                              //     : _isFavorite = true;
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                            // color: _isFavorite ? Colors.red : const Color(0xffB0B0B0),
+                            // color: const Color(0xffFF0000),
+                            size: 30,
+                          ),
+                        ),
+                        SizedBox(width: 7.w,),
+                        Text(
+                          '${widget.product.overalRate}',
+                          // "overal rate",
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontFamily: 'Nunito',
+                            fontSize: 20.sp,
+                            color: const Color(0xff716F87),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(width: 2.w,),
+                        Icon(Icons.star,color: Colors.amber,size: 24.w,),
+                      ],
                     ),
                   ],
                 ),
                 Text(
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry`s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+                  widget.product.infoProduct,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 50,
                   style: TextStyle(
