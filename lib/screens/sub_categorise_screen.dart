@@ -2,6 +2,7 @@ import 'package:elancer_momma/api/controllers/sub_category_api_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/models/api/categories/category.dart';
 import 'package:elancer_momma/models/api/sub_category/sub_category.dart';
+import 'package:elancer_momma/screens/products_screen.dart';
 import 'package:elancer_momma/widgets/card_sub_categorise.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -242,7 +243,15 @@ class _SubCategoriseScreenState extends State<SubCategoriseScreen> with Helpers{
                   childAspectRatio: 171.w / 210.h),
               itemBuilder: (context, index) {
                 return GestureDetector(
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ProductsScreen(subCategory: _subCategories[index]),
+                      ),
+                    );
+                  },
                   child: CardSubCategorise(
                     image: _subCategories[index].imageUrl,
                     title: _subCategories[index].categoryName,

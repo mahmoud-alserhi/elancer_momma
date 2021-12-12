@@ -1,10 +1,15 @@
+import 'package:elancer_momma/api/controllers/product_read_api_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
+import 'package:elancer_momma/models/api/products/product_read.dart';
+import 'package:elancer_momma/models/api/sub_category/sub_category.dart';
+import 'package:elancer_momma/screens/detail_product_screen.dart';
 import 'package:elancer_momma/widgets/card_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductsScreen extends StatefulWidget {
-  const ProductsScreen({Key? key}) : super(key: key);
+  const ProductsScreen({Key? key,required this.subCategory}) : super(key: key);
+  final SubCategory subCategory;
 
   @override
   _ProductsScreenState createState() => _ProductsScreenState();
@@ -13,6 +18,16 @@ class ProductsScreen extends StatefulWidget {
 class _ProductsScreenState extends State<ProductsScreen> with Helpers{
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  late Future<List<ProductRead>> _future;
+  List<ProductRead> _productRead = <ProductRead>[];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _future = ProductReadApiController().showProductRead(widget.subCategory.id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -209,120 +224,176 @@ class _ProductsScreenState extends State<ProductsScreen> with Helpers{
           ],
         ),
       ),
-      body: GestureDetector(
-        onTap: (){
-          Navigator.pushNamed(context, '/details_product_screen');
-        },
-        child: GridView.builder(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-          itemCount: 10,
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 20,
-              crossAxisSpacing: 20,
-              childAspectRatio: 171 / 210),
-          itemBuilder: (context, index) {
-            return Container(
-              decoration: BoxDecoration(
-                color: const Color(0xffF0F1F6),
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: Stack(
-                alignment: Alignment.bottomCenter,
-                children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5.w,),
-                      child: IconButton(
-                        onPressed: (){},
-                        icon: const Icon(
-                          Icons.favorite_border_outlined,
-                          color: Color(0xffFF0000),
-                          size: 30,
-                        ),
-                      ),
-                    ),
+      body: FutureBuilder<List<ProductRead>>(
+        future: _future,
+        builder: (context, snapshot) {
+          if(snapshot.connectionState == ConnectionState.waiting){
+            return const Center(child: CircularProgressIndicator());
+          }else if(snapshot.hasData && snapshot.data!.isNotEmpty){
+            _productRead = snapshot.data ?? [];
+            return GridView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+              itemCount: _productRead.length,
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 1,
+                  mainAxisSpacing: 20.w,
+                  crossAxisSpacing: 20.h,
+                  childAspectRatio: 235.w / 141.h),
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: (){
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) =>
+                    //         DetailProductScreen(product: _productRead[index].productName),
+                    //   ),
+                    // );
+                  },
+                  child: CardProduct(
+                      image: _productRead[index].imageUrl,
+                      title: _productRead[index].productName,
+                      subTitle: _productRead[index].infoProduct,
+                      price: _productRead[index].price.toString(),
+                      overalRate: _productRead[index].overalRate!,
+                      isFavorite: _productRead[index].isFavorite,
                   ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      width: 55,
-                      height: 50,
-                      decoration: const BoxDecoration(
-                        color: Color(0xff6A90F2),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          bottomRight: Radius.circular(15),
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          // price,
-                          "\$10.00",
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontFamily: 'Nunito',
-                            fontSize: 15.sp,
-                            color: const Color(0xff23203F),
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
+                );
+              },
+            );
+          }else{
+            return Center(
+              child: Column(
+                children: const [
+                  Icon(Icons.warning, size: 80),
+                  Text(
+                    'NO DATA',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
                     ),
-                  ),
-                  Image.asset(
-                    // image,
-                    'assets/images/Clip.png',
-                    fit: BoxFit.fitHeight,
-                    height: 200,
-                  ),
-                  Container(
-                    decoration: const BoxDecoration(
-                      color: Color(0xffe6e4fa),
-                      borderRadius: BorderRadius.only(bottomRight: Radius.circular(15),bottomLeft: Radius.circular(15)),
-                    ),
-                    height: 50.h,
-                    width: double.infinity,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 2.h),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            // title,
-                            "Lorem Ipsum is",
-                            maxLines: 1,
-                            style: TextStyle(
-                              fontFamily: 'Nunito',
-                              fontSize: 16.sp,
-                              color: const Color(0xff23203F),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            // subTitle,
-                            "subTitle",
-                            maxLines: 1,
-                            style: TextStyle(
-                              fontFamily: 'Nunito',
-                              fontSize: 15.sp,
-                              color: const Color(0xff716F87),
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  )
                 ],
               ),
             );
-          },
-        ),
+          }
+        },
       ),
     );
   }
 }
+
+
+
+// GridView.builder(
+// padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+// itemCount: 10,
+// shrinkWrap: true,
+// scrollDirection: Axis.vertical,
+// gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+// crossAxisCount: 2,
+// mainAxisSpacing: 20,
+// crossAxisSpacing: 20,
+// childAspectRatio: 171 / 210),
+// itemBuilder: (context, index) {
+// return Container(
+// decoration: BoxDecoration(
+// color: const Color(0xffF0F1F6),
+// borderRadius: BorderRadius.circular(25),
+// ),
+// child: Stack(
+// alignment: Alignment.bottomCenter,
+// children: [
+// Align(
+// alignment: Alignment.topRight,
+// child: Padding(
+// padding: EdgeInsets.symmetric(horizontal: 5.w,),
+// child: IconButton(
+// onPressed: (){},
+// icon: const Icon(
+// Icons.favorite_border_outlined,
+// color: Color(0xffFF0000),
+// size: 30,
+// ),
+// ),
+// ),
+// ),
+// Align(
+// alignment: Alignment.topLeft,
+// child: Container(
+// width: 55,
+// height: 50,
+// decoration: const BoxDecoration(
+// color: Color(0xff6A90F2),
+// borderRadius: BorderRadius.only(
+// topLeft: Radius.circular(15),
+// bottomRight: Radius.circular(15),
+// ),
+// ),
+// child: Center(
+// child: Text(
+// // price,
+// "\$10.00",
+// maxLines: 1,
+// style: TextStyle(
+// fontFamily: 'Nunito',
+// fontSize: 15.sp,
+// color: const Color(0xff23203F),
+// fontWeight: FontWeight.w600,
+// ),
+// ),
+// ),
+// ),
+// ),
+// Image.asset(
+// // image,
+// 'assets/images/Clip.png',
+// fit: BoxFit.fitHeight,
+// height: 200,
+// ),
+// Container(
+// decoration: const BoxDecoration(
+// color: Color(0xffe6e4fa),
+// borderRadius: BorderRadius.only(bottomRight: Radius.circular(15),bottomLeft: Radius.circular(15)),
+// ),
+// height: 50.h,
+// width: double.infinity,
+// child: Padding(
+// padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 2.h),
+// child: Column(
+// crossAxisAlignment: CrossAxisAlignment.start,
+// children: [
+// Text(
+// // title,
+// "Lorem Ipsum is",
+// maxLines: 1,
+// style: TextStyle(
+// fontFamily: 'Nunito',
+// fontSize: 16.sp,
+// color: const Color(0xff23203F),
+// fontWeight: FontWeight.bold,
+// ),
+// ),
+// Text(
+// // subTitle,
+// "subTitle",
+// maxLines: 1,
+// style: TextStyle(
+// fontFamily: 'Nunito',
+// fontSize: 15.sp,
+// color: const Color(0xff716F87),
+// fontWeight: FontWeight.w600,
+// ),
+// ),
+// ],
+// ),
+// ),
+// ),
+// ],
+// ),
+// );
+// },
+// )
