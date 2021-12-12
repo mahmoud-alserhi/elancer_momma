@@ -1,6 +1,6 @@
 import 'package:elancer_momma/prefs/shared_pref_controller.dart';
 
-class Product {
+class ProductHome {
   late int id;
   late String nameEn;
   late String nameAr;
@@ -18,7 +18,7 @@ class Product {
   // late SubCategory subCategory;
 
 
-  Product.fromJson(Map<String, dynamic> json) {
+  ProductHome.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     nameEn = json['name_en'];
     nameAr = json['name_ar'];

@@ -1,7 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:elancer_momma/get/home_getx_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
-import 'package:elancer_momma/widgets/card_categorise.dart';
+import 'package:elancer_momma/widgets/card_categorise_home.dart';
 import 'package:elancer_momma/widgets/card_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -374,15 +374,11 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                                 Navigator.pushNamed(
                                     context, '/sub_categorise_screen');
                               },
-                              child: CardCategorise(
+                              child: CardCategoriseHome(
                                 image: controller
                                     .homeResponse!.categories[index].imageUrl,
                                 title: controller.homeResponse!
                                     .categories[index].categoryName,
-                                // subCategory: controller.homeResponse!
-                                //     .categories[index].subCategoriesCount!,
-                                // productCount: controller.homeResponse!
-                                //     .categories[index].productsCount!,
                               ),
                             );
                           },
@@ -515,35 +511,40 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                     minWidth: double.infinity,
                   ),
                   child: controller.homeResponse!.famousProducts.isNotEmpty
-                      ? GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, '/details_product_screen');
-                          },
-                          child: GridView.builder(
-                            padding: EdgeInsets.symmetric(horizontal: 20.h),
-                            itemCount: controller.homeResponse!.famousProducts.length,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 1,
-                                    mainAxisSpacing: 20.h,
-                                    childAspectRatio: 131.w / 210.h),
-                            itemBuilder: (context, index) {
-                              return CardProduct(
-                                image: controller.homeResponse!
-                                    .famousProducts[index].imageUrl,
-                                title: controller.homeResponse!
-                                    .famousProducts[index].productName,
-                                subTitle: controller.homeResponse!
-                                    .famousProducts[index].infoProduct,
-                                price: controller.homeResponse!
-                                    .famousProducts[index].price.toString(),
+                      ? GridView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: 20.h),
+                        itemCount: controller.homeResponse!.famousProducts.length,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        gridDelegate:
+                            SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 1,
+                                mainAxisSpacing: 20.h,
+                                childAspectRatio: 131.w / 210.h),
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetailProductScreen(product: controller.homeResponse!.latestProducts[index]),
+                                ),
                               );
                             },
-                          ),
-                        )
+                            child: CardProduct(
+                              image: controller.homeResponse!
+                                  .famousProducts[index].imageUrl,
+                              title: controller.homeResponse!
+                                  .famousProducts[index].productName,
+                              subTitle: controller.homeResponse!
+                                  .famousProducts[index].infoProduct,
+                              price: controller.homeResponse!
+                                  .famousProducts[index].price.toString(),
+                            ),
+                          );
+                        },
+                      )
                       : const Center(
                           child: Text("no Data"),
                         ),

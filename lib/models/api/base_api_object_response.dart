@@ -1,5 +1,5 @@
 import 'package:elancer_momma/models/api/base_api_response.dart';
-import 'package:elancer_momma/models/api/home_response.dart';
+import 'package:elancer_momma/models/api/home/home_response.dart';
 import 'package:elancer_momma/models/api/user.dart';
 
 class BaseApiObjectResponse<T> extends BaseApiResponse {

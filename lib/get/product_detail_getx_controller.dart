@@ -1,5 +1,5 @@
 import 'package:elancer_momma/api/controllers/home_api_controller.dart';
-import 'package:elancer_momma/models/api/home_response.dart';
+import 'package:elancer_momma/models/api/home/home_response.dart';
 import 'package:get/get.dart';
 
 class ProductDetailGetxController extends GetxController {

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:elancer_momma/api/api_settings.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/models/api/base_api_object_response.dart';
-import 'package:elancer_momma/models/api/home_response.dart';
+import 'package:elancer_momma/models/api/home/home_response.dart';
 import 'package:http/http.dart' as http;
 
 class ProductDetailApiController with Helpers{

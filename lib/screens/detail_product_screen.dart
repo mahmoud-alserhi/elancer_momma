@@ -1,12 +1,12 @@
 import 'package:card_swiper/card_swiper.dart';
-import 'package:elancer_momma/models/api/product.dart';
+import 'package:elancer_momma/models/api/home/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetailProductScreen extends StatefulWidget {
   const DetailProductScreen({Key? key,required this.product}) : super(key: key);
-  final Product product;
+  final ProductHome product;
 
   @override
   _DetailProductScreenState createState() => _DetailProductScreenState();

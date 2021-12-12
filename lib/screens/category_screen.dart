@@ -2,12 +2,13 @@ import 'package:elancer_momma/api/controllers/category_api_controller.dart';
 import 'package:elancer_momma/get/category_getx_controller.dart';
 import 'package:elancer_momma/get/home_getx_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
-import 'package:elancer_momma/models/api/category.dart';
+import 'package:elancer_momma/models/api/categories/category.dart';
+import 'package:elancer_momma/screens/sub_categorise_screen.dart';
 import 'package:elancer_momma/widgets/card_categorise.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -245,13 +246,20 @@ class _CategoryScreenState extends State<CategoryScreen> with Helpers{
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: (){
-                    Navigator.pushNamed(context, '/sub_categorise_screen');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SubCategoriseScreen(category: _categories[index]),
+                      ),
+                    );
+                    // Navigator.pushNamed(context, '/sub_categorise_screen');
                   },
                   child: CardCategorise(
                     image: _categories[index].imageUrl,
                     title: _categories[index].categoryName,
-                    subCategory: _categories[index].subCategoriesCount!,
-                    productCount: _categories[index].productsCount!,
+                    subCategory: _categories[index].subCategoriesCount,
+                    productCount: _categories[index].productsCount,
                   ),
                 );
               },

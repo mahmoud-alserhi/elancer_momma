@@ -1,10 +1,14 @@
+import 'package:elancer_momma/api/controllers/sub_category_api_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
-import 'package:elancer_momma/widgets/card_categorise.dart';
+import 'package:elancer_momma/models/api/categories/category.dart';
+import 'package:elancer_momma/models/api/sub_category/sub_category.dart';
+import 'package:elancer_momma/widgets/card_sub_categorise.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SubCategoriseScreen extends StatefulWidget {
-  const SubCategoriseScreen({Key? key}) : super(key: key);
+  const SubCategoriseScreen({Key? key,required this.category}) : super(key: key);
+  final Category category;
 
   @override
   _SubCategoriseScreenState createState() => _SubCategoriseScreenState();
@@ -13,6 +17,16 @@ class SubCategoriseScreen extends StatefulWidget {
 class _SubCategoriseScreenState extends State<SubCategoriseScreen> with Helpers{
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  late Future<List<SubCategory>> _future;
+  List<SubCategory> _subCategories = <SubCategory>[];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _future = SubCategoryApiController().showSubCategory(widget.category.id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -209,28 +223,56 @@ class _SubCategoriseScreenState extends State<SubCategoriseScreen> with Helpers{
           ],
         ),
       ),
-      body: GestureDetector(
-        onTap: (){
-          Navigator.pushNamed(context, '/details_product_screen');
-        },
-        child: GridView.builder(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-          itemCount: 10,
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 1,
-              mainAxisSpacing: 20,
-              crossAxisSpacing: 20,
-              childAspectRatio: 240 / 141),
-          itemBuilder: (context, index) {
-            return const CardCategorise(
-              image: 'assets/images/Clip.png',
-              title: 'Lorem Ipsum is',
+      body: FutureBuilder<List<SubCategory>>(
+        future: _future,
+        builder: (context, snapshot) {
+          if(snapshot.connectionState == ConnectionState.waiting){
+            return const Center(child: CircularProgressIndicator());
+          }else if(snapshot.hasData && snapshot.data!.isNotEmpty){
+            _subCategories = snapshot.data ?? [];
+            return GridView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+              itemCount: _subCategories.length,
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 20.w,
+                  crossAxisSpacing: 20.h,
+                  childAspectRatio: 171.w / 210.h),
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: (){},
+                  child: CardSubCategorise(
+                    image: _subCategories[index].imageUrl,
+                    title: _subCategories[index].categoryName,
+                    productCount: _subCategories[index].productsCount,
+                  ),
+                );
+              },
             );
-          },
-        ),
+          }else{
+            return Center(
+              child: Column(
+                children: const [
+                  Icon(Icons.warning, size: 80),
+                  Text(
+                    'NO DATA',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  )
+                ],
+              ),
+            );
+          }
+        },
       ),
     );
   }
 }
+
+
+
