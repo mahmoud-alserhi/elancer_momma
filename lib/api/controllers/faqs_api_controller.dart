@@ -15,7 +15,7 @@ class FaqsApiController with Helpers{
     // print(response.statusCode);
     if (response.statusCode == 200) {
       print(response.statusCode);
-      print(jsonDecode(response.body));
+      // print(jsonDecode(response.body));
       var faqsJsonArray = jsonDecode(response.body)['list'] as List;
       return faqsJsonArray
           .map((jsonObject) => Faqs.fromJson(jsonObject))
