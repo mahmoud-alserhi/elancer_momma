@@ -1,12 +1,14 @@
 import 'package:elancer_momma/models/api/home/category.dart';
 import 'package:elancer_momma/models/api/home/product.dart';
 import 'package:elancer_momma/models/api/home/slider.dart';
+import 'package:elancer_momma/models/api/products/product.dart';
+import 'package:elancer_momma/models/api/products/product.dart';
 
 class HomeResponse {
   late List<SliderHome> slider;
   late List<CategoryHome> categories;
-  late List<ProductHome> latestProducts;
-  late List<ProductHome> famousProducts;
+  late List<Product> latestProducts;
+  late List<Product> famousProducts;
 
   HomeResponse.fromJson(Map<String, dynamic> json) {
 
@@ -25,15 +27,15 @@ class HomeResponse {
       // print(categories.length.toString()+"aaaaa");
     }
     if (json['latest_products'] != null) {
-      latestProducts = <ProductHome>[];
+      latestProducts = <Product>[];
       json['latest_products'].forEach((jsonObject) {
-        latestProducts.add(ProductHome.fromJson(jsonObject));
+        latestProducts.add(Product.fromJson(jsonObject));
       });
     }
     if (json['famous_products'] != null) {
-      famousProducts = <ProductHome>[];
+      famousProducts = <Product>[];
       json['famous_products'].forEach((jsonObject) {
-        famousProducts.add(ProductHome.fromJson(jsonObject));
+        famousProducts.add(Product.fromJson(jsonObject));
       });
     }
   }

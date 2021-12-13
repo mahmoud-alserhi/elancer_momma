@@ -1,6 +1,6 @@
 import 'package:elancer_momma/api/controllers/product_read_api_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
-import 'package:elancer_momma/models/api/products/product_read.dart';
+import 'package:elancer_momma/models/api/products/product.dart';
 import 'package:elancer_momma/models/api/sub_category/sub_category.dart';
 import 'package:elancer_momma/screens/detail_product_screen.dart';
 import 'package:elancer_momma/widgets/card_product.dart';
@@ -19,8 +19,8 @@ class _ProductsScreenState extends State<ProductsScreen> with Helpers{
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  late Future<List<ProductRead>> _future;
-  List<ProductRead> _productRead = <ProductRead>[];
+  late Future<List<Product>> _future;
+  List<Product> _productRead = <Product>[];
 
   @override
   void initState() {
@@ -224,7 +224,7 @@ class _ProductsScreenState extends State<ProductsScreen> with Helpers{
           ],
         ),
       ),
-      body: FutureBuilder<List<ProductRead>>(
+      body: FutureBuilder<List<Product>>(
         future: _future,
         builder: (context, snapshot) {
           if(snapshot.connectionState == ConnectionState.waiting){
@@ -248,7 +248,7 @@ class _ProductsScreenState extends State<ProductsScreen> with Helpers{
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            DetailProductScreen(productRead: _productRead[index]),
+                            DetailProductScreen(product: _productRead[index]),
                       ),
                     );
                   },

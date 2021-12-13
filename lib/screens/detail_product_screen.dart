@@ -1,23 +1,36 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:elancer_momma/api/controllers/product_details_api_controller.dart';
 import 'package:elancer_momma/get/product_details_getx_controller.dart';
 import 'package:elancer_momma/models/api/home/product.dart';
-import 'package:elancer_momma/models/api/products/product_read.dart';
+import 'package:elancer_momma/models/api/products/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class DetailProductScreen extends StatefulWidget {
-  const DetailProductScreen({Key? key, this.product, this.productRead})
+  const DetailProductScreen({Key? key, required this.product})
       : super(key: key);
-  final ProductHome? product;
-  final ProductRead? productRead;
+  final Product product;
 
   @override
   _DetailProductScreenState createState() => _DetailProductScreenState();
 }
 
 class _DetailProductScreenState extends State<DetailProductScreen> {
+  // ProductDetailsGetxController controller =
+  //     Get.put(ProductDetailsGetxController());
+
+  late Future<Product?> _future;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _future =
+        ProductDetailsApiController().showProductDetails(widget.product.id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,13 +77,12 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
           ),
         ],
       ),
-      body: GetBuilder<ProductDetailsGetxController>(
-        builder: (controller) {
-          if (controller.loading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (controller.productDetails != null) {
+      body: FutureBuilder<Product?>(
+        future: _future,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasData) {
             return ListView(
               shrinkWrap: true,
               padding: EdgeInsets.symmetric(vertical: 20.w),
@@ -81,11 +93,11 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                     maxHeight: 200.h,
                     minWidth: double.infinity,
                   ),
-                  child: controller.productDetails!.images.isNotEmpty
+                  child: snapshot.data!.images.isNotEmpty
                       ? Swiper(
                           duration: 500,
                           autoplay: true,
-                          itemCount: controller.productDetails!.images.length,
+                          itemCount: snapshot.data!.images.length,
                           viewportFraction: 0.7,
                           scale: 0.8,
                           itemBuilder: (BuildContext context, int index) {
@@ -104,7 +116,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                                         height: 200.h,
                                         width: double.infinity,
                                         child: Image.network(
-                                          controller.productDetails!.images[index].imageUrl,
+                                          snapshot.data!.images[index].imageUrl,
                                           // widget.product.imageUrl[index],
                                           fit: BoxFit.fill,
                                         ),
@@ -133,7 +145,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                         children: [
                           Expanded(
                             child: Text(
-                              controller.productDetails!.productName,
+                              snapshot.data!.productName,
                               // "Lorem Ipsum is",
                               // overflow: TextOverflow.clip,
                               maxLines: 1,
@@ -146,7 +158,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                             ),
                           ),
                           Text(
-                            "\$${controller.productDetails!.price}",
+                            "\$${snapshot.data!.price}",
                             // "\$${widget.product!.price}",
                             // "\$10.00",
                             maxLines: 1,
@@ -163,7 +175,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Quantity: ${controller.productDetails!.quantity}',
+                            'Quantity: ${snapshot.data!.quantity}',
                             // 'Quantity: ${widget.product!.quantity}',
                             // 'Quantity: 5',
                             maxLines: 1,
@@ -229,7 +241,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                                 width: 7.w,
                               ),
                               Text(
-                                '${controller.productDetails!.overalRate}',
+                                '${snapshot.data!.overalRate}',
                                 // "overal rate",
                                 maxLines: 1,
                                 style: TextStyle(
@@ -252,7 +264,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                         ],
                       ),
                       Text(
-                        controller.productDetails!.infoProduct,
+                        snapshot.data!.infoProduct,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 50,
                         style: TextStyle(

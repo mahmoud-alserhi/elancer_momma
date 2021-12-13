@@ -5,6 +5,7 @@ import 'package:elancer_momma/screens/auth/password/forgot_password_screen.dart'
 import 'package:elancer_momma/screens/auth/password/reset_password_screen.dart';
 import 'package:elancer_momma/screens/auth/update_profile_screen.dart';
 import 'package:elancer_momma/screens/category_screen.dart';
+import 'package:elancer_momma/screens/contact.dart';
 import 'package:elancer_momma/screens/detail_product_screen.dart';
 import 'package:elancer_momma/screens/faqs_screen.dart';
 import 'package:elancer_momma/screens/favorite_screen.dart';
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
           // '/details_product_screen' : (context) => const DetailProductScreen(),
           '/favorite_screen' : (context) => const FavoriteScreen(),
           '/faqs_screen' : (context) => const FAQseScreen(),
+          '/contact_screen' : (context) => const ContactScreen(),
         },
       ),
     );

@@ -27,4 +27,6 @@ class ApiSettings{
 
   static const String faqs = _apiUrl + "faqs";
 
+  static const String contactRequests = _apiUrl + "contact-requests";
+
 }

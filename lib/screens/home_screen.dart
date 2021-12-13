@@ -229,6 +229,32 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                 color: Color(0xff23203F),
               ),
             ),
+            ListTile(
+              onTap: () {
+                Navigator.pop(context);
+                Future.delayed(const Duration(microseconds: 800), () {
+                  Navigator.pushNamed(context, '/contact_screen');
+                });
+              },
+              leading: const Icon(
+                Icons.contact_support_outlined,
+                color: Color(0xff23203F),
+                size: 25,
+              ),
+              title: Text(
+                'Contact Us',
+                style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 19.sp,
+                  color: const Color(0xff23203F),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              trailing: const Icon(
+                Icons.arrow_forward_ios,
+                color: Color(0xff23203F),
+              ),
+            ),
             Divider(
               color: const Color(0xff6A90F2),
               thickness: 1,

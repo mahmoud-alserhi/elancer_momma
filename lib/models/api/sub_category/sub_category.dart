@@ -11,12 +11,13 @@ class SubCategory {
 
 
   SubCategory.fromJson(Map<String, dynamic> json) {
+
     id = json['id'];
     nameEn = json['name_en'];
     nameAr = json['name_ar'];
     categoryId = json['category_id'];
     image = json['image'];
-    productsCount = json['products_count'];
+    productsCount = json['products_count'] ?? 0;
     imageUrl = json['image_url'];
   }
 
