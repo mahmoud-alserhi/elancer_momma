@@ -1,7 +1,9 @@
+import 'package:elancer_momma/get/favorite_product_getx_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/widgets/card_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({Key? key}) : super(key: key);
@@ -11,6 +13,14 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> with Helpers{
+
+  // FavoriteProductGetxController _favoriteProductGetxController = Get.put(FavoriteProductGetxController());
+  @override
+  void initState() {
+    // TODO: implement initState
+    FavoriteProductGetxController.to.getFavoriteProduct();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -199,31 +209,54 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Helpers{
           ],
         ),
       ),
-      body: GestureDetector(
-        onTap: (){
-          Navigator.pushNamed(context, '/details_product_screen');
-        },
-        child: GridView.builder(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-          itemCount: 10,
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 1,
-              mainAxisSpacing: 20,
-              crossAxisSpacing: 20,
-              childAspectRatio: 240 / 141),
-          itemBuilder: (context, index) {
-            return const CardProduct(
-              image: 'assets/images/Clip.png',
-              title: 'Lorem Ipsum is',
-              subTitle: 'subTitle',
-              price: '\$10.00',
-              // isFavorite: true,
+      body: GetBuilder<FavoriteProductGetxController>(
+        builder: (controller) {
+          if (controller.loading) {
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          },
-        ),
+          } else if (controller.favoriteProducts.isNotEmpty) {
+            return GridView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+              itemCount: controller.favoriteProducts.length,
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 1,
+                  mainAxisSpacing: 20.h,
+                  crossAxisSpacing: 20.w,
+                  childAspectRatio: 240.w / 141.h),
+              itemBuilder: (context, index) {
+                return CardProduct(
+                  id: controller.favoriteProducts[index].id,
+                  image: controller.favoriteProducts[index].imageUrl,
+                  title: controller.favoriteProducts[index].favoriteProductName,
+                  subTitle: controller.favoriteProducts[index].favoriteInfoProduct,
+                  price: '${controller.favoriteProducts[index].price}',
+                  overalRate: controller.favoriteProducts[index].overalRate,
+                  isFavorite: controller.favoriteProducts[index].isFavorite,
+                  favoriteButton: true,
+                  // isFavorite: true,
+                );
+              },
+            );
+          } else {
+            return Center(
+              child: Text(
+                'No Data',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 22.sp,
+                  fontWeight: FontWeight.w600,
+                  color: const Color(0xff23203F),
+                ),
+              ),
+            );
+          }
+        },
       ),
     );
   }
 }
+

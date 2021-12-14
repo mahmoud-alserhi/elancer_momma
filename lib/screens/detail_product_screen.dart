@@ -1,6 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:elancer_momma/api/controllers/favorite_product_api_controller.dart';
 import 'package:elancer_momma/api/controllers/product_details_api_controller.dart';
-import 'package:elancer_momma/get/product_details_getx_controller.dart';
+import 'package:elancer_momma/get/favorite_product_getx_controller.dart';
 import 'package:elancer_momma/models/api/home/product.dart';
 import 'package:elancer_momma/models/api/products/product.dart';
 import 'package:flutter/material.dart';
@@ -23,12 +24,15 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
 
   late Future<Product?> _future;
 
+  bool _isFavorite = false;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _future =
         ProductDetailsApiController().showProductDetails(widget.product.id);
+    FavoriteProductGetxController.to.getFavoriteProduct();
   }
 
   @override
@@ -59,15 +63,6 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
-          // IconButton(
-          //   onPressed: () {
-          //     Navigator.pushNamed(context, '/favorite_screen');
-          //   },
-          //   icon: const Icon(
-          //     Icons.favorite,
-          //     color: Color(0xffFF0000),
-          //   ),
-          // ),
           IconButton(
             onPressed: () {},
             icon: const Icon(
@@ -222,16 +217,19 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                             children: [
                               IconButton(
                                 onPressed: () {
+                                  FavoriteProductApiController().postFavorite(
+                                      context,
+                                      productId: widget.product.id);
                                   setState(() {
-                                    // _isFavorite
-                                    // // widget.isFavorite
-                                    //     ? _isFavorite = false
-                                    //     : _isFavorite = true;
+                                    _isFavorite
+                                        ? _isFavorite = false
+                                        : _isFavorite = true;
                                   });
                                 },
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.favorite,
-                                  color: Colors.red,
+                                  color: _isFavorite || snapshot.data!.isFavorite ? const Color(0xffFF0000) : const Color(0xffB0B0B0),
+                                  // color: Colors.red,
                                   // color: _isFavorite ? Colors.red : const Color(0xffB0B0B0),
                                   // color: const Color(0xffFF0000),
                                   size: 30,

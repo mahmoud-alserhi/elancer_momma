@@ -1,3 +1,5 @@
+import 'package:elancer_momma/api/controllers/favorite_product_api_controller.dart';
+import 'package:elancer_momma/get/favorite_product_getx_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,12 +7,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CardProduct extends StatefulWidget {
   const CardProduct({
     Key? key,
+    required this.id,
     required this.image,
     required this.title,
     required this.subTitle,
     required this.price,
+    required this.isFavorite,
     this.overalRate = 0,
-    this.isFavorite = false,
+    this.favoriteButton = false,
   }) : super(key: key);
 
   final String image;
@@ -19,8 +23,9 @@ class CardProduct extends StatefulWidget {
   final String price;
   final num overalRate;
   final bool isFavorite;
+  final int id;
+  final bool favoriteButton;
 
-  // late bool _isFavorite = false;
 
   @override
   State<CardProduct> createState() => _CardProductState();
@@ -56,11 +61,14 @@ class _CardProductState extends State<CardProduct> {
               padding: EdgeInsets.symmetric(
                 horizontal: 5.w,
               ),
-              child: IconButton(
+              child: widget.favoriteButton ? IconButton(
                 onPressed: () {
+                  FavoriteProductApiController().postFavorite(
+                      context,
+                      productId: widget.id);
+                  FavoriteProductGetxController.to.getFavoriteProduct();
                   setState(() {
                     _isFavorite
-                    // widget.isFavorite
                         ? _isFavorite = false
                         : _isFavorite = true;
                   });
@@ -68,11 +76,11 @@ class _CardProductState extends State<CardProduct> {
                 icon: Icon(
                   Icons.favorite,
                   // isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
-                  color: _isFavorite ? const Color(0xffFF0000) : const Color(0xffB0B0B0),
+                  color: _isFavorite || widget.isFavorite ? const Color(0xffFF0000) : const Color(0xffB0B0B0),
                   // color: const Color(0xffFF0000),
                   size: 30,
                 ),
-              ),
+              ) : SizedBox(),
             ),
           ),
           Container(

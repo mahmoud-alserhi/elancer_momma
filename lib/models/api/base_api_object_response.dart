@@ -19,7 +19,7 @@ class BaseApiObjectResponse<T> extends BaseApiResponse {
     if (json.containsKey('object')) {
       if (T == Product) {
         object = Product.fromJson(json['object']) as T;
-        print('0000001');
+        // print('0000001');
       }
     }
   }

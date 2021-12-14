@@ -7,6 +7,7 @@ class AppTextFiled extends StatefulWidget {
   final TextInputType textInputType;
   final bool obscureText;
   final IconButton? suffixIcon;
+  final int maxLine;
 
 
   AppTextFiled({
@@ -15,6 +16,7 @@ class AppTextFiled extends StatefulWidget {
     this.textInputType = TextInputType.text,
     this.obscureText = false,
     this.suffixIcon,
+    this.maxLine = 1,
   });
 
   @override
@@ -28,6 +30,7 @@ class _AppTextFiledState extends State<AppTextFiled> {
       controller: widget.textEditingController,
       keyboardType: widget.textInputType,
       obscureText: widget.obscureText,
+      maxLines: widget.maxLine,
       decoration: InputDecoration(
         enabledBorder: getBorder(borderColor: const Color(0xffD0D0D0)),
         focusedBorder: getBorder(borderColor: const Color(0xff6A90F2)),

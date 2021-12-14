@@ -1,6 +1,8 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:elancer_momma/get/favorite_product_getx_controller.dart';
 import 'package:elancer_momma/get/home_getx_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
+import 'package:elancer_momma/screens/sub_categorise_screen.dart';
 import 'package:elancer_momma/widgets/card_categorise_home.dart';
 import 'package:elancer_momma/widgets/card_product.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with Helpers {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   HomeGetxController _homeGetxController = Get.put(HomeGetxController());
+  FavoriteProductGetxController _favoriteProductGetxController = Get.put(FavoriteProductGetxController());
 
   @override
   Widget build(BuildContext context) {
@@ -70,35 +73,36 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
       drawer: Drawer(
         child: ListView(
           children: [
-            UserAccountsDrawerHeader(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    begin: AlignmentDirectional.topStart,
-                    end: AlignmentDirectional.bottomEnd,
-                    colors: [
-                      Color(0xff3d69A8),
-                      Color(0xff6A90F2),
-                    ]),
-              ),
-              currentAccountPicture: const CircleAvatar(
-                backgroundImage: AssetImage(
-                  'assets/images/me.jpg',
-                ),
-              ),
-              currentAccountPictureSize: Size(85.w, 88.h),
-              accountName: const Text(
-                'Mahmoud Maher Alserhi',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              accountEmail: const Text(
-                'mahmoudalserhi@gmail.com',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
+            // UserAccountsDrawerHeader(
+            //   decoration: const BoxDecoration(
+            //     gradient: LinearGradient(
+            //         begin: AlignmentDirectional.topStart,
+            //         end: AlignmentDirectional.bottomEnd,
+            //         colors: [
+            //           Color(0xff3d69A8),
+            //           Color(0xff6A90F2),
+            //         ]),
+            //   ),
+            //   currentAccountPicture: const CircleAvatar(
+            //     backgroundImage: AssetImage(
+            //       'assets/images/me.jpg',
+            //     ),
+            //   ),
+            //   currentAccountPictureSize: Size(85.w, 88.h),
+            //   accountName: const Text(
+            //     'Mahmoud Maher Alserhi',
+            //     style: TextStyle(
+            //       color: Colors.white,
+            //     ),
+            //   ),
+            //   accountEmail: const Text(
+            //     'Email Dev: mahmoudalserhi@gmail.com',
+            //     style: TextStyle(
+            //       color: Colors.white,
+            //     ),
+            //   ),
+            // ),
+            SizedBox(height: 100.h,),
             ListTile(
               onTap: () {
                 Navigator.pop(context);
@@ -303,8 +307,15 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                   child: controller.homeResponse!.slider.isNotEmpty
                       ? Swiper(
                           onTap: (value) {
-                            Navigator.pushNamed(
-                                context, '/details_product_screen');
+                            // Navigator.pushNamed(
+                            //     context, '/details_product_screen');
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) =>
+                            //         DetailProductScreen(product: controller.homeResponse!.latestProducts[index]),
+                            //   ),
+                            // );
                           },
                           duration: 500,
                           autoplay: true,
@@ -397,8 +408,15 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(
-                                    context, '/sub_categorise_screen');
+                                // Navigator.pushNamed(
+                                //     context, '/sub_categorise_screen');
+                                // Navigator.push(
+                                //       context,
+                                //       MaterialPageRoute(
+                                //         builder: (context) =>
+                                //             SubCategoriseScreen(category: controller.homeResponse!.categories[index]),
+                                //       ),
+                                //     );
                               },
                               child: CardCategoriseHome(
                                 image: controller
@@ -414,10 +432,10 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                         ),
                 ),
                 SizedBox(
-                  height: 20.h,
+                  height: 10.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -430,21 +448,21 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                              context, '/latest_products_screen');
-                        },
-                        child: Text(
-                          'View All',
-                          style: TextStyle(
-                            fontFamily: 'Nunito',
-                            color: const Color(0xff6A90F2),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.sp,
-                          ),
-                        ),
-                      ),
+                      // TextButton(
+                      //   onPressed: () {
+                      //     Navigator.pushNamed(
+                      //         context, '/latest_products_screen');
+                      //   },
+                      //   child: Text(
+                      //     'View All',
+                      //     style: TextStyle(
+                      //       fontFamily: 'Nunito',
+                      //       color: const Color(0xff6A90F2),
+                      //       fontWeight: FontWeight.bold,
+                      //       fontSize: 18.sp,
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -478,6 +496,8 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                               );
                             },
                             child: CardProduct(
+                              id: controller.homeResponse!
+                                  .latestProducts[index].id,
                               image: controller.homeResponse!
                                   .latestProducts[index].imageUrl,
                               title: controller.homeResponse!
@@ -487,6 +507,10 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                               price: controller
                                   .homeResponse!.latestProducts[index].price
                                   .toString(),
+                              isFavorite: controller.homeResponse!
+                                  .famousProducts[index].isFavorite,
+                              overalRate: controller.homeResponse!
+                                  .famousProducts[index].overalRate,
                             ),
                           );
                         },
@@ -496,10 +520,10 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                         ),
                 ),
                 SizedBox(
-                  height: 20.h,
+                  height: 10.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -513,20 +537,20 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/products_screen');
-                        },
-                        child: Text(
-                          'View All',
-                          style: TextStyle(
-                            fontFamily: 'Nunito',
-                            color: const Color(0xff6A90F2),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.sp,
-                          ),
-                        ),
-                      ),
+                      // TextButton(
+                      //   onPressed: () {
+                      //     Navigator.pushNamed(context, '/products_screen');
+                      //   },
+                      //   child: Text(
+                      //     'View All',
+                      //     style: TextStyle(
+                      //       fontFamily: 'Nunito',
+                      //       color: const Color(0xff6A90F2),
+                      //       fontWeight: FontWeight.bold,
+                      //       fontSize: 18.sp,
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -559,6 +583,8 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                               );
                             },
                             child: CardProduct(
+                              id: controller.homeResponse!
+                                  .latestProducts[index].id,
                               image: controller.homeResponse!
                                   .famousProducts[index].imageUrl,
                               title: controller.homeResponse!
@@ -567,6 +593,10 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                                   .famousProducts[index].infoProduct,
                               price: controller.homeResponse!
                                   .famousProducts[index].price.toString(),
+                              isFavorite: controller.homeResponse!
+                                  .famousProducts[index].isFavorite,
+                              overalRate: controller.homeResponse!
+                                  .famousProducts[index].overalRate,
                             ),
                           );
                         },

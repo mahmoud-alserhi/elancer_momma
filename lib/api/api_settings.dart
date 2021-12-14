@@ -29,4 +29,7 @@ class ApiSettings{
 
   static const String contactRequests = _apiUrl + "contact-requests";
 
+  static const String postFavorite = _apiUrl + "favorite-products";
+  static const String getFavorite = _apiUrl + "favorite-products";
+
 }

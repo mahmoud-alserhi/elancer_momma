@@ -39,14 +39,41 @@ class _ContactScreenState extends State<ContactScreen> with Helpers{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Color(0xff23203F),
+          ),
+        ),
+        title: Text(
+          // AppLocalizations.of(context)!.resetPassword,
+            'Contact Us',
+            style: TextStyle(
+              fontFamily: 'Nunito',
+              fontSize: 25.sp,
+              color: const Color(0xff23203F),
+              fontWeight: FontWeight.bold,
+            )),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.language,
+              color: Color(0xff23203f),
+            ),
+          ),
+        ],
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: ListView(
-        physics: const NeverScrollableScrollPhysics(),
+        // physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
         children: [
-          SizedBox(
-            height: 138.h,
-          ),
           Text(
             'Suggestions and complaints',
             textAlign: TextAlign.start,
@@ -57,7 +84,7 @@ class _ContactScreenState extends State<ContactScreen> with Helpers{
                 fontWeight: FontWeight.bold),
           ),
           Text(
-            'We would like you to receive your suggestions?',
+            'We would like to receive your suggestions?',
             textAlign: TextAlign.start,
             style: TextStyle(
               fontFamily: 'Nunito',
@@ -77,38 +104,12 @@ class _ContactScreenState extends State<ContactScreen> with Helpers{
           SizedBox(
             height: 20.h,
           ),
-          Container(
-            height: 200.h,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0xffD0D0D0),
-                  blurRadius: 5,
-                  offset: Offset(0, 5),
-                  spreadRadius: 3,
-                ),
-              ],
+          AppTextFiled(
+              textEditingController: _messageTextEditingController,
+              hintText: 'Message',
+              textInputType: TextInputType.text,
+            maxLine: 7,
             ),
-            child: TextField(
-              controller: _messageTextEditingController,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                hintText: 'Message',
-                hintStyle: TextStyle(
-                    fontFamily: 'Nunito',
-                    fontSize: 22.sp,
-                    fontWeight: FontWeight.w600,
-                    color: const Color(0xff9391A4)),
-                hintMaxLines: 1,
-              ),
-            ),
-            // child: AppTextFiled(
-            //   textEditingController: _messageTextEditingController,
-            //   hintText: 'Message',
-            //   textInputType: TextInputType.text,
-            // ),
-          ),
           SizedBox(
             height: 30.h,
           ),

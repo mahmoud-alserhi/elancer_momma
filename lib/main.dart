@@ -1,4 +1,5 @@
 import 'package:elancer_momma/prefs/shared_pref_controller.dart';
+import 'package:elancer_momma/screens/about_screen.dart';
 import 'package:elancer_momma/screens/auth/activate_screen.dart';
 import 'package:elancer_momma/screens/auth/password/change_password_screen.dart';
 import 'package:elancer_momma/screens/auth/password/forgot_password_screen.dart';
@@ -65,6 +66,7 @@ class MyApp extends StatelessWidget {
           '/favorite_screen' : (context) => const FavoriteScreen(),
           '/faqs_screen' : (context) => const FAQseScreen(),
           '/contact_screen' : (context) => const ContactScreen(),
+          '/about_screen' : (context) => const AboutScreen(),
         },
       ),
     );

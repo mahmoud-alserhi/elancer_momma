@@ -15,7 +15,8 @@ class Contact with Helpers {
           'message': message,
         },
         headers: headers);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
+      // print(response.statusCode);
       showSnackBar(
         context: context,
         message: jsonDecode(response.body)['message'],

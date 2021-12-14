@@ -1,8 +1,7 @@
-import 'package:elancer_momma/models/api/sub_category/sub_category.dart';
+import 'package:elancer_momma/models/api/favorite_product/pivot.dart';
 import 'package:elancer_momma/prefs/shared_pref_controller.dart';
-import 'image.dart';
 
-class Product {
+class FavoriteProducts {
   late int id;
   late String nameEn;
   late String nameAr;
@@ -10,16 +9,16 @@ class Product {
   late String infoAr;
   late int price;
   late int quantity;
-  late num overalRate;
+  late int overalRate;
   late int subCategoryId;
   late int productRate;
   late num? offerPrice;
   late bool isFavorite;
   late String imageUrl;
-  late List<Images> images;
-  late SubCategory subCategory;
+  late Pivot pivot;
 
-  Product.fromJson(Map<String, dynamic> json) {
+
+  FavoriteProducts.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     nameEn = json['name_en'];
     nameAr = json['name_ar'];
@@ -33,22 +32,13 @@ class Product {
     offerPrice = json['offer_price'];
     isFavorite = json['is_favorite'];
     imageUrl = json['image_url'];
-
-    if (json.containsKey('images') && json['images'] != null) {
-      images = <Images>[];
-      json['images'].forEach((v) {
-        images.add(Images.fromJson(v));
-      });
-    }
-    if (json.containsKey('sub_category') && json['sub_category'] != null) {
-      subCategory = SubCategory.fromJson(json['sub_category']);
-    }
-
+    pivot = (json['pivot'] != null ? Pivot.fromJson(json['pivot']) : null)!;
   }
 
-  String get productName =>
+  String get favoriteProductName =>
       SharedPrefController().checkLanguage == 'en' ? nameEn : nameAr;
 
-  String get infoProduct =>
+  String get favoriteInfoProduct =>
       SharedPrefController().checkLanguage == 'en' ? infoEn : infoAr;
+
 }
