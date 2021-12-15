@@ -1,9 +1,11 @@
 import 'package:elancer_momma/api/controllers/sub_category_api_controller.dart';
+import 'package:elancer_momma/get/language_getx_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/models/api/categories/category.dart';
 import 'package:elancer_momma/models/api/sub_category/sub_category.dart';
 import 'package:elancer_momma/screens/products_screen.dart';
 import 'package:elancer_momma/widgets/card_sub_categorise.dart';
+import 'package:elancer_momma/widgets/no_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -65,7 +67,11 @@ class _SubCategoriseScreenState extends State<SubCategoriseScreen> with Helpers{
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                LanguageGetxController.to.changeLanguage();
+              });
+            },
             icon: const Icon(
               Icons.language,
               color: Color(0xff23203f),
@@ -262,11 +268,11 @@ class _SubCategoriseScreenState extends State<SubCategoriseScreen> with Helpers{
                 color: Color(0xff23203F),
               ),
             ),
-            Divider(
-              color: const Color(0xff6A90F2),
-              thickness: 1,
-              endIndent: 25.w,
-            ),
+            // Divider(
+            //   color: const Color(0xff6A90F2),
+            //   thickness: 1,
+            //   endIndent: 25.w,
+            // ),
             ListTile(
               onTap: () async {
                 Navigator.pop(context);
@@ -327,21 +333,7 @@ class _SubCategoriseScreenState extends State<SubCategoriseScreen> with Helpers{
               },
             );
           }else{
-            return Center(
-              child: Column(
-                children: const [
-                  Icon(Icons.warning, size: 80),
-                  Text(
-                    'NO DATA',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
-                  )
-                ],
-              ),
-            );
+            return widgetNoData();
           }
         },
       ),

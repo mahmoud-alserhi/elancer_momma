@@ -1,5 +1,6 @@
 import 'package:elancer_momma/api/controllers/auth_api_controller.dart';
 import 'package:elancer_momma/api/controllers/contact_api_controller.dart';
+import 'package:elancer_momma/get/language_getx_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/widgets/app_text_filed.dart';
 import 'package:flutter/gestures.dart';
@@ -58,7 +59,11 @@ class _ContactScreenState extends State<ContactScreen> with Helpers{
             )),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                LanguageGetxController.to.changeLanguage();
+              });
+            },
             icon: const Icon(
               Icons.language,
               color: Color(0xff23203f),

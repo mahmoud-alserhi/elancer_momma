@@ -1,10 +1,12 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:elancer_momma/get/favorite_product_getx_controller.dart';
 import 'package:elancer_momma/get/home_getx_controller.dart';
+import 'package:elancer_momma/get/language_getx_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/screens/sub_categorise_screen.dart';
 import 'package:elancer_momma/widgets/card_categorise_home.dart';
 import 'package:elancer_momma/widgets/card_product.dart';
+import 'package:elancer_momma/widgets/no_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -62,7 +64,11 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                LanguageGetxController.to.changeLanguage();
+              });
+            },
             icon: const Icon(
               Icons.language,
               color: Color(0xff23203f),
@@ -259,11 +265,11 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                 color: Color(0xff23203F),
               ),
             ),
-            Divider(
-              color: const Color(0xff6A90F2),
-              thickness: 1,
-              endIndent: 25.w,
-            ),
+            // Divider(
+            //   color: const Color(0xff6A90F2),
+            //   thickness: 1,
+            //   endIndent: 25.w,
+            // ),
             ListTile(
               onTap: () async {
                 Navigator.pop(context);
@@ -608,18 +614,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
               ],
             );
           } else {
-            return Center(
-              child: Text(
-                'No Data',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 22.sp,
-                  fontWeight: FontWeight.w600,
-                  color: const Color(0xff23203F),
-                ),
-              ),
-            );
+            return widgetNoData();
           }
         },
       ),

@@ -1,4 +1,6 @@
-import 'package:elancer_momma/widgets/top_container.dart';
+import 'package:elancer_momma/get/language_getx_controller.dart';
+import 'package:elancer_momma/widgets/about/background.dart';
+import 'package:elancer_momma/widgets/about/personal_information.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -41,7 +43,11 @@ class _AboutScreenState extends State<AboutScreen> {
         elevation: 0,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                LanguageGetxController.to.changeLanguage();
+              });
+            },
             icon: const Icon(
               Icons.language,
               color: Color(0xff23203f),
@@ -51,11 +57,18 @@ class _AboutScreenState extends State<AboutScreen> {
       ),
       body: ListView(
         children: [
-        personalInformation(),
+          Stack(
+            children: [
+              background(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.w),
+                child: personalInformation(),
+              ),
+            ],
+          ),
+
         ],
       ),
     );
   }
-
-
 }

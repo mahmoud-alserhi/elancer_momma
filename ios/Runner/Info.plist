@@ -10,6 +10,8 @@
     </true>
     </dict>
 
+    <key>LSApplicationQueriesSchemes</key>
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

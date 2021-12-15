@@ -1,3 +1,4 @@
+import 'package:elancer_momma/get/language_getx_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/widgets/card_product.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,9 @@ class _LatestProductsScreenState extends State<LatestProductsScreen> with Helper
         elevation: 0,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/favorite_screen');
+              },
             icon: const Icon(
               Icons.favorite,
               color: Color(0xffFF0000),
@@ -49,7 +52,9 @@ class _LatestProductsScreenState extends State<LatestProductsScreen> with Helper
           ),
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/favorite_screen');
+              setState(() {
+                LanguageGetxController.to.changeLanguage();
+              });
             },
             icon: const Icon(
               Icons.language,

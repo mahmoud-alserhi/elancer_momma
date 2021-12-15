@@ -140,6 +140,10 @@ class AuthApiController with Helpers {
     if (response.statusCode == 200) {
       print(response.statusCode);
       print(jsonDecode(response.body)['code']);
+      showSnackBarCode(
+        context: context,
+        message: "Your verification Code: ${jsonDecode(response.body)["code"]}",
+      );
       return true;
     } else if (response.statusCode == 400) {
       showSnackBar(
