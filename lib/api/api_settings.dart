@@ -32,5 +32,7 @@ class ApiSettings{
   //---------------------------FAVORITE LINK------------------------------------
   static const String postFavorite = _apiUrl + "favorite-products";
   static const String getFavorite = _apiUrl + "favorite-products";
+  //---------------------------CONTACT LINK-------------------------------------
+  static const String rateProduct = _apiUrl + "products/rate";
 
 }

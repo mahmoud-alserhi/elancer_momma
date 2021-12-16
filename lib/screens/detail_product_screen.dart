@@ -1,6 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:elancer_momma/api/controllers/favorite_product_api_controller.dart';
 import 'package:elancer_momma/api/controllers/product_details_api_controller.dart';
+import 'package:elancer_momma/api/controllers/rate_product_api_controller.dart';
 import 'package:elancer_momma/get/favorite_product_getx_controller.dart';
 import 'package:elancer_momma/get/language_getx_controller.dart';
 import 'package:elancer_momma/models/api/home/product.dart';
@@ -30,6 +31,10 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
 
   bool _isFavorite = false;
 
+  late double _rating;
+  IconData? _selectedIcon;
+  double _initialRating = 0.0;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -37,6 +42,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
     _future =
         ProductDetailsApiController().showProductDetails(widget.id);
     FavoriteProductGetxController.to.getFavoriteProduct();
+    _rating = _initialRating;
   }
 
   @override
@@ -177,19 +183,29 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                             ),
                           ),
                           RatingBar.builder(
-                            initialRating: 0,
+                            glow: false,
+                            // glowColor: Colors.amber,
+                            initialRating: _initialRating,
                             minRating: 1,
                             direction: Axis.horizontal,
                             allowHalfRating: true,
                             itemCount: 5,
                             itemSize: 24,
                             updateOnDrag: true,
-                            itemBuilder: (context, _) => const Icon(
-                              Icons.star,
+                            itemBuilder: (context, _) => Icon(
+                              _selectedIcon ?? Icons.star,
                               color: Colors.amber,
                             ),
                             onRatingUpdate: (rating) {
+                              RateProductApiController().rateProduct(
+                                  context,
+                                  productId: widget.id,
+                                  rate: _rating
+                              );
                               print(rating);
+                              setState(() {
+                                _rating = rating;
+                              });
                             },
                           ),
                         ],
