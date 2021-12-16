@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'about_me.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-Container personalInformation() {
+Container personalInformation(BuildContext context) {
   return Container(
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -23,7 +24,8 @@ Container personalInformation() {
           height: 14.h,
         ),
         Text(
-          'Mahmoud Maher Alserhi',
+          AppLocalizations.of(context)!.mahmoud,
+          // 'Mahmoud Maher Alserhi',
           style: TextStyle(
             fontFamily: 'Nunito',
             fontSize: 19.sp,
@@ -35,7 +37,8 @@ Container personalInformation() {
           height: 4.h,
         ),
         Text(
-          "Flutter Developer",
+          AppLocalizations.of(context)!.flutter,
+          // "Flutter Developer",
           style: TextStyle(
             fontFamily: 'Nunito',
             fontSize: 14.sp,
@@ -84,8 +87,8 @@ Container personalInformation() {
         SizedBox(
             height: 10.h
         ),
-        aboutMe(),
-        aboutApp(),
+        aboutMe(context),
+        aboutApp(context),
         SizedBox(
             height: 20.h
         ),

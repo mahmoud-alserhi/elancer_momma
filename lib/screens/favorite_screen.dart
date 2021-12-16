@@ -6,6 +6,7 @@ import 'package:elancer_momma/widgets/no_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({Key? key}) : super(key: key);
@@ -39,8 +40,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Helpers{
           ),
         ),
         title: Text(
-          // AppLocalizations.of(context)!.home,
-          'Favorite',
+          AppLocalizations.of(context)!.favorite,
+          // 'Favorite',
           style: TextStyle(
             fontFamily: 'Nunito',
             fontSize: 25.sp,
@@ -96,7 +97,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Helpers{
               },
             );
           } else {
-            return widgetNoData();
+            return widgetNoData(context);
           }
         },
       ),

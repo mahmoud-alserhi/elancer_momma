@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({
@@ -95,8 +96,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
           ),
         ),
         title: Text(
-          // AppLocalizations.of(context)!.resetPassword,
-            'Reset Password',
+          AppLocalizations.of(context)!.resetPassword,
+            // 'Reset Password',
             style: TextStyle(
               fontFamily: 'Nunito',
               fontSize: 25.sp,
@@ -115,7 +116,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
             height: 50.h,
           ),
           Text(
-            'Enter New Password',
+            AppLocalizations.of(context)!.enterPassword,
+            // 'Enter New Password',
             style: TextStyle(
                 color: const Color(0xff23203F),
                 fontFamily: 'Nunito',
@@ -123,7 +125,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
                 fontSize: 30.sp,),
           ),
           Text(
-            'Enter New Password and received code',
+            AppLocalizations.of(context)!.subTitlePassword,
+            // 'Enter New Password and received code',
             style: TextStyle(
                 color: const Color(0xff716F87),
                 fontFamily: 'Nunito',
@@ -232,7 +235,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
             height: 20.h,
           ),
           AppTextFiled(
-            hintText: 'Password',
+            hintText: AppLocalizations.of(context)!.password,
+            // hintText: 'Password',
             textEditingController: _newPasswordTextEditingController,
             textInputType: TextInputType.text,
             obscureText: true,
@@ -241,7 +245,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
             height: 20.h,
           ),
           AppTextFiled(
-            hintText: 'Password Confirmation',
+            hintText: AppLocalizations.of(context)!.confirmPassword,
+            // hintText: 'Password Confirmation',
             textEditingController: _newPasswordConfirmationTextEditingController,
             textInputType: TextInputType.text,
             obscureText: true,
@@ -259,7 +264,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
               minimumSize: Size(0.w, 56.h),
             ),
             child: Text(
-              'Reset',
+              AppLocalizations.of(context)!.reset,
+              // 'Reset',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: 'Nunito',
@@ -295,14 +301,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
       }
       showSnackBar(
         context: context,
-        message: 'Password confirmation error!',
+        message: AppLocalizations.of(context)!.passwordConfirmation,
         error: true,
       );
       return false;
     }
     showSnackBar(
       context: context,
-      message: 'Enter New Password!',
+      message: AppLocalizations.of(context)!.enterRequired,
       error: true,
     );
     return false;
@@ -318,7 +324,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
     }
     showSnackBar(
       context: context,
-      message: 'Enter Verification Code!',
+      message: AppLocalizations.of(context)!.enterVerification,
       error: true,
     );
     return false;

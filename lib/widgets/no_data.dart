@@ -1,16 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-Center widgetNoData() {
+Center widgetNoData(BuildContext context) {
   return Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Image.asset('assets/images/noData.png'),
-        const Text(
-          'Oops! Its Empty!',
-          style: TextStyle(
+        Text(
+          AppLocalizations.of(context)!.oop,
+          // 'Oops! Its Empty!',
+          style: const TextStyle(
             color: Color(0xff23203F),
             fontWeight: FontWeight.bold,
             fontSize: 24,
@@ -19,10 +21,11 @@ Center widgetNoData() {
         SizedBox(
             height: 10.h
         ),
-        const Text(
-          'There are no products under this\ncategory right now.',
+        Text(
+            AppLocalizations.of(context)!.oopDes,
+          // 'There are no products under this\ncategory right now.',
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             color: Color(0xff23203F),
             fontWeight: FontWeight.bold,
             fontSize: 18,

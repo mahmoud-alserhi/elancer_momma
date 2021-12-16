@@ -7,6 +7,7 @@ import 'package:elancer_momma/widgets/app_text_filed.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({
@@ -56,8 +57,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
           ),
         ),
         title: Text(
-          // AppLocalizations.of(context)!.resetPassword,
-            'Update Profile',
+          AppLocalizations.of(context)!.updateProfile,
+            // 'Update Profile',
             style: TextStyle(
               fontFamily: 'Nunito',
               fontSize: 25.sp,
@@ -89,7 +90,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
             height: 50.h,
           ),
           Text(
-            'Enter New Information',
+              AppLocalizations.of(context)!.updateTitle,
+            // 'Enter New Information',
             style: TextStyle(
                 color: const Color(0xff23203F),
                 fontFamily: 'Nunito',
@@ -97,7 +99,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                 fontSize: 30.sp,),
           ),
           Text(
-            'Are you sure you want to change the Information?',
+            AppLocalizations.of(context)!.updateSubTitle,
+            // 'Are you sure you want to change the Information?',
             style: TextStyle(
                 color: const Color(0xff716F87),
                 fontFamily: 'Nunito',
@@ -108,7 +111,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
             height: 20.h,
           ),
           AppTextFiled(
-            hintText: 'Name',
+            hintText: AppLocalizations.of(context)!.name,
+            // hintText: 'Name',
             textEditingController: _nameTextEditingController,
             textInputType: TextInputType.text,
           ),
@@ -132,7 +136,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                     underline: const SizedBox.shrink(),
                     isExpanded: true,
                     hint: Text(
-                      'Select City',
+                      AppLocalizations.of(context)!.selectCity,
+                      // 'Select City',
                       style: TextStyle(
                         fontFamily: 'Nunito',
                         fontSize: 18.sp,
@@ -166,8 +171,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
             height: 20.h,
           ),
           Text(
-            // AppLocalizations.of(context)!.gender,
-            'Gender',
+            AppLocalizations.of(context)!.gender,
+            // 'Gender',
             textAlign: TextAlign.start,
             style: TextStyle(
                 fontFamily: 'Nunito',
@@ -180,7 +185,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
             children: [
               Expanded(
                 child: RadioListTile<String>(
-                    title: Text('Male',
+                    title: Text(
+                        AppLocalizations.of(context)!.male,
+                        // 'Male',
                         style: TextStyle(
                             fontFamily: 'Nunito',
                             fontSize: 20.sp,
@@ -199,7 +206,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
               ),
               Expanded(
                 child: RadioListTile<String>(
-                    title: Text('Female',
+                    title: Text(
+                        AppLocalizations.of(context)!.female,
+                        // 'Female',
                         style: TextStyle(
                             fontFamily: 'Nunito',
                             fontSize: 20.sp,
@@ -230,7 +239,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
               minimumSize: Size(0.w, 56.h),
             ),
             child: Text(
-              'Update Information',
+              AppLocalizations.of(context)!.updateInformation,
+              // 'Update Information',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: 'Nunito',
@@ -257,7 +267,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
     }
     showSnackBar(
       context: context,
-      message: 'Enter required data!',
+      message: AppLocalizations.of(context)!.enterRequired,
       error: true,
     );
     return false;
@@ -274,14 +284,5 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
     if (status) Navigator.pop(context);
   }
 
-  // User get user {
-  //   User user = User();
-  //   user.name = _nameTextEditingController.text;
-  //   user.mobile = _mobileTextEditingController.text;
-  //   user.password = _passwordTextEditingController.text;
-  //   user.gender = _gender;
-  //   user.cityId = _selectedAddress!;
-  //   return user;
-  // }
 
 }

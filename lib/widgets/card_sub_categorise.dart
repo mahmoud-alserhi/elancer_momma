@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CardSubCategorise extends StatelessWidget {
   const CardSubCategorise({
@@ -40,10 +41,10 @@ class CardSubCategorise extends StatelessWidget {
                   bottomRight: Radius.circular(15),
                   bottomLeft: Radius.circular(15)),
             ),
-            height: 50.h,
+            height: 52.h,
             width: double.infinity,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 2.h),
+              padding: EdgeInsets.symmetric(horizontal: 15.w,),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -62,7 +63,8 @@ class CardSubCategorise extends StatelessWidget {
                   ),
                   Expanded(
                     child: Text(
-                      'Product: $productCount',
+                      '${AppLocalizations.of(context)!.products}: $productCount',
+                      // 'Product: ',
                       // overflow: TextOverflow.ellipsis,
                       // overflow: TextOverflow.clip,
                       maxLines: 1,

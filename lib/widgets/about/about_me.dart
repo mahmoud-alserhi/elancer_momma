@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-Container aboutMe() {
+Container aboutMe(BuildContext context) {
   return Container(
     // alignment: AlignmentDirectional.centerStart,
-    height: 200.h,
+    height: 275.h,
     padding: EdgeInsets.symmetric(
       horizontal: 10.h,
       vertical: 10.w,
@@ -13,7 +14,8 @@ Container aboutMe() {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'About Me:',
+          '${AppLocalizations.of(context)!.aboutMe}:',
+          // 'About Me:',
           textAlign: TextAlign.start,
           style: TextStyle(
             fontFamily: 'Nunito',
@@ -23,9 +25,10 @@ Container aboutMe() {
           ),
         ),
         Text(
-          'Mahmoud Alserhi is a student of eLancer, with experience developer mobile application. Mahmoud fuels her passion for understanding the nuances of professional application development. He eager to both build on her academic foundations in application development sciences and stay in tune with the latest flutter strategies through continued coursework.',
+          AppLocalizations.of(context)!.aboutMeDes,
+          // 'Mahmoud Alserhi is a student of eLancer, with experience developer mobile application. Mahmoud fuels her passion for understanding the nuances of professional application development. He eager to both build on her academic foundations in application development sciences and stay in tune with the latest flutter strategies through continued coursework.',
           textAlign: TextAlign.start,
-          maxLines: 6,
+          maxLines: 7,
           style: TextStyle(
             fontFamily: 'Nunito',
             fontSize: 18.sp,

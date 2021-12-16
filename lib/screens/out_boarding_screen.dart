@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OutBoardingScreen extends StatefulWidget {
   const OutBoardingScreen({Key? key}) : super(key: key);
@@ -50,8 +50,8 @@ class _OutBoardingScreenState extends State<OutBoardingScreen> {
                     duration: const Duration(seconds: 1),
                     curve: Curves.easeInOut),
                 child: Text(
-                  // AppLocalizations.of(context)!.skip,
-                  'Skip',
+                  AppLocalizations.of(context)!.skip,
+                  // 'Skip',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Nunito',
@@ -78,30 +78,30 @@ class _OutBoardingScreenState extends State<OutBoardingScreen> {
                   _currentPage = value;
                 });
               },
-              children: const [
+              children: [
                 OutBoardingContent(
                   image: 'assets/images/out_boarding_image1.png',
-                  // title: AppLocalizations.of(context)!.pageOneTitle,
-                  title: 'Welcome!',
+                  title: AppLocalizations.of(context)!.pageOneTitle,
+                  // title: 'Welcome!',
                   description:
-                  // AppLocalizations.of(context)!.pageOneDescription,
-                      'Welcome to Momma shop,Everything you need is here, Just take your time.',
+                  AppLocalizations.of(context)!.pageOneDescription,
+                      // 'Welcome to Momma shop,Everything you need is here, Just take your time.',
                 ),
                 OutBoardingContent(
                   image: 'assets/images/out_boarding_image2.png',
-                  // title: AppLocalizations.of(context)!.pageTwoTitle,
-                  title: 'Add to cart',
+                  title: AppLocalizations.of(context)!.pageTwoTitle,
+                  // title: 'Add to cart',
                   description:
-                  // AppLocalizations.of(context)!.pageTwoDescription,
-                      'Shop everything you want,\nAnd Add to cart, It`s an easy way.',
+                  AppLocalizations.of(context)!.pageTwoDescription,
+                      // 'Shop everything you want,\nAnd Add to cart, It`s an easy way.',
                 ),
                 OutBoardingContent(
                   image: 'assets/images/out_boarding_image3.png',
-                  // title: AppLocalizations.of(context)!.pageThreeTitle,
-                  title: 'Enjoy Purchase!',
+                  title: AppLocalizations.of(context)!.pageThreeTitle,
+                  // title: 'Enjoy Purchase!',
                   description:
-                  // AppLocalizations.of(context)!.pageThreeDescription,
-                      'You can purchase on Momma.\nDuring checkout,Select the timeframe',
+                  AppLocalizations.of(context)!.pageThreeDescription,
+                      // 'You can purchase on Momma.\nDuring checkout,Select the timeframe',
                 ),
               ],
             ),
@@ -146,8 +146,8 @@ class _OutBoardingScreenState extends State<OutBoardingScreen> {
                   minimumSize: Size(165.w, 56.h),
                 ),
                 child: Text(
-                  // AppLocalizations.of(context)!.getStart,
-                  'Get Start',
+                  AppLocalizations.of(context)!.getStart,
+                  // 'Get Start',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontFamily: 'Nunito',

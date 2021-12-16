@@ -3,6 +3,7 @@ import 'package:elancer_momma/widgets/about/background.dart';
 import 'package:elancer_momma/widgets/about/personal_information.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -29,8 +30,8 @@ class _AboutScreenState extends State<AboutScreen> {
           ),
         ),
         title: Text(
-          // AppLocalizations.of(context)!.home,
-          'About',
+          AppLocalizations.of(context)!.about,
+          // 'About',
           style: TextStyle(
             fontFamily: 'Nunito',
             fontSize: 25.sp,
@@ -62,7 +63,7 @@ class _AboutScreenState extends State<AboutScreen> {
               background(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.w),
-                child: personalInformation(),
+                child: personalInformation(context),
               ),
             ],
           ),

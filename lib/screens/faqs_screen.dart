@@ -2,8 +2,10 @@ import 'package:elancer_momma/api/controllers/faqs_api_controller.dart';
 import 'package:elancer_momma/get/language_getx_controller.dart';
 import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/models/api/faqs/faqs.dart';
+import 'package:elancer_momma/widgets/no_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FAQseScreen extends StatefulWidget {
   const FAQseScreen({Key? key}) : super(key: key);
@@ -52,8 +54,8 @@ class _FAQseScreenState extends State<FAQseScreen> with Helpers {
           ),
         ),
         title: Text(
-          // AppLocalizations.of(context)!.home,
-          'FAQs',
+          AppLocalizations.of(context)!.faqs,
+          // 'FAQs',
           style: TextStyle(
             fontFamily: 'Nunito',
             fontSize: 25.sp,
@@ -109,21 +111,7 @@ class _FAQseScreenState extends State<FAQseScreen> with Helpers {
               },
             );
           }else{
-            return Center(
-              child: Column(
-                children: const [
-                  Icon(Icons.warning, size: 80),
-                  Text(
-                    'NO DATA',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
-                  )
-                ],
-              ),
-            );
+            return widgetNoData(context);
           }
         },
       ),

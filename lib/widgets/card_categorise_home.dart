@@ -33,15 +33,15 @@ class CardCategoriseHome extends StatelessWidget {
           ),
           Container(
             decoration: const BoxDecoration(
-              color: Color(0xffe6e4fa),
+              color: Color(0xffe6e9fa),
               borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(15),
                   bottomLeft: Radius.circular(15)),
             ),
-            height: 45.h,
+            height: 50.h,
             width: double.infinity,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 9.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -49,7 +49,7 @@ class CardCategoriseHome extends StatelessWidget {
                     title,
                     // "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
                     // textAlign: TextAlign.right,
-                    overflow: TextOverflow.ellipsis,
+                    // overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(
                       fontFamily: 'Nunito',

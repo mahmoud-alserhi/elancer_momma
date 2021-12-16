@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CardCategorise extends StatelessWidget {
   const CardCategorise({
@@ -36,37 +37,43 @@ class CardCategorise extends StatelessWidget {
             ),
           ),
           Container(
+
             decoration: const BoxDecoration(
               color: Color(0xffe6e4fa),
               borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(15),
                   bottomLeft: Radius.circular(15)),
             ),
-            height: 50.h,
+            height: 55.h,
             width: double.infinity,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 2.h),
+              padding: EdgeInsets.symmetric(horizontal: 15.w,),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    // "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-                    // textAlign: TextAlign.right,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: TextStyle(
-                      fontFamily: 'Nunito',
-                      fontSize: 16.sp,
-                      color: const Color(0xff23203F),
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        title,
+                        // "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+                        // textAlign: TextAlign.right,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontSize: 16.sp,
+                          color: const Color(0xff23203F),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Sub Category: $subCategory',
+                        '${AppLocalizations.of(context)!.subCategories}: $subCategory',
                         // overflow: TextOverflow.ellipsis,
                         overflow: TextOverflow.clip,
                         maxLines: 1,
@@ -77,22 +84,22 @@ class CardCategorise extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(width: 10.w,),
-                      Expanded(
-                        child: Text(
-                          'Product: $productCount',
-                          // overflow: TextOverflow.ellipsis,
-                          // overflow: TextOverflow.clip,
-                          maxLines: 1,
-                          textAlign: TextAlign.end,
-                          style: TextStyle(
-                            fontFamily: 'Nunito',
-                            fontSize: 16.sp,
-                            color: const Color(0xff716F87),
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
+                      // SizedBox(width: 10.w,),
+                      // Expanded(
+                      //   child: Text(
+                      //     'Product: $productCount',
+                      //     // overflow: TextOverflow.ellipsis,
+                      //     // overflow: TextOverflow.clip,
+                      //     maxLines: 1,
+                      //     textAlign: TextAlign.end,
+                      //     style: TextStyle(
+                      //       fontFamily: 'Nunito',
+                      //       fontSize: 16.sp,
+                      //       color: const Color(0xff716F87),
+                      //       fontWeight: FontWeight.w600,
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ],

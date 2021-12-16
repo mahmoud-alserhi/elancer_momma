@@ -5,7 +5,7 @@ import 'package:elancer_momma/widgets/app_text_filed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -44,8 +44,8 @@ class _ForgotPasswordState extends State<ForgotPassword> with Helpers{
           ),
         ),
         title: Text(
-          // AppLocalizations.of(context)!.forgetPassword,
-            'Forget Password',
+          AppLocalizations.of(context)!.forgetPassword,
+            // 'Forget Password',
             style: TextStyle(
               fontFamily: 'Nunito',
               fontSize: 25.sp,
@@ -70,8 +70,8 @@ class _ForgotPasswordState extends State<ForgotPassword> with Helpers{
             height: 15.h,
           ),
           Text(
-            // AppLocalizations.of(context)!.forgetTitle,
-            'We have sent a Code recover instructions to your Mobile',
+            AppLocalizations.of(context)!.weSent,
+            // 'We have sent a Code recover instructions to your Mobile',
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontFamily: 'Nunito',
@@ -88,7 +88,8 @@ class _ForgotPasswordState extends State<ForgotPassword> with Helpers{
           AppTextFiled(
             textEditingController: _mobileTextEditingController,
             // hintText: AppLocalizations.of(context)!.mobile,
-            hintText: 'Mobile',
+            hintText: AppLocalizations.of(context)!.mobile,
+            // hintText: 'Mobile',
             textInputType: TextInputType.phone,
           ),
           SizedBox(
@@ -103,8 +104,8 @@ class _ForgotPasswordState extends State<ForgotPassword> with Helpers{
               minimumSize: Size(double.infinity, 56.h),
             ),
             child: Text(
-              // AppLocalizations.of(context)!.sendCode,
-              'Send Code',
+              AppLocalizations.of(context)!.sendCode,
+              // 'Send Code',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: 'Nunito',
@@ -133,7 +134,7 @@ class _ForgotPasswordState extends State<ForgotPassword> with Helpers{
     }
     showSnackBar(
       context: context,
-      message: 'Enter required data!',
+      message: AppLocalizations.of(context)!.enterRequired,
       error: true,
     );
     return false;

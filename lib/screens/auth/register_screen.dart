@@ -8,6 +8,7 @@ import 'package:elancer_momma/widgets/app_text_filed.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -74,8 +75,8 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
           ),
         ),
         title: Text(
-            // AppLocalizations.of(context)!.register,
-            'Register',
+            AppLocalizations.of(context)!.register,
+            // 'Register',
             style: TextStyle(
               fontFamily: 'Nunito',
               fontSize: 25.sp,
@@ -87,13 +88,13 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
         elevation: 0,
       ),
       body: ListView(
-        physics: const NeverScrollableScrollPhysics(),
+        // physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
         children: [
           Text(
-            // AppLocalizations.of(context)!.singUp,
-            'Sing Up',
+            AppLocalizations.of(context)!.singUp,
+            // 'Sing Up',
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontFamily: 'Nunito',
@@ -102,8 +103,8 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
                 fontWeight: FontWeight.bold),
           ),
           Text(
-            // AppLocalizations.of(context)!.singIn,
-            'Create Account',
+            AppLocalizations.of(context)!.createAccount,
+            // 'Create Account',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontFamily: 'Nunito',
@@ -117,7 +118,8 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
           ),
           AppTextFiled(
             textEditingController: _nameTextEditingController,
-            hintText: 'Name',
+            hintText: AppLocalizations.of(context)!.name,
+            // hintText: 'Name',
             textInputType: TextInputType.text,
           ),
           SizedBox(
@@ -125,7 +127,8 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
           ),
           AppTextFiled(
             textEditingController: _mobileTextEditingController,
-            hintText: 'Mobile',
+            hintText: AppLocalizations.of(context)!.mobile,
+            // hintText: 'Mobile',
             textInputType: TextInputType.phone,
           ),
           SizedBox(
@@ -133,7 +136,8 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
           ),
           AppTextFiled(
             textEditingController: _passwordTextEditingController,
-            hintText: 'Password',
+            hintText: AppLocalizations.of(context)!.password,
+            // hintText: 'Password',
             textInputType: TextInputType.text,
             obscureText: _isPasswordShow,
             suffixIcon: IconButton(
@@ -171,7 +175,8 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
                     underline: const SizedBox.shrink(),
                     isExpanded: true,
                     hint: Text(
-                      'Select City',
+                      AppLocalizations.of(context)!.selectCity,
+                      // 'Select City',
                       style: TextStyle(
                         fontFamily: 'Nunito',
                         fontSize: 18.sp,
@@ -218,8 +223,8 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
             height: 20.h,
           ),
           Text(
-            // AppLocalizations.of(context)!.gender,
-            'Gender',
+            AppLocalizations.of(context)!.gender,
+            // 'Gender',
             textAlign: TextAlign.start,
             style: TextStyle(
                 fontFamily: 'Nunito',
@@ -232,7 +237,9 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
             children: [
               Expanded(
                 child: RadioListTile<String>(
-                    title: Text('Male',
+                    title: Text(
+                        AppLocalizations.of(context)!.male,
+                        // 'Male',
                         style: TextStyle(
                             fontFamily: 'Nunito',
                             fontSize: 20.sp,
@@ -251,7 +258,9 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
               ),
               Expanded(
                 child: RadioListTile<String>(
-                    title: Text('Female',
+                    title: Text(
+                        AppLocalizations.of(context)!.female,
+                        // 'Female',
                         style: TextStyle(
                             fontFamily: 'Nunito',
                             fontSize: 20.sp,
@@ -282,7 +291,8 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
               minimumSize: Size(double.infinity, 56.h),
             ),
             child: Text(
-              'Sing Up',
+              AppLocalizations.of(context)!.singUp,
+              // 'Sing Up',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: 'Nunito',
@@ -297,7 +307,8 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
-                text: 'Already have an account? ',
+                text: '${AppLocalizations.of(context)!.already} ',
+                // text: 'Already have an account? ',
                 style: TextStyle(
                   color: const Color(0xff23203F),
                   fontFamily: 'Nunito',
@@ -307,7 +318,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
                 children: [
                   TextSpan(
                     recognizer: _tapGestureRecognizer,
-                    text: 'Sing In!',
+                    text: '${AppLocalizations.of(context)!.singIn}!',
                     style: TextStyle(
                       color: const Color(0xff6A90F2),
                       fontFamily: 'Nunito',
@@ -337,7 +348,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
     }
     showSnackBar(
       context: context,
-      message: 'Enter required data!',
+      message: AppLocalizations.of(context)!.enterRequired,
       error: true,
     );
     return false;

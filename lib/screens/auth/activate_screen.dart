@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ActivateScreen extends StatefulWidget {
   const ActivateScreen({
@@ -87,8 +88,8 @@ class _ActivateScreenState extends State<ActivateScreen>
           ),
         ),
         title: Text(
-          // AppLocalizations.of(context)!.resetPassword,
-            'Verification',
+          AppLocalizations.of(context)!.verification,
+            // 'Verification',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontFamily: 'Nunito',
@@ -108,7 +109,8 @@ class _ActivateScreenState extends State<ActivateScreen>
             height: 147.h,
           ),
           Text(
-            'Verify Your Account',
+            AppLocalizations.of(context)!.verifyAccount,
+            // 'Verify Your Account',
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: const Color(0xff23203F),
@@ -120,7 +122,8 @@ class _ActivateScreenState extends State<ActivateScreen>
             height: 20.h,
           ),
           Text(
-            'We are sending OTP to validate your mobile number. Hang on!',
+            AppLocalizations.of(context)!.subVerifyAccount,
+            // 'We are sending OTP to validate your mobile number. Hang on!',
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: const Color(0xff716F87),
@@ -202,7 +205,8 @@ class _ActivateScreenState extends State<ActivateScreen>
               minimumSize: Size(0.w, 56.h),
             ),
             child: Text(
-              'Submit',
+              AppLocalizations.of(context)!.submit,
+              // 'Submit',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: 'Nunito',
@@ -233,7 +237,7 @@ class _ActivateScreenState extends State<ActivateScreen>
     }
     showSnackBar(
       context: context,
-      message: 'Enter Verification Code!',
+      message: AppLocalizations.of(context)!.enterVerification,
       error: true,
     );
     return false;

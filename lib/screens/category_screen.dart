@@ -6,10 +6,13 @@ import 'package:elancer_momma/helpers/helpers.dart';
 import 'package:elancer_momma/models/api/categories/category.dart';
 import 'package:elancer_momma/screens/sub_categorise_screen.dart';
 import 'package:elancer_momma/widgets/card_categorise.dart';
+import 'package:elancer_momma/widgets/list_tile/menu_list_tile.dart';
 import 'package:elancer_momma/widgets/no_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class CategoryScreen extends StatefulWidget {
@@ -47,8 +50,8 @@ class _CategoryScreenState extends State<CategoryScreen> with Helpers{
           ),
         ),
         title: Text(
-          // AppLocalizations.of(context)!.home,
-          'Categorise',
+          AppLocalizations.of(context)!.categorise,
+          // 'Categorise',
           style: TextStyle(
             fontFamily: 'Nunito',
             fontSize: 25.sp,
@@ -83,51 +86,28 @@ class _CategoryScreenState extends State<CategoryScreen> with Helpers{
       ),
       drawer: Drawer(
         child: ListView(
+          physics: const NeverScrollableScrollPhysics(),
           children: [
-            // UserAccountsDrawerHeader(
-            //   decoration: const BoxDecoration(
-            //     gradient: LinearGradient(
-            //         begin: AlignmentDirectional.topStart,
-            //         end: AlignmentDirectional.bottomEnd,
-            //         colors: [
-            //           Color(0xff3d69A8),
-            //           Color(0xff6A90F2),
-            //         ]),
-            //   ),
-            //   currentAccountPicture: const CircleAvatar(
-            //     backgroundImage: AssetImage(
-            //       'assets/images/me.jpg',
-            //     ),
-            //   ),
-            //   currentAccountPictureSize: Size(85.w, 88.h),
-            //   accountName: const Text(
-            //     'Mahmoud Maher Alserhi',
-            //     style: TextStyle(
-            //       color: Colors.white,
-            //     ),
-            //   ),
-            //   accountEmail: const Text(
-            //     'Email Dev: mahmoudalserhi@gmail.com',
-            //     style: TextStyle(
-            //       color: Colors.white,
-            //     ),
-            //   ),
-            // ),
-            SizedBox(height: 100.h,),
+            SizedBox(height: 50.h,),
+            MenuListTile(title: AppLocalizations.of(context)!.home,icon: Icons.home_rounded,page: '/home_screen',),
+            MenuListTile(title: AppLocalizations.of(context)!.updateProfile,icon: Icons.person_rounded,page: '/update_profile_screen',),
+            MenuListTile(title: AppLocalizations.of(context)!.changePassword,icon: Icons.change_circle_rounded,page: '/change_password_screen',),
+            MenuListTile(title: AppLocalizations.of(context)!.about,icon: Icons.info_rounded,page: '/about_screen',),
             ListTile(
               onTap: () {
                 Navigator.pop(context);
                 Future.delayed(const Duration(microseconds: 800), () {
-                  Navigator.pushNamed(context, '/home_screen');
+                  launch('https://smart-store.mr-dev.tech/privacy-policy');
                 });
               },
               leading: const Icon(
-                Icons.home_outlined,
+                Icons.local_police_rounded,
                 color: Color(0xff23203F),
                 size: 25,
               ),
               title: Text(
-                'Home',
+                AppLocalizations.of(context)!.privacyPolicies,
+                // 'Privacy Policies',
                 style: TextStyle(
                   fontFamily: 'Nunito',
                   fontSize: 19.sp,
@@ -140,157 +120,44 @@ class _CategoryScreenState extends State<CategoryScreen> with Helpers{
                 color: Color(0xff23203F),
               ),
             ),
-            ListTile(
-              onTap: () {
-                Navigator.pop(context);
-                Future.delayed(const Duration(microseconds: 800), () {
-                  Navigator.pushNamed(context, '/update_profile_screen');
-                });
-              },
-              leading: const Icon(
-                Icons.person_outline,
-                color: Color(0xff23203F),
-                size: 25,
-              ),
-              title: Text(
-                'Update Profile',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 19.sp,
-                  color: const Color(0xff23203F),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              trailing: const Icon(
-                Icons.arrow_forward_ios,
-                color: Color(0xff23203F),
-              ),
+            MenuListTile(title: AppLocalizations.of(context)!.setting,icon: Icons.settings_rounded,page: '/settings_screen',),
+            MenuListTile(title: AppLocalizations.of(context)!.faqs,icon: Icons.announcement_rounded,page: '/faqs_screen',),
+            MenuListTile(title: AppLocalizations.of(context)!.contactUs,icon: Icons.contact_support_rounded,page: '/contact_screen',),
+            Divider(
+              color: const Color(0xffD0D0D0),
+              thickness: 2,
+              endIndent: 23.w,
             ),
-            ListTile(
-              onTap: () {
-                Navigator.pop(context);
-                Future.delayed(const Duration(microseconds: 800), () {
-                  Navigator.pushNamed(context, '/change_password_screen');
-                });
-              },
-              leading: const Icon(
-                Icons.change_circle_outlined,
-                color: Color(0xff23203F),
-                size: 25,
-              ),
-              title: Text(
-                'Change Password',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 19.sp,
-                  color: const Color(0xff23203F),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              trailing: const Icon(
-                Icons.arrow_forward_ios,
-                color: Color(0xff23203F),
-              ),
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.pop(context);
-                Future.delayed(const Duration(microseconds: 800), () {
-                  Navigator.pushNamed(context, '/faqs_screen');
-                });
-              },
-              leading: const Icon(
-                Icons.announcement_outlined,
-                color: Color(0xff23203F),
-                size: 25,
-              ),
-              title: Text(
-                'FAQs',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 19.sp,
-                  color: const Color(0xff23203F),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              trailing: const Icon(
-                Icons.arrow_forward_ios,
-                color: Color(0xff23203F),
-              ),
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.pop(context);
-                Future.delayed(const Duration(microseconds: 800), () {
-                  Navigator.pushNamed(context, '/about_screen');
-                });
-              },
-              leading: const Icon(
-                Icons.info_outline,
-                color: Color(0xff23203F),
-                size: 25,
-              ),
-              title: Text(
-                'About',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 19.sp,
-                  color: const Color(0xff23203F),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              trailing: const Icon(
-                Icons.arrow_forward_ios,
-                color: Color(0xff23203F),
-              ),
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.pop(context);
-                Future.delayed(const Duration(microseconds: 800), () {
-                  Navigator.pushNamed(context, '/contact_screen');
-                });
-              },
-              leading: const Icon(
-                Icons.contact_support_outlined,
-                color: Color(0xff23203F),
-                size: 25,
-              ),
-              title: Text(
-                'Contact Us',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontSize: 19.sp,
-                  color: const Color(0xff23203F),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              trailing: const Icon(
-                Icons.arrow_forward_ios,
-                color: Color(0xff23203F),
-              ),
-            ),
-            // Divider(
-            //   color: const Color(0xff6A90F2),
-            //   thickness: 1,
-            //   endIndent: 25.w,
-            // ),
             ListTile(
               onTap: () async {
                 Navigator.pop(context);
                 await logOut(context);
               },
               leading: const Icon(
-                Icons.logout,
+                Icons.logout_rounded,
                 color: Color(0xff23203F),
                 size: 25,
               ),
               title: Text(
-                'Logout',
+                AppLocalizations.of(context)!.logout,
+                // 'Logout',
                 style: TextStyle(
                   fontFamily: 'Nunito',
                   fontSize: 19.sp,
                   color: const Color(0xff23203F),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            SizedBox(height: 180.h,),
+            // Spacer(),
+            ListTile(
+              title: Text(
+                'MOMMA: 1.0.0',
+                style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontSize: 14.sp,
+                  color: const Color(0xffD0D0D0),
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -322,7 +189,7 @@ class _CategoryScreenState extends State<CategoryScreen> with Helpers{
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            SubCategoriseScreen(category: _categories[index]),
+                            SubCategoriseScreen(id: _categories[index].id),
                       ),
                     );
                     // Navigator.pushNamed(context, '/sub_categorise_screen');
@@ -337,7 +204,7 @@ class _CategoryScreenState extends State<CategoryScreen> with Helpers{
               },
             );
           }else{
-            return widgetNoData();
+            return widgetNoData(context);
           }
         },
       ),

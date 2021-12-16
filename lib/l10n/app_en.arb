@@ -22,7 +22,7 @@
 "male": "Male",
 "female": "Female",
 "already": "Already have an account ",
-"weSent": "We have sent Code to your Mobile",
+"weSent": "We will send the code to your mobile phone",
 "sendCode": "Send Code",
 "resetPassword": "Reset Password",
 "enterPassword": "Enter New Password",
@@ -69,5 +69,14 @@
 "message": "Message",
 "send": "Send",
 "oop": "Oops! Its Empty!",
-"oopDes": "There are no products under this\n category right now."
+"oopDes": "There are no products under this\n category right now.",
+"setting": "Settings",
+"privacyPolicies": "Privacy Policies",
+"language": "language",
+"arabic": "Arabic",
+"english": "English",
+"quantity": "Quantity",
+"itemDescription": "Item Description",
+"passwordConfirmation": "Password confirmation error!",
+"enterVerification": "Enter Verification Code!"
 }

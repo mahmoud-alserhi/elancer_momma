@@ -10,11 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetailProductScreen extends StatefulWidget {
-  const DetailProductScreen({Key? key, required this.product})
+  const DetailProductScreen({Key? key, required this.id})
       : super(key: key);
-  final Product product;
+  // final Product product;
+  final int id;
 
   @override
   _DetailProductScreenState createState() => _DetailProductScreenState();
@@ -33,7 +35,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
     // TODO: implement initState
     super.initState();
     _future =
-        ProductDetailsApiController().showProductDetails(widget.product.id);
+        ProductDetailsApiController().showProductDetails(widget.id);
     FavoriteProductGetxController.to.getFavoriteProduct();
   }
 
@@ -52,8 +54,8 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
           ),
         ),
         title: Text(
-          // AppLocalizations.of(context)!.home,
-          'Details Product',
+          AppLocalizations.of(context)!.detailsProduct,
+          // 'Details Product',
           style: TextStyle(
             fontFamily: 'Nunito',
             fontSize: 25.sp,
@@ -176,7 +178,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Quantity: ${snapshot.data!.quantity}',
+                            '${AppLocalizations.of(context)!.quantity}: ${snapshot.data!.quantity}',
                             // 'Quantity: ${widget.product!.quantity}',
                             // 'Quantity: 5',
                             maxLines: 1,
@@ -210,7 +212,8 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                         // crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            'Item Description:',
+                            '${AppLocalizations.of(context)!.itemDescription}:',
+                            // 'Item Description:',
                             maxLines: 1,
                             style: TextStyle(
                               fontFamily: 'Nunito',
@@ -225,7 +228,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                                 onPressed: () {
                                   FavoriteProductApiController().postFavorite(
                                       context,
-                                      productId: widget.product.id);
+                                      productId: widget.id);
                                   setState(() {
                                     _isFavorite
                                         ? _isFavorite = false
@@ -284,7 +287,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
               ],
             );
           } else {
-            return widgetNoData();
+            return widgetNoData(context);
           }
         },
       ),

@@ -6,6 +6,7 @@ import 'package:elancer_momma/widgets/code_text_filed.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({
@@ -61,8 +62,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
           ),
         ),
         title: Text(
-          // AppLocalizations.of(context)!.resetPassword,
-            'Change Password',
+          AppLocalizations.of(context)!.changePassword,
+            // 'Change Password',
             style: TextStyle(
               fontFamily: 'Nunito',
               fontSize: 25.sp,
@@ -94,7 +95,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
             height: 50.h,
           ),
           Text(
-            'Enter New Password',
+            AppLocalizations.of(context)!.changeTitle,
+            // 'Enter New Password',
             style: TextStyle(
                 color: const Color(0xff23203F),
                 fontFamily: 'Nunito',
@@ -102,7 +104,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
                 fontSize: 30.sp,),
           ),
           Text(
-            'Are you sure you want to change the password?',
+            AppLocalizations.of(context)!.changeSubTitle,
+            // 'Are you sure you want to change the password?',
             style: TextStyle(
                 color: const Color(0xff716F87),
                 fontFamily: 'Nunito',
@@ -113,7 +116,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
             height: 20.h,
           ),
           AppTextFiled(
-            hintText: 'Current Password',
+            hintText: AppLocalizations.of(context)!.currentPassword,
+            // hintText: 'Current Password',
             textEditingController: _currentPasswordTextEditingController,
             textInputType: TextInputType.text,
             obscureText: true,
@@ -122,7 +126,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
             height: 20.h,
           ),
           AppTextFiled(
-            hintText: 'New Password',
+            hintText: AppLocalizations.of(context)!.newPassword,
+            // hintText: 'New Password',
             textEditingController: _newPasswordTextEditingController,
             textInputType: TextInputType.text,
             obscureText: _isPasswordShow1,
@@ -144,7 +149,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
             height: 20.h,
           ),
           AppTextFiled(
-            hintText: 'Password Confirmation',
+            hintText: AppLocalizations.of(context)!.confirmPassword,
+            // hintText: 'Password Confirmation',
             textEditingController: _newPasswordConfirmationTextEditingController,
             textInputType: TextInputType.text,
             obscureText: _isPasswordShow2,
@@ -174,7 +180,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
               minimumSize: Size(0.w, 56.h),
             ),
             child: Text(
-              'Change Password',
+              AppLocalizations.of(context)!.changePassword,
+              // 'Change Password',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: 'Nunito',
@@ -211,14 +218,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
       }
       showSnackBar(
         context: context,
-        message: 'Password confirmation error!',
+        message: AppLocalizations.of(context)!.passwordConfirmation,
         error: true,
       );
       return false;
     }
     showSnackBar(
       context: context,
-      message: 'Enter New Password!',
+      message: AppLocalizations.of(context)!.enterRequired,
       error: true,
     );
     return false;

@@ -4,6 +4,7 @@ import 'package:elancer_momma/widgets/app_text_filed.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -59,8 +60,8 @@ class _LoginScreenState extends State<LoginScreen> with Helpers{
             height: 138.h,
           ),
           Text(
-            // AppLocalizations.of(context)!.singIn,
-            'Sing In',
+            AppLocalizations.of(context)!.singIn,
+            // 'Sing In',
             textAlign: TextAlign.start,
             style: TextStyle(
                 fontFamily: 'Nunito',
@@ -69,8 +70,8 @@ class _LoginScreenState extends State<LoginScreen> with Helpers{
                 fontWeight: FontWeight.bold),
           ),
           Text(
-            // AppLocalizations.of(context)!.singIn,
-            'Login to continue your account,',
+            AppLocalizations.of(context)!.loginTo,
+            // 'Login to continue your account,',
             textAlign: TextAlign.start,
             style: TextStyle(
               fontFamily: 'Nunito',
@@ -84,7 +85,8 @@ class _LoginScreenState extends State<LoginScreen> with Helpers{
           ),
           AppTextFiled(
             textEditingController: _mobileTextEditingController,
-            hintText: 'Mobile',
+            hintText:  AppLocalizations.of(context)!.mobile,
+            // hintText: 'Mobile',
             textInputType: TextInputType.phone,
           ),
           SizedBox(
@@ -92,7 +94,8 @@ class _LoginScreenState extends State<LoginScreen> with Helpers{
           ),
           AppTextFiled(
             textEditingController: _passwordTextEditingController,
-            hintText: 'Password',
+            hintText:  AppLocalizations.of(context)!.password,
+            // hintText: 'Password',
             textInputType: TextInputType.text,
             obscureText: _isPasswordShow,
             suffixIcon: IconButton(
@@ -121,7 +124,8 @@ class _LoginScreenState extends State<LoginScreen> with Helpers{
               minimumSize: Size(double.infinity, 56.h),
             ),
             child: Text(
-              'Sing In',
+              AppLocalizations.of(context)!.singIn,
+              // 'Sing In',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: 'Nunito',
@@ -136,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers{
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
-                text: 'Don`t have an account? ',
+                text: '${ AppLocalizations.of(context)!.haveCreateAccount}',
                 style: TextStyle(
                   color: const Color(0xff23203F),
                   fontFamily: 'Nunito',
@@ -145,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers{
                 children: [
                   TextSpan(
                     recognizer: _tapGestureRecognizer,
-                    text: 'Sing Up!',
+                    text: '${ AppLocalizations.of(context)!.singUp}!',
                     style: TextStyle(
                       color: const Color(0xff6A90F2),
                       fontFamily: 'Nunito',
@@ -159,7 +163,9 @@ class _LoginScreenState extends State<LoginScreen> with Helpers{
             onPressed: (){
               Navigator.pushNamed(context, '/forget_password_screen');
             },
-            child: Text('Forget Password?',
+            child: Text(
+                AppLocalizations.of(context)!.forgetPassword,
+                // 'Forget Password?',
                 style: TextStyle(
               color: const Color(0xff6A90F2),
               fontFamily: 'Nunito',
@@ -185,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers{
     }
     showSnackBar(
       context: context,
-      message: 'Enter required data!',
+      message:  AppLocalizations.of(context)!.enterRequired,
       error: true,
     );
     return false;

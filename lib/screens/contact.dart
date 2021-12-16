@@ -6,6 +6,7 @@ import 'package:elancer_momma/widgets/app_text_filed.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContactScreen extends StatefulWidget {
   const ContactScreen({Key? key}) : super(key: key);
@@ -49,8 +50,8 @@ class _ContactScreenState extends State<ContactScreen> with Helpers{
           ),
         ),
         title: Text(
-          // AppLocalizations.of(context)!.resetPassword,
-            'Contact Us',
+          AppLocalizations.of(context)!.contactUs,
+            // 'Contact Us',
             style: TextStyle(
               fontFamily: 'Nunito',
               fontSize: 25.sp,
@@ -80,7 +81,8 @@ class _ContactScreenState extends State<ContactScreen> with Helpers{
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
         children: [
           Text(
-            'Suggestions and complaints',
+            AppLocalizations.of(context)!.suggestionsTitle,
+            // 'Suggestions and complaints',
             textAlign: TextAlign.start,
             style: TextStyle(
                 fontFamily: 'Nunito',
@@ -89,7 +91,8 @@ class _ContactScreenState extends State<ContactScreen> with Helpers{
                 fontWeight: FontWeight.bold),
           ),
           Text(
-            'We would like to receive your suggestions?',
+            AppLocalizations.of(context)!.suggestionsSubTitle,
+            // 'We would like to receive your suggestions?',
             textAlign: TextAlign.start,
             style: TextStyle(
               fontFamily: 'Nunito',
@@ -103,7 +106,8 @@ class _ContactScreenState extends State<ContactScreen> with Helpers{
           ),
           AppTextFiled(
             textEditingController: _subjectTextEditingController,
-            hintText: 'Subject',
+            hintText: AppLocalizations.of(context)!.subject,
+            // hintText: 'Subject',
             textInputType: TextInputType.text,
           ),
           SizedBox(
@@ -111,7 +115,8 @@ class _ContactScreenState extends State<ContactScreen> with Helpers{
           ),
           AppTextFiled(
               textEditingController: _messageTextEditingController,
-              hintText: 'Message',
+              hintText: AppLocalizations.of(context)!.message,
+              // hintText: 'Message',
               textInputType: TextInputType.text,
             maxLine: 7,
             ),
@@ -127,7 +132,8 @@ class _ContactScreenState extends State<ContactScreen> with Helpers{
               minimumSize: Size(double.infinity, 56.h),
             ),
             child: Text(
-              'Send',
+              AppLocalizations.of(context)!.send,
+              // 'Send',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: 'Nunito',

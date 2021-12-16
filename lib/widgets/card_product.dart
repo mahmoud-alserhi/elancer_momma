@@ -115,7 +115,7 @@ class _CardProductState extends State<CardProduct> {
                         ),
                       ),
                       Text(
-                        'Price \$${widget.price}',
+                        '\$${widget.price}',
                         // "\$10.00",
                         maxLines: 1,
                         style: TextStyle(
@@ -132,7 +132,7 @@ class _CardProductState extends State<CardProduct> {
                     children: [
                       SizedBox(
                         height: 25.h,
-                        width: 163.w,
+                        width: 230.w,
                         child: Text(
                           '${widget.subTitle}...',
                           // "subTitle",
