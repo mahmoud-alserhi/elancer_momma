@@ -4,7 +4,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 
 class LanguageGetxController extends GetxController {
 
-  String language = '';
+  String language = 'en';
 
   static LanguageGetxController get to => Get.find<LanguageGetxController>();
 

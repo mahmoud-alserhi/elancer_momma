@@ -66,19 +66,6 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        actions: [
-          IconButton(
-            onPressed: () {
-              setState(() {
-                LanguageGetxController.to.changeLanguage();
-              });
-            },
-            icon: const Icon(
-              Icons.language,
-              color: Color(0xff23203f),
-            ),
-          ),
-        ],
       ),
       body: FutureBuilder<Product?>(
         future: _future,

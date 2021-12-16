@@ -68,12 +68,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
         actions: [
           IconButton(
             onPressed: () {
-              setState(() {
-                LanguageGetxController.to.changeLanguage();
+              Navigator.pop(context);
+              Future.delayed(const Duration(microseconds: 800), () {
+                Navigator.pushNamed(context, '/settings_screen');
               });
             },
             icon: const Icon(
-              Icons.language,
+              Icons.settings_rounded,
               color: Color(0xff23203f),
             ),
           ),

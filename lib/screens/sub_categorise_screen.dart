@@ -69,17 +69,6 @@ class _SubCategoriseScreenState extends State<SubCategoriseScreen> with Helpers{
               color: Color(0xffFF0000),
             ),
           ),
-          IconButton(
-            onPressed: () {
-              setState(() {
-                LanguageGetxController.to.changeLanguage();
-              });
-            },
-            icon: const Icon(
-              Icons.language,
-              color: Color(0xff23203f),
-            ),
-          ),
         ],
       ),
       drawer: Drawer(

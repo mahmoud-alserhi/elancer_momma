@@ -72,11 +72,12 @@
 "oopDes": "لا توجد منتجات تحت هذه الفئة الآن.",
 "setting": "الإعدادات",
 "privacyPolicies": "سياسات الخصوصية",
-"language": "الغة",
+"language": "اللغة",
 "arabic": "العربية",
 "english": "الإنجليزية",
 "quantity": "الكمية",
 "itemDescription": "وصف السلعة",
 "passwordConfirmation": "خطأ في تأكيد كلمة المرور!",
-"enterVerification": "أدخل رمز التحقق!"
+"enterVerification": "أدخل رمز التحقق!",
+"chooseLanguage": "اختر لغة التطبيق"
 }
