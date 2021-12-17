@@ -7,6 +7,7 @@ import 'package:elancer_momma/prefs/shared_pref_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:elancer_momma/api/api_settings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AuthApiController with Helpers {
 
@@ -31,7 +32,7 @@ class AuthApiController with Helpers {
       );
       showSnackBarCode(
           context: context,
-          message: "Your verification Code: ${jsonDecode(response.body)["code"]}",
+          message: "${AppLocalizations.of(context)!.yourVerification}: ${jsonDecode(response.body)["code"]}",
       );
       // print(jsonDecode(response.body)['code']);
       return true;
@@ -142,7 +143,7 @@ class AuthApiController with Helpers {
       print(jsonDecode(response.body)['code']);
       showSnackBarCode(
         context: context,
-        message: "Your verification Code: ${jsonDecode(response.body)["code"]}",
+        message: "${AppLocalizations.of(context)!.yourVerification}: ${jsonDecode(response.body)["code"]}",
       );
       return true;
     } else if (response.statusCode == 400) {

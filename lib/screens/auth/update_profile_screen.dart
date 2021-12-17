@@ -157,7 +157,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                     value: _selectedCity,
                     items: _city.map((e) {
                       return DropdownMenuItem(
-                        child: Text(e.nameEn),
+                        child: Text(e.cityName),
                         value: e.id,
                       );
                     }).toList(),

@@ -132,7 +132,7 @@ class _CardProductState extends State<CardProduct> {
                     children: [
                       SizedBox(
                         height: 25.h,
-                        width: 230.w,
+                        width: 182.w,
                         child: Text(
                           '${widget.subTitle}...',
                           // "subTitle",
@@ -147,7 +147,7 @@ class _CardProductState extends State<CardProduct> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10.w,),
+                      // SizedBox(width: 10.w,),
                       Stack(
                         alignment: Alignment.bottomRight,
                         children: [

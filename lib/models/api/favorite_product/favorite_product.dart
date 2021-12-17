@@ -7,11 +7,11 @@ class FavoriteProducts {
   late String nameAr;
   late String infoEn;
   late String infoAr;
-  late int price;
+  late num price;
   late int quantity;
-  late int overalRate;
+  late num overalRate;
   late int subCategoryId;
-  late int productRate;
+  late num productRate;
   late num? offerPrice;
   late bool isFavorite;
   late String imageUrl;

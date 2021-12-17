@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.elancer_momma.elancer_momma">
    <application
-        android:label="elancer_momma"
-        android:icon="@mipmap/ic_launcher"
+        android:label="Momma"
+        android:icon="@drawable/launch_background"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"

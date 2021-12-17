@@ -121,7 +121,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      InkWell(
+                      GestureDetector(
                         child: Column(
                           children: [
                             CircleAvatar(
@@ -156,7 +156,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         },
                       ),
                       // SizedBox(width: 30),
-                      InkWell(
+                      GestureDetector(
                         child: Column(
                           children: [
                             CircleAvatar(
