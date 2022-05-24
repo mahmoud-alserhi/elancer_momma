@@ -26,6 +26,9 @@ class AuthApiController with Helpers {
     );
 
     if (response.statusCode == 201) {
+      // var jsonObject = jsonDecode(response.body);
+      // BaseApiObjectResponse baseApiResponseObject = BaseApiObjectResponse<User>.fromJson(jsonObject);
+      // await SharedPrefController().save(user: baseApiResponseObject.data);
       showSnackBar(
         context: context,
         message: jsonDecode(response.body)['message'],

@@ -53,17 +53,20 @@ class CardCategorise extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        title,
-                        // "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-                        // textAlign: TextAlign.right,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: TextStyle(
-                          fontFamily: 'Nunito',
-                          fontSize: 16.sp,
-                          color: const Color(0xff23203F),
-                          fontWeight: FontWeight.bold,
+                      SizedBox(
+                        width: 127.w,
+                        child: Text(
+                          title,
+                          // "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+                          // textAlign: TextAlign.right,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: TextStyle(
+                            fontFamily: 'Nunito',
+                            fontSize: 16.sp,
+                            color: const Color(0xff23203F),
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],

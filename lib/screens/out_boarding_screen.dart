@@ -142,7 +142,7 @@ class _OutBoardingScreenState extends State<OutBoardingScreen> {
                 style: ElevatedButton.styleFrom(
                   primary: const Color(0xff6A90F2),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(28)),
+                      borderRadius: BorderRadius.circular(28.r)),
                   minimumSize: Size(165.w, 56.h),
                 ),
                 child: Text(

@@ -51,6 +51,10 @@ class _LoginScreenState extends State<LoginScreen> with Helpers{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      // for to button up when use keyboard
+        resizeToAvoidBottomInset: true,
+
       body: ListView(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,

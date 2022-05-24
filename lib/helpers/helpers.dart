@@ -43,6 +43,10 @@ mixin Helpers{
       headers['Authorization'] = SharedPrefController().token;
       // headers['Authorization'] = 'Bearer TOKEN';
     }
+    else if(SharedPrefController().register) {
+      headers['Authorization'] = SharedPrefController().token;
+      // headers['Authorization'] = 'Bearer TOKEN';
+    }
     return headers;
   }
 

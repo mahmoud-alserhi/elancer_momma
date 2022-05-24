@@ -2,7 +2,7 @@ import 'package:elancer_momma/models/api/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum prefKeys{
-  loggIn, name, mobile, cityId, gender, token, lang, cityAr,cityEn
+  loggIn, name, mobile, cityId, gender, token, lang, cityAr,cityEn,register
 }
 class SharedPrefController{
 
@@ -20,6 +20,7 @@ class SharedPrefController{
 
   Future<void> save({required User user}) async{
     await _sharedPreferences.setBool(prefKeys.loggIn.toString(), true);
+    await _sharedPreferences.setBool(prefKeys.register.toString(), true);
     await _sharedPreferences.setString(prefKeys.name.toString(), user.name);
     await _sharedPreferences.setString(prefKeys.mobile.toString(), user.mobile);
     await _sharedPreferences.setInt(prefKeys.cityId.toString(), user.cityId);
@@ -30,6 +31,8 @@ class SharedPrefController{
   }
 
   bool get loggedIn => _sharedPreferences.getBool(prefKeys.loggIn.toString()) ?? false;
+
+  bool get register => _sharedPreferences.getBool(prefKeys.register.toString()) ?? false;
 
   String get token => _sharedPreferences.getString(prefKeys.token.toString()) ?? '';
 

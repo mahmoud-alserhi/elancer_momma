@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375,812),
       builder: () => MaterialApp(
         debugShowCheckedModeBanner: false,
-        localizationsDelegates:  [
+        localizationsDelegates:  const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
